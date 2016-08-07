@@ -1,3 +1,3 @@
 <?php
-$config['db']=array("host"=>"localhost","dbname"=>"zenski_ugao","username"=>"root","password"=>"");
+$config['db']=array("host"=>"localhost","dbname"=>"all_shine_out","username"=>"root","password"=>"");
 
