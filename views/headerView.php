@@ -3,14 +3,15 @@
 <!--[if IE 8]>    <html class="ie8" > <![endif]-->
 <!--[if IE 9]>    <html class="ie9" > <![endif]-->
 <!--[if IE 10]>    <html class="ie10" > <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en-US"> <!--<![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> 
+  <html lang="en-US"> <!--<![endif]-->
 		<head>
-				<!-- META TAGS -->
-				<meta charset="UTF-8" />
-				<meta name="viewport" content="width=device-width" />
-				
-				<!-- Title -->
-				<title>Max Shop</title>
+                <!-- META TAGS -->
+                <meta charset="UTF-8" />
+                <meta name="viewport" content="width=device-width" />
+
+                <!-- Title -->
+                <title>All shine out</title>
 
                 <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,700,600,800' rel='stylesheet' type='text/css'>
                 <link href='http://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
@@ -68,7 +69,7 @@
 
                             <div class="span5">
                                 <div class="logo">
-                                    <a href="index.html"><img style="width: 151px;" src="<?=_WEB_PATH?>/views/images/1_o.jpg" alt=""></a>
+                                    <a href="index.html"><img style="width: 100px; height: 70px;" src="<?=_WEB_PATH?>/views/images/1_o.jpg" alt=""></a>
                                     <h1><a href="index.html">Ultra Customizable<span> Ecommerce </span>Theme</a></h1>
                                 </div>
                             </div>
