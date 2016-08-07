@@ -68,7 +68,7 @@
 
                             <div class="span5">
                                 <div class="logo">
-                                    <a href="index.html"><img src="<?=_WEB_PATH?>/views/images/logo.png" alt=""></a>
+                                    <a href="index.html"><img style="width: 151px;" src="<?=_WEB_PATH?>/views/images/1_o.jpg" alt=""></a>
                                     <h1><a href="index.html">Ultra Customizable<span> Ecommerce </span>Theme</a></h1>
                                 </div>
                             </div>
