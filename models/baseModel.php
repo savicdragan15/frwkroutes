@@ -139,27 +139,3 @@ abstract class baseModel
     }
 
 }
-/*
- *  public function join() {
-        $fields = isset($this->select) ? $this->select : "*";
-        $join_table = $this->join;
-        $relation = $this->on;
-        
-        $query = "SELECT " . $fields . " FROM " . static::$table . " LEFT JOIN " . $join_table . " ON " . $relation;
-        
-        if (isset($this->where))
-            $query .= "WHERE " . $this->where;
-        var_dump($query);
-        try {
-            $res = $this->db->query($query);
-            $datas = $res->fetchAll(PDO::FETCH_CLASS, "stdClass");
-            foreach ($datas as $data) {
-                unset($data->db);
-            }
-            return $datas;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            return false;
-        }
-    }
- */
