@@ -28,7 +28,7 @@ class Navigation extends baseController{
                        }else
                             $string .="<a href=''>{$child->name}</a>";
 
-                        if($i%14 == 0 && $i != 0) $string .='</p>';
+                      //  if($i%14 == 0 && $i != 0) $string .='</p>';
                        $i++;
                    }
                    $string .='</div>';
