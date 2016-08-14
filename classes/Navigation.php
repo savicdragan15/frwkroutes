@@ -14,7 +14,7 @@ class Navigation extends baseController{
             $string = '';
              foreach($parents as $parent){
                  $string .="<li>
-                <a href='#'>{$parent->name}</a>";
+                <a href='"._WEB_PATH."products/allProductsByCategory/".$parent->ID."/1/".$this->remove_accents($parent->name)."'>{$parent->name}</a>";
                  $children = $navigationModel->getAll('*', 'WHERE id_parent ='.$parent->ID);
                  if(count($children) > 0){
                    $string .='<ul class="clearfix sub-menu menu-three">';
@@ -22,7 +22,7 @@ class Navigation extends baseController{
                    $string .='<div class="links">';
                    $i = 0;
                    foreach ($children as $child){
-                       if($i%7 == 0) $string .='<p>';
+                    if($i%7 == 0) $string .='<p>';
                        if($child->id_subparent > 0){
                            $string .="<a href='' style='text-transform: capitalize;'> > {$child->name}</a>";
                        }else

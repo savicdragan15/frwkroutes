@@ -1,0 +1,14 @@
+{
+    "name": "vendor/all-shine-out",
+    "description": "Description of project all_shine_out.",
+    "authors": [
+        {
+            "name": "Dragan",
+            "email": "savicdrgan2707@gmail.com"
+        }
+    ],
+    "require": {
+        "centralapps/pagination": "v1.0.0",
+        "amstaffix/pagination": "^1.1"
+    }
+}
