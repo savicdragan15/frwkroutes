@@ -8,4 +8,5 @@ class navigationModel extends baseModel{
         return $this->get($id, "name")->name;
     }
     
+    
 }

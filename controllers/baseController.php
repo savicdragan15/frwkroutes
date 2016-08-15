@@ -228,6 +228,9 @@ abstract class baseController
 
         return $string;
     }
-
+    public function url_friendly($string)
+    {
+       return str_replace(" ","_",$this->remove_accents($string));
+    }
 }
 

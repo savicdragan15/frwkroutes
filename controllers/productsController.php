@@ -27,4 +27,7 @@ class productsController extends frontendController{
     public function allProductsByCategory($id,$page){
         $this->productsModuleController->allProductsByCategory($id,$page);
     }
+    public function allProductsBySubCategory($id,$idcat,$page){
+        $this->productsModuleController->allProductsBySubCategory($id,$idcat,$page);
+    }
 }

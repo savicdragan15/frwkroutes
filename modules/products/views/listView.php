@@ -65,17 +65,24 @@
                                     </div>
                                 <?php } ?>
                                 </div>
-
+                              <?php
+                             if(isset($cat_id))
+                                 $cat_id=$cat_id."/";
+                             else
+                                 $cat_id="";
+                             
+                             // $controllerMethod
+                              ?>
                                 <div class="pagination clearfix">
                                     <p>Items <?=$limit?> of <?=$total?> total</p>
                                     <ul class="clearfix">
                                         <?php foreach($pagination as $key => $page){?>
                                             <?php if($page == 'current'){?>
-                                              <li><a style="background-color: gray; color: white;" href="<?=_WEB_PATH?>products/allProductsByCategory/<?=$category_id?>/<?=$key?>/<?=$category_name?>"><?=$key?></a></li>
+                                              <li><a style="background-color: gray; color: white;" href="<?=_WEB_PATH?>products/<?=$controllerMethod?>/<?=$category_id?>/<?=$cat_id?><?=$key?>/<?=$category_name?>"><?=$key?></a></li>
                                             <?php }else if($page == 'less' || $page == 'more'){ ?>
-                                                <li><a href="<?=_WEB_PATH?>products/allProductsByCategory/<?=$category_id?>/<?=$key?>/<?=$category_name?>">...</a></li>
+                                                <li><a href="<?=_WEB_PATH?>products/<?=$controllerMethod?>/<?=$category_id?>/<?=$cat_id?><?=$key?>/<?=$category_name?>">...</a></li>
                                             <?php }else{ ?>
-                                              <li><a href="<?=_WEB_PATH?>products/allProductsByCategory/<?=$category_id?>/<?=$key?>/<?=$category_name?>"><?=$key?></a></li>
+                                              <li><a href="<?=_WEB_PATH?>products/<?=$controllerMethod?>/<?=$category_id?>/<?=$cat_id?><?=$key?>/<?=$category_name?>"><?=$key?></a></li>
                                            <?php }
                                         } ?>
                                         <!--<li><a href="#">2</a></li>
