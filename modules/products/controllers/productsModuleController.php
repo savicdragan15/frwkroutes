@@ -35,6 +35,9 @@ class productsModuleController extends baseController
         $pages = $pagination->build(); // Contains associative array with a numbers of a pages
         
         $this->template['products'] = $products;
+        foreach ($products as $product){
+            $product->product_name_url = $this->url_friendly($product->product_name);
+        }
         $this->template['pagination'] = $pages;
         $this->template['category_name'] = $this->url_friendly($category_name);
         $this->template['category_id'] = $id;
@@ -42,20 +45,23 @@ class productsModuleController extends baseController
         $this->template['total'] = $nubmerOfRecords;
         $this->template['controllerMethod']='allProductsByCategory';
        // Loader::loadView('list', 'products', false,$this->template);
-        if(isset($_POST['type'])){
+         if(isset($_POST['type'])){
            //$this->template['navigation']=new Navigation();
            //Loader::loadPartialView('list', 'products', false,$this->template);
             if($_POST['type']==2)
             {
-           Loader::loadView('list', 'products', false,$this->template);
+            Loader::loadView('list', 'products', false,$this->template);
             }
             else
             {
-                Loader::loadView('grid', 'products', false,$this->template);
+             Loader::loadView('grid', 'products', false,$this->template);
             }
+        }else{
+            if(Cookie::get('grid') == 'list' || !Cookie::get('grid'))
+               Loader::loadView('list', 'products', FALSE,$this->template);
+             else
+               Loader::loadView('grid', 'products', FALSE,$this->template);  
         }
-        else
-            Loader::loadView('list', 'products', false,$this->template);
     }
     public function allProductsBySubCategory($id,$idcat,$page){
         $id = $this->filter_input($id);
@@ -71,6 +77,9 @@ class productsModuleController extends baseController
         $pages = $pagination->build(); // Contains associative array with a numbers of a pages
         
         $this->template['products'] = $products;
+        foreach ($products as $product){
+            $product->product_name_url = $this->url_friendly($product->product_name);
+        }
         $this->template['pagination'] = $pages;
         $this->template['category_name'] = $this->url_friendly($sub_category_name);
         $this->template['category_id'] = $id;
@@ -78,7 +87,33 @@ class productsModuleController extends baseController
         $this->template['limit'] = $limit;
         $this->template['total'] = $nubmerOfRecords;
         $this->template['controllerMethod']='allProductsBySubCategory';
-        Loader::loadView('list', 'products', FALSE,$this->template);
+        if(isset($_POST['type'])){
+           //$this->template['navigation']=new Navigation();
+           //Loader::loadPartialView('list', 'products', false,$this->template);
+            if($_POST['type']==2)
+            {
+            Loader::loadView('list', 'products', false,$this->template);
+            }
+            else
+            {
+             Loader::loadView('grid', 'products', false,$this->template);
+            }
+        }else{
+           if(Cookie::get('grid') == 'list' || !Cookie::get('grid'))
+               Loader::loadView('list', 'products', FALSE,$this->template);
+             else
+               Loader::loadView('grid', 'products', FALSE,$this->template);  
+        }
+        
+    }
+    
+    public function singleProduct($id){
+        
+        $id = $this->filter_input($id);
+        
+        $product = $this->productsModel->getProduct($id);
+        $this->template['product'] = $product;
+        Loader::loadView('singleProduct', 'products', FALSE, $this->template);
     }
     
 }

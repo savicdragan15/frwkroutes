@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * @property string $product_name Name of product
+ * @property string $product_price Price
+ */
 class productsModel extends baseModel{
     public static $key = "ID";
     public static $table = "products";
@@ -24,10 +27,22 @@ class productsModel extends baseModel{
 
         return $this->join();
     }
+    
     public function getNumberOfRecords($category,$id){
         $products = $this->getAll("count(ID) as 'all'", "WHERE {$category}={$id}");
         
         return $products[0]->all;
+    }
+    
+    public function getProduct($id){
+       
+        $this->join = array(
+            array("table"=>"images","realtion"=>"products.ID = images.product_id")
+        );
+        
+        $this->where = "products.ID ={$id}";
+        
+        return $this->join()[0];
     }
     
 }

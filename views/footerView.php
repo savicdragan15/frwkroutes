@@ -104,19 +104,33 @@
                 <script src="<?=_WEB_PATH?>/views/js/jquery.tooltipster.min.js"></script>
                 <script src="<?=_WEB_PATH?>/views/js/jquery.prettyPhoto.js"></script>
                 <script src="<?=_WEB_PATH?>/views/js/custom.js"></script>
+               
+                <?php 
+                 if(isset($controllerMethod))
+                    $link_view = _WEB_PATH."products/".$controllerMethod."/".$category_id."/".$cat_id."1/".$category_name; 
+                ?>
                 <script>
                 $("#grdView").bind("click", function(e){
                     e.preventDefault();
-                ajaxCall(1,'http://localhost/all_shine_out/products/allProductsByCategory/1/1/Exterior');
+                    var formData = {'type':'1'}; //Array 
+                    ajaxCall(formData,'<?=$link_view?>',function(data){
+                       createCookie('grid','grid',365);
+                        $('body').html(data);
+                    });
+                     
                 });
 
                 $("#lstView").bind("click", function(e){
                     e.preventDefault();
-                //alert("<?php echo '123' ?>");
-                ajaxCall(2,'http://localhost/all_shine_out/products/allProductsByCategory/1/1/Exterior');
-               // "
+                    var formData = {'type':'2'}; //Array
+                    ajaxCall(formData,'<?=$link_view?>',function(data){
+                        createCookie('grid','list',365);
+                        $('body').html(data);
+                    });
+                    
                 });
                 </script>
+                
         </body>
 </html>
 

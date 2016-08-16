@@ -29,8 +29,8 @@
 
                                     <div class="sorting-btn clearfix">
                                         <label>View As</label>
-                                        <a href="#" class="one" id='grdView'></a>
-                                        <a href="#" class="two" id='lstView'></a>
+                                            <a href="#" title='Grid view' class="one" id='grdView'></a>
+                                            <a href="#" title='List view' class="two" id='lstView'></a>
                                     </div>
                                 </div>
                             </div>
@@ -49,11 +49,11 @@
                                             <a href="#"><img src="<?=_WEB_PATH?>views/images/products_gallery/thumbnail/<?=$product->image_name?>" alt="image"></a>
                                             <div class="overlay">
                                                 <a href="<?=_WEB_PATH?>views/images/products_gallery/normal/<?=$product->image_name?>" class="zoom"></a>
-                                                <a href="#" class="link"></a>
+                                                <a href="<?=_WEB_PATH?>products/singleProduct/<?=$product->ID?>/<?=$product->product_name_url?>" class="link"></a>
                                             </div>
                                         </figure>
                                         <div class="detail">
-                                            <h4><?= $product->product_name ?></h4>
+                                            <a href="<?=_WEB_PATH?>products/singleProduct/<?=$product->ID?>/<?=$product->product_name_url?>"><h4><?= $product->product_name ?></h4></a>
                                             <span><?= $product->product_price ?> €</span>
                                             <p><?= $product->product_description ?></p>
                                             <div class="icon">
@@ -95,7 +95,7 @@
 
                             <div class="span3">
                         <?php
-                       echo Loader::loadPartialView('sidebar','products',false,array('navigation'=>$navigation))
+                       echo Loader::loadPartialView('_sidebar','products',false,array('navigation'=>$navigation))
                                 
                         ?>
                               

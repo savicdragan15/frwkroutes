@@ -24,7 +24,7 @@
                 <link rel="stylesheet" href="<?=_WEB_PATH?>/views/style.css">
                 <link rel="stylesheet" href="<?=_WEB_PATH?>/views/css/responsive.css">
                 <link rel="stylesheet" href="<?=_WEB_PATH?>/views/css/prettyPhoto.css">
-
+                
 				
                 <!-- favicon -->
                 <link rel="shortcut icon" href="<?=_WEB_PATH?>/views/images/favicon.jpg">
@@ -70,8 +70,8 @@
 
                             <div class="span5">
                                 <div class="logo">
-                                    <a href="index.html"><img style="width: 100px; height: 70px;" src="<?=_WEB_PATH?>/views/images/1_o.jpg" alt=""></a>
-                                    <h1><a href="index.html">Ultra Customizable<span> Ecommerce </span>Theme</a></h1>
+                                    <a href="<?=_WEB_PATH?>"><img style="width: 100px; height: 70px;" src="<?=_WEB_PATH?>/views/images/1_o.jpg" alt=""></a>
+                                    <h1><a href="<?=_WEB_PATH?>">Ultra Customizable<span> All shine out </span>Theme</a></h1>
                                 </div>
                             </div>
 

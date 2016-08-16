@@ -209,24 +209,31 @@ $(document).ready(function(e) {
     $( "#amount2" ).val( "$"
          + $( "#slider-range" ).slider( "values", 1 ) );
 });
-function ajaxCall(type,url)
-{
-    var formData = {type:type}; //Array 
- 
-$.ajax({
-    url : url,//"products/allProductsByCategory/1/1/Exterior",
-    type: "POST",
-    data : formData,
-    success: function(data, textStatus, jqXHR)
+    function ajaxCall(data,url,callback)
     {
-        //data - response from server
-       // console.log(data)
-     //  $("html").remove();
-       $("body").html(data);
-    },
-    error: function (jqXHR, textStatus, errorThrown)
-    {
- 
+
+        $.ajax({
+            url : url,//"products/allProductsByCategory/1/1/Exterior",
+            type: "POST",
+            data : data,
+            success: function(data, textStatus, jqXHR)
+            {
+                //data - response from server
+              callback(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+
+            }
+        });
     }
-});
+
+function createCookie(name,value,days) {
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime()+(days*24*60*60*1000));
+        var expires = "; expires="+date.toGMTString();
+    }
+    else var expires = "";
+    document.cookie = name+"="+value+expires+"; path=/";
 }
