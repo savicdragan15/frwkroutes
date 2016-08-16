@@ -22,6 +22,7 @@ class productsModuleController extends baseController
     }
     
     public function allProductsByCategory($id,$page){
+        
         $id = $this->filter_input($id);
         
         $category_name = $this->navigationModel->getCategoryName($id); 
@@ -40,7 +41,21 @@ class productsModuleController extends baseController
         $this->template['limit'] = $limit;
         $this->template['total'] = $nubmerOfRecords;
         $this->template['controllerMethod']='allProductsByCategory';
-        Loader::loadView('list', 'products', FALSE,$this->template);
+       // Loader::loadView('list', 'products', false,$this->template);
+        if(isset($_POST['type'])){
+           //$this->template['navigation']=new Navigation();
+           //Loader::loadPartialView('list', 'products', false,$this->template);
+            if($_POST['type']==2)
+            {
+           Loader::loadView('list', 'products', false,$this->template);
+            }
+            else
+            {
+                Loader::loadView('grid', 'products', false,$this->template);
+            }
+        }
+        else
+            Loader::loadView('list', 'products', false,$this->template);
     }
     public function allProductsBySubCategory($id,$idcat,$page){
         $id = $this->filter_input($id);

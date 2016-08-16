@@ -1,4 +1,5 @@
- <!-- FOOTER -->
+
+<!-- FOOTER -->
                 <div class="shipping-wrap">
                     <div class="container">
                         <div class="row">
@@ -102,7 +103,20 @@
                 <script src="<?=_WEB_PATH?>/views/js/jquery.selectBox.js"></script>
                 <script src="<?=_WEB_PATH?>/views/js/jquery.tooltipster.min.js"></script>
                 <script src="<?=_WEB_PATH?>/views/js/jquery.prettyPhoto.js"></script>
-                <script src="<?=_WEB_PATH?>/views/js/custom.js"></script>		
+                <script src="<?=_WEB_PATH?>/views/js/custom.js"></script>
+                <script>
+                $("#grdView").bind("click", function(e){
+                    e.preventDefault();
+                ajaxCall(1,'http://localhost/all_shine_out/products/allProductsByCategory/1/1/Exterior');
+                });
+
+                $("#lstView").bind("click", function(e){
+                    e.preventDefault();
+                //alert("<?php echo '123' ?>");
+                ajaxCall(2,'http://localhost/all_shine_out/products/allProductsByCategory/1/1/Exterior');
+               // "
+                });
+                </script>
         </body>
 </html>
 

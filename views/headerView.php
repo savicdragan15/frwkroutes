@@ -31,6 +31,7 @@
 
             <!-- Include the HTML5 shiv print polyfill for Internet Explorer browsers 8 and below -->
             <!--[if lt IE 10]><script src="js/html5shiv-printshiv.js" media="all"></script><![endif]-->
+            
 		</head>
 		<body>				
                     <!-- HEADER -->

@@ -48,4 +48,24 @@ class Navigation extends baseController{
             }
             return $string;
         }
+        public function renderSideBar()
+        {
+            $navigationModel = $this->models['navigation'];
+            $parents = $navigationModel->getAll('*', 'WHERE parent = 1');
+           $string='<div id="accordion">';
+           foreach($parents as $parent){
+              $string.='<h5><a href="'._WEB_PATH."products/allProductsByCategory/".$parent->ID."/1/".$this->url_friendly($parent->name).'">'.$parent->name.'(5)</a></h5>';
+              $string.="<div><ul>";
+              $children = $navigationModel->getAll('*', 'WHERE id_parent ='.$parent->ID);
+                 if(count($children) > 0){
+                   foreach ($children as $child){
+                       $string.='<li><a href="'._WEB_PATH."products/allProductsBySubCategory/".$child->ID."/".$child->id_parent."/1/".$this->url_friendly($child->name).'">'.$child->name.' (7)</a></li>';
+                   }
+                 }
+                  $string.="</ul></div>";
+           }
+           $string.="</div>";
+           return $string;
+           
+        }
 }

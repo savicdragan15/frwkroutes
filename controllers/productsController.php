@@ -11,13 +11,14 @@
  *
  * @author Dragan
  */
-require 'frontendController.php';
+
 class productsController extends frontendController{
      private $productsModuleController;
      
      public function __construct() {
         parent::__construct();
-        $this->productsModuleController = new productsModuleController();
+        Loader::loadModule($this, 'productsModule');
+        $this->productsModuleController = $this->modules['productsModule'];
      }
 
      public function index() {
@@ -25,7 +26,9 @@ class productsController extends frontendController{
     }
     
     public function allProductsByCategory($id,$page){
+      
         $this->productsModuleController->allProductsByCategory($id,$page);
+        
     }
     public function allProductsBySubCategory($id,$idcat,$page){
         $this->productsModuleController->allProductsBySubCategory($id,$idcat,$page);

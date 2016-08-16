@@ -6,6 +6,7 @@
 abstract class baseController
 {
     protected $models=array();
+    protected $modules=array();
     /**
      * 
      * @param string $name naziv modela
@@ -14,6 +15,10 @@ abstract class baseController
     public function setModel($name,$value)
     {
         $this->models[$name]=$value;
+    }
+    public function setModule($name,$value)
+    {
+        $this->modules[$name]=$value;
     }
     abstract public function index();
     

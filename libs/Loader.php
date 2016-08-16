@@ -91,7 +91,23 @@ class Loader
             echo $config['Poruke']['noView'];
         } 
     }
-    
+    public static function loadPartialView($view,$module="",$from_module = false, $params=array())
+    {
+        global $config;
+        $module_folder = ($module != '')?'modules/'.$module."/":'';
+        $path_to_view=realpath($module_folder."views/".strtolower($view)."View.php");
+        if (file_exists($path_to_view))
+        {
+            extract($params);
+            
+            include_once  $path_to_view;
+            
+        }
+        else 
+        {
+            echo $config['Poruke']['noView'];
+        } 
+    }
     public static function loadClass($className){
         global $config;
         $class_folder = "classes";
@@ -102,5 +118,11 @@ class Loader
         else{
             echo $config['poruke']['noClass'];
         }
+    }
+    public static function loadModule($object,$module)
+    {
+        $module_name=$module."Controller";
+        $module_instance=new $module_name();
+        $object->setModule($module,$module_instance);
     }
 }
