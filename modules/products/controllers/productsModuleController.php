@@ -35,9 +35,11 @@ class productsModuleController extends baseController
         $pages = $pagination->build(); // Contains associative array with a numbers of a pages
         
         $this->template['products'] = $products;
+        
         foreach ($products as $product){
             $product->product_name_url = $this->url_friendly($product->product_name);
         }
+        
         $this->template['pagination'] = $pages;
         $this->template['category_name'] = $this->url_friendly($category_name);
         $this->template['category_id'] = $id;
