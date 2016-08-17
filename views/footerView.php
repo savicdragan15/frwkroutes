@@ -106,8 +106,14 @@
                 <script src="<?=_WEB_PATH?>/views/js/custom.js"></script>
                
                 <?php 
-                 if(isset($controllerMethod))
-                    $link_view = _WEB_PATH."products/".$controllerMethod."/".$category_id."/".$cat_id."1/".$category_name; 
+                     
+                 if(isset($params['controllerMethod'])){
+                     if(isset($params['cat_id']))
+                        $cat_id = $params['cat_id']."/";
+                    else
+                        $cat_id="";
+                    $link_view = _WEB_PATH."products/".$params['controllerMethod']."/".$params['category_id']."/".$cat_id."1/".$params['category_name']; 
+                    
                 ?>
                 <script>
                 $("#grdView").bind("click", function(e){
@@ -115,7 +121,7 @@
                     var formData = {'type':'1'}; //Array 
                     ajaxCall(formData,'<?=$link_view?>',function(data){
                        createCookie('grid','grid',365);
-                        $('body').html(data);
+                        $('#list_partial').html(data);
                     });
                      
                 });
@@ -125,12 +131,12 @@
                     var formData = {'type':'2'}; //Array
                     ajaxCall(formData,'<?=$link_view?>',function(data){
                         createCookie('grid','list',365);
-                        $('body').html(data);
+                        $('#list_partial').html(data);
                     });
                     
                 });
                 </script>
-                
+                 <?php } ?>
         </body>
 </html>
 
