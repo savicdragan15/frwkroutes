@@ -44,12 +44,12 @@
                         <div class="row">
                             <div id="list_partial">
                             <?php
-                                 echo Loader::loadPartialView('_grid','products',false,array('params'=>$partial_params)); 
+                                  Loader::loadPartialView('_grid','products',false,array('params'=>$partial_params)); 
                              ?>
                             </div>
                             <div class="span3">
                             <?php
-                                echo Loader::loadPartialView('_sidebar','products',false,array('navigation'=>$navigation)); 
+                                 Loader::loadPartialView('_sidebar','products',false,array('navigation'=>$navigation)); 
                             ?>
                             </div>
                         </div>

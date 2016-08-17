@@ -88,7 +88,7 @@
 
                             <div class="span3">
                             <?php
-                                echo Loader::loadPartialView('_sidebar','products',false,array('navigation'=>$navigation)); 
+                                 Loader::loadPartialView('_sidebar','products',false,array('navigation'=>$navigation)); 
                             ?>
                             </div>
                         </div>
