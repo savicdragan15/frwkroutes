@@ -115,7 +115,7 @@
                     var formData = {'type':'1'}; //Array 
                     ajaxCall(formData,'<?=$link_view?>',function(data){
                        createCookie('grid','grid',365);
-                        $('body').html(data);
+                        $('#list_partial').html(data);
                     });
                      
                 });
@@ -125,7 +125,7 @@
                     var formData = {'type':'2'}; //Array
                     ajaxCall(formData,'<?=$link_view?>',function(data){
                         createCookie('grid','list',365);
-                        $('body').html(data);
+                        $('#list_partial').html(data);
                     });
                     
                 });

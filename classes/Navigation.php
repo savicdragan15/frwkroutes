@@ -65,7 +65,10 @@ class Navigation extends baseController{
                    foreach ($children as $child){
                        $products = $productsModel->getAll('count(ID) as "productNumber"' ,'WHERE product_subcategory='.$child->ID);
                        //var_dump($products);
-                       $string.='<li><a href="'._WEB_PATH."products/allProductsBySubCategory/".$child->ID."/".$child->id_parent."/1/".$this->url_friendly($child->name).'">'.$child->name.' ('.$products[0]->productNumber.')</a></li>';
+                       if($child->id_subparent > 0){
+                           $string.= "<li> &nbsp;&nbsp; <a href='#'> ".$child->name." </a></li>";
+                       }else
+                         $string.='<li><a href="'._WEB_PATH."products/allProductsBySubCategory/".$child->ID."/".$child->id_parent."/1/".$this->url_friendly($child->name).'">'.$child->name.' ('.$products[0]->productNumber.')</a></li>';
                    }
                  }
                   $string.="</ul></div>";
