@@ -106,7 +106,7 @@
                 <script src="<?=_WEB_PATH?>/views/js/custom.js"></script>
                
                 <?php 
-                 if(isset($controllerMethod))
+                 if(isset($controllerMethod)){
                     $link_view = _WEB_PATH."products/".$controllerMethod."/".$category_id."/".$cat_id."1/".$category_name; 
                 ?>
                 <script>
@@ -130,7 +130,7 @@
                     
                 });
                 </script>
-                
+                 <?php } ?>  
         </body>
 </html>
 
