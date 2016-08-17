@@ -1,5 +1,6 @@
     
     <div class="product_wrap">
+
                     <div class="container">
                         <div class="row">
                             <div class="span9">
@@ -88,7 +89,7 @@
 
                             <div class="span3">
                             <?php
-                                 Loader::loadPartialView('_sidebar','products',false,array('navigation'=>$navigation)); 
+                                echo Loader::loadPartialView('_sidebar','products',false,array('navigation'=>$navigation)); 
                             ?>
                             </div>
                         </div>

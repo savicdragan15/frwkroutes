@@ -80,7 +80,6 @@ class Loader
 
         if (file_exists($path_to_view))
         {
-            $partial_params = $params;
             extract($params);
             include_once  $path_to_header;
             include_once  $path_to_view;
