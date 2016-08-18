@@ -28,6 +28,16 @@ class productsModel extends baseModel{
         return $this->join();
     }
     
+    public function getProductsBySubCatChild($id, $idsubcat, $idcat, $offset, $limit){
+        $this->join = array(
+            array("table"=>"images","realtion"=>"products.ID = images.product_id")
+        );
+        
+        $this->where = "products.product_category={$idcat} and products.product_subcategory={$idsubcat} and products.product_sub_subcategory={$id} LIMIT {$limit} OFFSET {$offset}";
+
+        return $this->join();
+    }
+    
     public function getNumberOfRecords($category,$id){
         $products = $this->getAll("count(ID) as 'all'", "WHERE {$category}={$id}");
         

@@ -112,7 +112,12 @@
                         $cat_id = $params['cat_id']."/";
                     else
                         $cat_id="";
-                    $link_view = _WEB_PATH."products/".$params['controllerMethod']."/".$params['category_id']."/".$cat_id."1/".$params['category_name']; 
+                    
+                    if(isset($params['sub_cat_id']))
+                            $sub_cat_id = $params['sub_cat_id']."/";
+                          else
+                            $sub_cat_id ="";
+                    $link_view = _WEB_PATH."products/".$params['controllerMethod']."/".$params['category_id']."/".$sub_cat_id.$cat_id."1/".$params['category_name']; 
                     
                 ?>
                 <script>

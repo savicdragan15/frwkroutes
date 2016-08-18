@@ -67,6 +67,7 @@ class productsModuleController extends baseController
     }
     public function allProductsBySubCategory($id,$idcat,$page){
         $id = $this->filter_input($id);
+        $idcat = $this->filter_input($idcat);
         
         $sub_category_name = $this->navigationModel->getCategoryName($id);
         
@@ -89,6 +90,55 @@ class productsModuleController extends baseController
         $this->template['limit'] = $limit;
         $this->template['total'] = $nubmerOfRecords;
         $this->template['controllerMethod']='allProductsBySubCategory';
+        if(isset($_POST['type'])){
+           //$this->template['navigation']=new Navigation();
+           //Loader::loadPartialView('list', 'products', false,$this->template);
+            if($_POST['type']==2)
+            {
+            Loader::loadPartialView('_list', 'products', false,array('params'=>$this->template));
+            }
+            else
+            {
+             Loader::loadPartialView('_grid', 'products', false,array('params'=>$this->template));
+            }
+        }else{
+           if(Cookie::get('grid') == 'list' || !Cookie::get('grid'))
+               Loader::loadView('list', 'products', FALSE,$this->template);
+             else
+               Loader::loadView('grid', 'products', FALSE,$this->template);  
+        }
+        
+    }
+    
+    public function allProductsSubCatChild($id,$idsubcat,$idcat,$page){
+        
+        $id = $this->filter_input($id);
+        $idsubcat = $this->filter_input($idsubcat);
+        $idcat = $this->filter_input($idcat);
+        
+        $sub_sub_category_name = $this->navigationModel->getCategoryName($id);
+        
+        $nubmerOfRecords = $this->productsModel->getNumberOfRecords("products.product_sub_subcategory",$id);
+        $pagination = new Pagination($nubmerOfRecords, $page, 2 ,2);
+        $offset = $pagination->offset();
+        $limit = $pagination->limit();
+        
+        $products = $this->productsModel->getProductsBySubCatChild($id, $idsubcat, $idcat, $offset, $limit);
+        $pages = $pagination->build(); // Contains associative array with a numbers of a pages
+       
+        
+        $this->template['products'] = $products;
+        foreach ($products as $product){
+            $product->product_name_url = $this->url_friendly($product->product_name);
+        }
+        $this->template['pagination'] = $pages;
+        $this->template['category_name'] = $this->url_friendly($sub_sub_category_name);
+        $this->template['category_id'] = $id;
+        $this->template['cat_id'] = $idcat;
+        $this->template['sub_cat_id'] = $idsubcat;
+        $this->template['limit'] = $limit;
+        $this->template['total'] = $nubmerOfRecords;
+        $this->template['controllerMethod'] = 'allProductsSubCatChild';
         if(isset($_POST['type'])){
            //$this->template['navigation']=new Navigation();
            //Loader::loadPartialView('list', 'products', false,$this->template);

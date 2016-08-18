@@ -30,6 +30,10 @@
                              else
                                  $cat_id="";
                              
+                        if(isset($params['sub_cat_id']))
+                                 $sub_cat_id = $params['sub_cat_id']."/";
+                              else
+                                  $sub_cat_id ="";
                              // $controllerMethod
                               ?>
                                 <div class="pagination clearfix">
@@ -37,11 +41,11 @@
                                     <ul class="clearfix">
                                         <?php foreach($params['pagination'] as $key => $page){?>
                                             <?php if($page == 'current'){?>
-                                              <li><a style="background-color: gray; color: white;" href="<?=_WEB_PATH?>products/<?=$params['controllerMethod']?>/<?=$params['category_id']?>/<?=$cat_id?><?=$key?>/<?=$params['category_name']?>"><?=$key?></a></li>
+                                              <li><a style="background-color: gray; color: white;" href="<?=_WEB_PATH?>products/<?=$params['controllerMethod']?>/<?=$params['category_id']?>/<?=$sub_cat_id?><?=$cat_id?><?=$key?>/<?=$params['category_name']?>"><?=$key?></a></li>
                                             <?php }else if($page == 'less' || $page == 'more'){ ?>
-                                                <li><a href="<?=_WEB_PATH?>products/<?=$params['controllerMethod']?>/<?=$params['category_id']?>/<?=$cat_id?><?=$key?>/<?=$params['category_name']?>">...</a></li>
+                                                <li><a href="<?=_WEB_PATH?>products/<?=$params['controllerMethod']?>/<?=$params['category_id']?>/<?=$sub_cat_id?><?=$cat_id?><?=$key?>/<?=$params['category_name']?>">...</a></li>
                                             <?php }else{ ?>
-                                              <li><a href="<?=_WEB_PATH?>products/<?=$params['controllerMethod']?>/<?=$params['category_id']?>/<?=$cat_id?><?=$key?>/<?=$params['category_name']?>"><?=$key?></a></li>
+                                              <li><a href="<?=_WEB_PATH?>products/<?=$params['controllerMethod']?>/<?=$params['category_id']?>/<?=$sub_cat_id?><?=$cat_id?><?=$key?>/<?=$params['category_name']?>"><?=$key?></a></li>
                                            <?php }
                                         } ?>
                                         <!--<li><a href="#">2</a></li>
