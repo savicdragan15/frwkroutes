@@ -57,11 +57,11 @@ class productsModuleController extends baseController
            //Loader::loadPartialView('list', 'products', false,$this->template);
             if($_POST['type']==2)
             {
-            Loader::loadPartialView('_list', 'products', false,array('params'=>$this->template));
+            Loader::loadView('list', 'products', false,$this->template);
             }
             else
             {
-             Loader::loadPartialView('_grid', 'products', false,array('params'=>$this->template));
+             Loader::loadView('grid', 'products', false,$this->template);
             }
         }else{
             if(Cookie::get('grid') == 'list' || !Cookie::get('grid'))
@@ -99,11 +99,11 @@ class productsModuleController extends baseController
            //Loader::loadPartialView('list', 'products', false,$this->template);
             if($_POST['type']==2)
             {
-            Loader::loadPartialView('_list', 'products', false,array('params'=>$this->template));
+            Loader::loadView('list', 'products', false,$this->template);
             }
             else
             {
-             Loader::loadPartialView('_grid', 'products', false,array('params'=>$this->template));
+             Loader::loadView('grid', 'products', false,$this->template);
             }
         }else{
            if(Cookie::get('grid') == 'list' || !Cookie::get('grid'))

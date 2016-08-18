@@ -106,14 +106,8 @@
                 <script src="<?=_WEB_PATH?>/views/js/custom.js"></script>
                
                 <?php 
-                     
-                 if(isset($params['controllerMethod'])){
-                     if(isset($params['cat_id']))
-                        $cat_id = $params['cat_id']."/";
-                    else
-                        $cat_id="";
-                    $link_view = _WEB_PATH."products/".$params['controllerMethod']."/".$params['category_id']."/".$cat_id."1/".$params['category_name']; 
-                    
+                 if(isset($controllerMethod)){
+                    $link_view = _WEB_PATH."products/".$controllerMethod."/".$category_id."/".$cat_id."1/".$category_name; 
                 ?>
                 <script>
                 $("#grdView").bind("click", function(e){
@@ -216,7 +210,7 @@
                     //asd
                 });
                 </script>
-                 <?php } ?>
+                 <?php } ?>  
         </body>
 </html>
 
