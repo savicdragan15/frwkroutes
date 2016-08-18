@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 14, 2016 at 03:57 PM
+-- Generation Time: Aug 18, 2016 at 08:48 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `images` (
   `product_id` int(11) NOT NULL,
   `image_name` varchar(250) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `images`
@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `product_price` decimal(20,2) NOT NULL,
   `product_category` int(11) NOT NULL,
   `product_subcategory` int(11) NOT NULL,
-  `product_sub_subcateogry` int(11) NOT NULL,
+  `product_sub_subcategory` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
@@ -133,14 +133,14 @@ CREATE TABLE IF NOT EXISTS `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`ID`, `product_name`, `product_description`, `product_price`, `product_category`, `product_subcategory`, `product_sub_subcateogry`) VALUES
+INSERT INTO `products` (`ID`, `product_name`, `product_description`, `product_price`, `product_category`, `product_subcategory`, `product_sub_subcategory`) VALUES
 (1, 'Test product 1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique. ', '10.00', 1, 2, 0),
-(2, 'Test product 2', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique.', '20.00', 1, 2, 0),
-(3, 'Test product 3', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique.', '30.00', 1, 2, 0),
-(4, 'Test product 4', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique. ', '50.00', 1, 2, 0),
-(5, 'Test product 5', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique. ', '60.00', 1, 2, 0),
-(6, 'Test product 6', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique. ', '60.00', 1, 2, 0),
-(7, 'Test product 7', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique. ', '60.00', 1, 2, 0),
+(2, 'Test product 2', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique.', '20.00', 1, 3, 0),
+(3, 'Test product 3', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique.', '30.00', 1, 3, 30),
+(4, 'Test product 4', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique. ', '50.00', 21, 29, 30),
+(5, 'Test product 5', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique. ', '60.00', 21, 29, 30),
+(6, 'Test product 6', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique. ', '60.00', 21, 29, 30),
+(7, 'Test product 7', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique. ', '60.00', 1, 4, 0),
 (8, 'Test product 8', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique. ', '60.00', 1, 2, 0),
 (9, 'Test product 9', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique. ', '60.00', 1, 2, 0),
 (10, 'Test product 10', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique. ', '60.00', 1, 2, 0),

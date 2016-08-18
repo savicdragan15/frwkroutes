@@ -28,7 +28,7 @@ class Navigation extends baseController{
                            $string .='<a href="'._WEB_PATH."products/allProductsSubCatChild/".$child->ID."/".$child->id_subparent."/".$child->id_parent."/1/".$this->url_friendly($child->name).'" style="text-transform: capitalize;"> >'. $child->name.'</a>';
 
                        }else
-                            $string .="<a href='"._WEB_PATH."products/allProductsBySubCategory/".$child->ID."/".$child->id_parent."/1/".$this->url_friendly($child->name)."'>$child->name}</a>";
+                            $string .="<a href='"._WEB_PATH."products/allProductsBySubCategory/".$child->ID."/".$child->id_parent."/1/".$this->url_friendly($child->name)."'>".$child->name."</a>";
 
                       //  if($i%14 == 0 && $i != 0) $string .='</p>';
                        $i++;
