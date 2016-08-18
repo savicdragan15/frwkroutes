@@ -122,6 +122,46 @@
                     ajaxCall(formData,'<?=$link_view?>',function(data){
                        createCookie('grid','grid',365);
                         $('#list_partial').html(data);
+                        $('.tooltip').tooltipster({
+                            theme: '.tooltipster-punk'
+                        });
+                         $('.detail .icon a').hover(
+                           function(){
+                            $(this).stop().animate(
+                            {backgroundPosition: "(0 -42.3px)"},
+                            {duration:500}
+                            )
+                            },
+                            function(){
+                        $(this).stop().animate(
+                        {backgroundPosition: "(0 0)"},
+                         {duration:500}
+                          )
+                        }
+                        );
+                        $(".product figure").hover(function(){
+                            $(this).children('.overlay').stop(true, true).fadeIn(700);
+                            }, function(){
+                            $(this).children('.overlay').stop(true, true).fadeOut(500);
+                        });
+                         $('.product figure .overlay a').hover(
+                             function(){
+                                $(this).stop().animate(
+                                  {backgroundPosition: "(0 -41px)"},
+                                  {duration:500}
+                                )
+                             },
+                        function(){
+                            $(this).stop().animate(
+                                {backgroundPosition: "(0 0)"},
+                                {duration:500}
+                                )
+                            }
+                         );
+                        $("a.zoom").prettyPhoto({
+                            social_tools: ''
+                        });
+
                     });
                      
                 });
@@ -132,6 +172,46 @@
                     ajaxCall(formData,'<?=$link_view?>',function(data){
                         createCookie('grid','list',365);
                         $('#list_partial').html(data);
+                        $('.tooltip').tooltipster({
+                            theme: '.tooltipster-punk'
+                        });
+                         $('.detail .icon a').hover(
+                           function(){
+                            $(this).stop().animate(
+                            {backgroundPosition: "(0 -42.3px)"},
+                            {duration:500}
+                            )
+                            },
+                            function(){
+                        $(this).stop().animate(
+                        {backgroundPosition: "(0 0)"},
+                         {duration:500}
+                          )
+                        }
+                        );
+                        $(".product figure").hover(function(){
+                            $(this).children('.overlay').stop(true, true).fadeIn(700);
+                            }, function(){
+                            $(this).children('.overlay').stop(true, true).fadeOut(500);
+                        });
+                         $('.product figure .overlay a').hover(
+                             function(){
+                                $(this).stop().animate(
+                                  {backgroundPosition: "(0 -41px)"},
+                                  {duration:500}
+                                )
+                             },
+                        function(){
+                            $(this).stop().animate(
+                                {backgroundPosition: "(0 0)"},
+                                {duration:500}
+                                )
+                            }
+                         );
+                        $("a.zoom").prettyPhoto({
+                            social_tools: ''
+                        });
+
                     });
                     
                 });
