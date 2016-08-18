@@ -21,6 +21,11 @@ class productsModuleController extends baseController
       
     }
     
+    /**
+     * Get products by category
+     * @param string $id
+     * @param type $page
+     */
     public function allProductsByCategory($id,$page){
         
         $id = $this->filter_input($id);
