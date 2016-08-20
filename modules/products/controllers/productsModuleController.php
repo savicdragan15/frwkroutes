@@ -166,7 +166,13 @@ class productsModuleController extends baseController
         $id = $this->filter_input($id);
         
         $product = $this->productsModel->getProduct($id);
+        if(is_null($product)){
+            $this->redirect(_WEB_PATH."home/page404");
+            die;
+        }
+            
         $this->template['product'] = $product;
+        
         Loader::loadView('singleProduct', 'products', FALSE, $this->template);
     }
     

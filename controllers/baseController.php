@@ -52,6 +52,10 @@ abstract class baseController
         echo json_encode($data);
     }
     
+    public function redirect($link){
+        header("Location:".$link);
+    }
+
     public function replaceYuFonts($string){
         $uri = str_replace(array('Ć','ć','Č','č','Ž','ž','Š','š','Đ','đ',' '), array('c','c','c','c','z','z','s','s','dj','dj','_'), $string);
         $uri = strtolower($uri);
