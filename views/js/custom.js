@@ -208,7 +208,10 @@ $(document).ready(function(e) {
     $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) );
     $( "#amount2" ).val( "$"
          + $( "#slider-range" ).slider( "values", 1 ) );
-});
+ 
+     
+    });
+    
     function ajaxCall(data,url,callback,method)
     {
        method = typeof method !== 'undefined' ? method : "POST";
@@ -228,12 +231,14 @@ $(document).ready(function(e) {
         });
     }
 
-function createCookie(name,value,days) {
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime()+(days*24*60*60*1000));
-        var expires = "; expires="+date.toGMTString();
+    function createCookie(name,value,days) {
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime()+(days*24*60*60*1000));
+            var expires = "; expires="+date.toGMTString();
+        }
+        else var expires = "";
+        document.cookie = name+"="+value+expires+"; path=/";
     }
-    else var expires = "";
-    document.cookie = name+"="+value+expires+"; path=/";
-}
+    
+            

@@ -74,8 +74,8 @@
                                 <h2>Featured Products <span></span></h2>
                             </div>
                         </div>
+                        
                         <div class="row">
-
                             <div class="span3 product">
 
                                 <div>
