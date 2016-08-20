@@ -52,7 +52,8 @@ class productsModel extends baseModel{
         
         $this->where = "products.ID ={$id}";
         
-        return $this->join()[0];
+        if(!empty($this->join()))
+            return $this->join()[0];
     }
     
 }
