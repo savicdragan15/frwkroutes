@@ -209,12 +209,12 @@ $(document).ready(function(e) {
     $( "#amount2" ).val( "$"
          + $( "#slider-range" ).slider( "values", 1 ) );
 });
-    function ajaxCall(data,url,callback)
+    function ajaxCall(data,url,callback,method)
     {
-
+       method = typeof method !== 'undefined' ? method : "POST";
         $.ajax({
             url : url,//"products/allProductsByCategory/1/1/Exterior",
-            type: "POST",
+            type: method,
             data : data,
             success: function(data, textStatus, jqXHR)
             {
