@@ -46,10 +46,10 @@ class productsModuleController extends baseController
         $this->template['limit'] = $limit;
         $this->template['total'] = $nubmerOfRecords;
         $this->template['controllerMethod']='allProductsByCategory';
-       // Loader::loadView('list', 'products', false,$this->template);
+        $this->template['message'] = 'No products in this category.';
+        
          if(isset($_POST['type'])){
-           //$this->template['navigation']=new Navigation();
-           //Loader::loadPartialView('list', 'products', false,$this->template);
+           
             if($_POST['type']==2)
             {
             Loader::loadPartialView('_list', 'products', false,array('params'=>$this->template));
@@ -90,6 +90,7 @@ class productsModuleController extends baseController
         $this->template['limit'] = $limit;
         $this->template['total'] = $nubmerOfRecords;
         $this->template['controllerMethod']='allProductsBySubCategory';
+        $this->template['message'] = 'No products in this subcategory.';
         if(isset($_POST['type'])){
            //$this->template['navigation']=new Navigation();
            //Loader::loadPartialView('list', 'products', false,$this->template);
@@ -139,9 +140,10 @@ class productsModuleController extends baseController
         $this->template['limit'] = $limit;
         $this->template['total'] = $nubmerOfRecords;
         $this->template['controllerMethod'] = 'allProductsSubCatChild';
+        $this->template['message'] = 'No products in this subcategory.';
+        
         if(isset($_POST['type'])){
-           //$this->template['navigation']=new Navigation();
-           //Loader::loadPartialView('list', 'products', false,$this->template);
+            
             if($_POST['type']==2)
             {
             Loader::loadPartialView('_list', 'products', false,array('params'=>$this->template));

@@ -23,6 +23,13 @@
 
                                     </div>
                                 <?php } ?>
+                                <?php 
+                                    if(empty($params['products'])){
+                                        echo "<div class='span3 product'>";
+                                        echo "<h3>".$params['message']."</h3>";
+                                        echo "</div>";
+                                    }
+                                ?>
                                 </div>
                                  <?php
                              if(isset($params['cat_id']))
