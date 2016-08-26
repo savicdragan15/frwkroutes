@@ -121,6 +121,20 @@
                     
                 ?>
                 <script>
+                 $(".add-to-cart").on("click", function(e){
+                     e.preventDefault();
+                     e.stopPropagation();
+                    // alert( $(this).attr('data-id'));
+                     var formData = {
+                         'proizvod_id': $(this).attr('data-id'),
+                         'proizvod_cena': $(this).attr('data-price'),
+                         'proizvod_naziv': $(this).attr('data-name')
+                     }; 
+                     ajaxCall(formData,'<?=_WEB_PATH?>cart/index',function(data){ 
+                           console.log(data.ukupno_proizvoda_u_korpi);
+                           $('#cart-info').html(data.ukupno_proizvoda_u_korpi+' items');
+                    });
+                 });
                 $("#grdView").bind("click", function(e){
                     e.preventDefault();
                     var formData = {'type':'1'}; //Array 
@@ -166,8 +180,11 @@
                         $("a.zoom").prettyPhoto({
                             social_tools: ''
                         });
-
+                    $(".add-to-cart").on("click", function(e){
+                        e.preventDefault();
+                        alert( $(this).attr('data-id'));
                     });
+                });
                      
                 });
 
@@ -216,10 +233,12 @@
                         $("a.zoom").prettyPhoto({
                             social_tools: ''
                         });
-
-                    });
-                    
-                });
+                    $(".add-to-cart").on("click", function(e){
+                        e.preventDefault();
+                        alert( $(this).attr('data-id'));
+                    }); 
+                }); 
+            });
                 </script>
                  <?php } ?>
         </body>

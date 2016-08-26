@@ -86,7 +86,7 @@
                                 <div class="cart">
                                     <ul>
                                         <li class="first"><a href="#"></a><span></span></li>
-                                        <li>0 item(s) - $0.00</li>
+                                        <li id="cart-info"><?=(isset($_SESSION['korpa']))?$_SESSION['korpa']['ukupno_proizvoda_u_korpi'].' items':'0 items'?></li>
                                     </ul>
                                 </div>
                             </div>

@@ -48,7 +48,7 @@ abstract class baseController
      * @param json $data
      */
     public function response($data){
-        header("Conten-type : application/json");
+       // header("Conten-type : application/json");
         echo json_encode($data);
     }
     
