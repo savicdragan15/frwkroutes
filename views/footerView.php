@@ -131,8 +131,14 @@
                          'proizvod_naziv': $(this).attr('data-name')
                      }; 
                      ajaxCall(formData,'<?=_WEB_PATH?>cart/index',function(data){ 
-                           console.log(data.ukupno_proizvoda_u_korpi);
-                           $('#cart-info').html(data.ukupno_proizvoda_u_korpi+' items');
+                           data=JSON.parse(data);
+                       //    console.log(data.data.ukupno_proizvoda_u_korpi);
+                           Object.keys(data.data).forEach(function(key) {
+
+                            console.log(key, data.data[key].proizvod_id);
+
+                           });
+                           //$('#cart-info').html(data.ukupno_proizvoda_u_korpi+' items');
                     });
                  });
                 $("#grdView").bind("click", function(e){

@@ -44,15 +44,15 @@ class cartModuleController extends baseController{
            $ukupan_broj_proizvoda[] = $proizvod['proizvod_kolicina'];
          }
          
-         $_SESSION['korpa']['ukupna_cena_korpe'] = array_sum($cena);
-         $_SESSION['korpa']['ukupno_proizvoda_u_korpi'] = count($_SESSION['inicijalna_korpa']);
+         $_SESSION['korpa']["ukupna_cena_korpe"] = array_sum($cena);
+         $_SESSION['korpa']["ukupno_proizvoda_u_korpi"] = count($_SESSION['inicijalna_korpa']);
          
          $error = false;
          $data = array(
              "data" => $_SESSION['korpa'],
              "error" => $error
          );
-         var_dump($data);
+         //var_dump($data);
          $this->response($data);
        }else{
          $this->response(array('error'=>true,"message"=>"Proizvod nije ubačen u korpu, pokusajte ponovo.","data"=>$_SESSION['korpica']));
