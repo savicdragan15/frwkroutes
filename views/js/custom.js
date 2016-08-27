@@ -241,10 +241,19 @@ $(document).ready(function(e) {
         document.cookie = name+"="+value+expires+"; path=/";
     }
     
-   function openCartDialog(){
-       $.pgwModal({
-        target: '#modalContent',
-        title: 'Modal title 2',
-        maxWidth: 800
+   function openCartDialog(url){
+     $.pgwModal({
+        url: url, // Returns the object "{status: 200, response: '<div class="user">John Doe</div>'}"
+        maxWidth : 1200,
+        ajaxOptions : {
+            success : function(data) {
+                if (data) {
+                    $.pgwModal({ pushContent: data });
+                } else {
+                    $.pgwModal({ pushContent: 'Doslo je do greske!' });
+                }
+            }
+        }
     });
+    
    }

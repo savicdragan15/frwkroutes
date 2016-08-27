@@ -129,20 +129,11 @@
                      var formData = {
                          'proizvod_id': $(this).attr('data-id'),
                          'proizvod_cena': $(this).attr('data-price'),
-                         'proizvod_naziv': $(this).attr('data-name')
+                         'proizvod_naziv': $(this).attr('data-name'),
+                         'proizvod_slika': $(this).attr('data-img')
                      }; 
                      ajaxCall(formData,'<?=_WEB_PATH?>cart/index',function(data){ 
                            data = JSON.parse(data);
-                           
-                          /* $.each(data.data,function(index, value){
-                                console.log(value.proizvod_naziv); 
-                           });*/
-                           
-                          /* Object.keys(data.data).forEach(function(key) {
-
-                            console.log(key, data.data[key].proizvod_naziv);
-
-                           });*/
                            if(data.error == false){
                               $('#cart-info').html(data.data.ukupno_proizvoda_u_korpi+' items');
                               // custom OK and Cancel label
@@ -156,7 +147,8 @@
                                 alertify.confirm("Uspesno ste ubacitli proizvod u korpu", function (e) {
                                     if (e) {
                                         // user clicked "ok"
-                                        openCartDialog();
+                                        var url = '<?=_WEB_PATH?>cart/cartDialog';
+                                        openCartDialog(url);
                                     } else {
                                         // user clicked "cancel"
                                     }
@@ -212,10 +204,42 @@
                         $("a.zoom").prettyPhoto({
                             social_tools: ''
                         });
+                        
                     $(".add-to-cart").on("click", function(e){
-                        e.preventDefault();
-                        alert( $(this).attr('data-id'));
+                     e.preventDefault();
+                     e.stopPropagation();
+                     var formData = {
+                         'proizvod_id': $(this).attr('data-id'),
+                         'proizvod_cena': $(this).attr('data-price'),
+                         'proizvod_naziv': $(this).attr('data-name'),
+                         'proizvod_slika': $(this).attr('data-img')
+                     }; 
+                     ajaxCall(formData,'<?=_WEB_PATH?>cart/index',function(data){ 
+                           data = JSON.parse(data);
+                           if(data.error == false){
+                              $('#cart-info').html(data.data.ukupno_proizvoda_u_korpi+' items');
+                              // custom OK and Cancel label
+                                // default: OK, Cancel
+                                alertify.set({ labels: {
+                                    ok     : "Prikazi korpu",
+                                    cancel : "Nastavi kupovinu"
+                                } });
+
+                                // confirm dialog
+                                alertify.confirm("Uspesno ste ubacitli proizvod u korpu", function (e) {
+                                    if (e) {
+                                        // user clicked "ok"
+                                        var url = '<?=_WEB_PATH?>cart/cartDialog';
+                                        openCartDialog(url);
+                                    } else {
+                                        // user clicked "cancel"
+                                    }
+                                });
+                           }
+                               
+                              
                     });
+                 });
                 });
                      
                 });
@@ -265,10 +289,42 @@
                         $("a.zoom").prettyPhoto({
                             social_tools: ''
                         });
+                        
                     $(".add-to-cart").on("click", function(e){
-                        e.preventDefault();
-                        alert( $(this).attr('data-id'));
-                    }); 
+                     e.preventDefault();
+                     e.stopPropagation();
+                     var formData = {
+                         'proizvod_id': $(this).attr('data-id'),
+                         'proizvod_cena': $(this).attr('data-price'),
+                         'proizvod_naziv': $(this).attr('data-name'),
+                         'proizvod_slika': $(this).attr('data-img')
+                     }; 
+                     ajaxCall(formData,'<?=_WEB_PATH?>cart/index',function(data){ 
+                           data = JSON.parse(data);
+                           if(data.error == false){
+                              $('#cart-info').html(data.data.ukupno_proizvoda_u_korpi+' items');
+                              // custom OK and Cancel label
+                                // default: OK, Cancel
+                                alertify.set({ labels: {
+                                    ok     : "Prikazi korpu",
+                                    cancel : "Nastavi kupovinu"
+                                } });
+
+                                // confirm dialog
+                                alertify.confirm("Uspesno ste ubacitli proizvod u korpu", function (e) {
+                                    if (e) {
+                                        // user clicked "ok"
+                                        var url = '<?=_WEB_PATH?>cart/cartDialog';
+                                        openCartDialog(url);
+                                    } else {
+                                        // user clicked "cancel"
+                                    }
+                                });
+                           }
+                               
+                              
+                    });
+                 }); 
                 }); 
             });
                 </script>
@@ -276,7 +332,8 @@
             <script>
                 $('#view_cart').on('click', function(e){
                  e.preventDefault();
-                    openCartDialog();
+                  var url = '<?=_WEB_PATH?>cart/cartDialog';
+                    openCartDialog(url);
                 });
             </script>
         </body>

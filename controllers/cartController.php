@@ -21,4 +21,8 @@ class cartController extends baseController{
     public function index() {
         $this->cartModuleController->index();
     }
+    
+    public function cartDialog(){
+        $this->cartModuleController->cartDialog();
+    }
 }

@@ -20,15 +20,18 @@ class cartModuleController extends baseController{
           
         $_SESSION['inicijalna_korpa'][$_POST['proizvod_id']][] = array(
                 "proizvod_id"=>$_POST['proizvod_id'],
-                "proizvod_cena"=>$_POST['proizvod_cena'],
-                "proizvod_naziv"=>$_POST['proizvod_naziv']
+                "proizvod_cena"=>(float)$_POST['proizvod_cena'],
+                "proizvod_naziv"=>$_POST['proizvod_naziv'],
+                "proizvod_slika" => $_POST['proizvod_slika']
         );
         
          $_SESSION['korpa'][$_POST['proizvod_id']] = array(
             "proizvod_id" => $_POST['proizvod_id'],
             "ukupna_cena" => $_POST['proizvod_cena'] * count($_SESSION['inicijalna_korpa'][$_POST['proizvod_id']]),
             "proizvod_naziv" => $_POST['proizvod_naziv'],
-            "proizvod_kolicina" => count($_SESSION['inicijalna_korpa'][$_POST['proizvod_id']])
+            "proizvod_slika" => $_POST['proizvod_slika'],
+            "proizvod_kolicina" => count($_SESSION['inicijalna_korpa'][$_POST['proizvod_id']]),
+            "proizvod_cena" => (float)$_POST['proizvod_cena']
          );
            
          foreach($_SESSION['korpa'] as $proizvod){
@@ -51,6 +54,12 @@ class cartModuleController extends baseController{
        }   
     }
     
+    public function cartDialog(){
+        
+        $this->template['products'] = Session::get('korpa');
+        
+        Loader::loadPartialView('_cartdialog', 'cart', false, $this->template);
+    }
     /**
      * Get all product from cart ($_SESSIO)
      * @return json niz proizvoda
