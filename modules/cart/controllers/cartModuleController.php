@@ -16,15 +16,7 @@ class cartModuleController extends baseController{
      * @return json Vraca ukupnu cenu i koliko proizvoda je u korpi
      */  
     public function index() {
-        //var_dump($_POST); die;
         if(isset($_POST['proizvod_id']) && !empty($_POST['proizvod_id'])){
-          /*if(!empty($_SESSION['korpica']['ids_proizvoda'])){
-              if(array_search($_POST['proizvod_id'], $_SESSION['korpica']['ids_proizvoda']) !== false){
-                  $error = true;
-                  $this->response(array("error"=>$error,"message"=>"Ovaj proizvod je već u korpi."));
-                  die();
-              }
-          }*/
           
         $_SESSION['inicijalna_korpa'][$_POST['proizvod_id']][] = array(
                 "proizvod_id"=>$_POST['proizvod_id'],
@@ -52,7 +44,7 @@ class cartModuleController extends baseController{
              "data" => $_SESSION['korpa'],
              "error" => $error
          );
-         //var_dump($data);
+         
          $this->response($data);
        }else{
          $this->response(array('error'=>true,"message"=>"Proizvod nije ubačen u korpu, pokusajte ponovo.","data"=>$_SESSION['korpica']));

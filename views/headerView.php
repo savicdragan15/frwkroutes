@@ -26,7 +26,7 @@
                 <link rel="stylesheet" href="<?=_WEB_PATH?>/views/css/prettyPhoto.css">
                 <link rel="stylesheet" href="<?=_WEB_PATH?>/views/css/pgwmodal.css">
                 <link rel="stylesheet" href="<?=_WEB_PATH?>/views/css/alertify/alertify.core.css">
-                <link rel="stylesheet" href="<?=_WEB_PATH?>/views/css/alertify/alertify.bootstrap.css">
+                <link rel="stylesheet" href="<?=_WEB_PATH?>/views/css/alertify/alertify.default.css">
                 
 				
                 <!-- favicon -->

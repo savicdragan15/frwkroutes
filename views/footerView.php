@@ -145,6 +145,22 @@
                            });*/
                            if(data.error == false){
                               $('#cart-info').html(data.data.ukupno_proizvoda_u_korpi+' items');
+                              // custom OK and Cancel label
+                                // default: OK, Cancel
+                                alertify.set({ labels: {
+                                    ok     : "Prikazi korpu",
+                                    cancel : "Nastavi kupovinu"
+                                } });
+
+                                // confirm dialog
+                                alertify.confirm("Uspesno ste ubacitli proizvod u korpu", function (e) {
+                                    if (e) {
+                                        // user clicked "ok"
+                                        openCartDialog();
+                                    } else {
+                                        // user clicked "cancel"
+                                    }
+                                });
                            }
                                
                               
@@ -260,12 +276,8 @@
             <script>
                 $('#view_cart').on('click', function(e){
                  e.preventDefault();
-                 $.pgwModal({
-                    target: '#modalContent',
-                    title: 'Modal title 2',
-                    maxWidth: 800
+                    openCartDialog();
                 });
-             });
             </script>
         </body>
 </html>

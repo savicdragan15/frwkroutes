@@ -241,4 +241,10 @@ $(document).ready(function(e) {
         document.cookie = name+"="+value+expires+"; path=/";
     }
     
-            
+   function openCartDialog(){
+       $.pgwModal({
+        target: '#modalContent',
+        title: 'Modal title 2',
+        maxWidth: 800
+    });
+   }
