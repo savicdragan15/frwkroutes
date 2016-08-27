@@ -103,6 +103,8 @@
                 <script src="<?=_WEB_PATH?>/views/js/jquery.selectBox.js"></script>
                 <script src="<?=_WEB_PATH?>/views/js/jquery.tooltipster.min.js"></script>
                 <script src="<?=_WEB_PATH?>/views/js/jquery.prettyPhoto.js"></script>
+                <script src="<?=_WEB_PATH?>/views/js/pgwmodal.min.js"></script>
+                <script src="<?=_WEB_PATH?>/views/js/alertify.min.js"></script>
                 <script src="<?=_WEB_PATH?>/views/js/custom.js"></script>
                
                 <?php 
@@ -124,23 +126,31 @@
                  $(".add-to-cart").on("click", function(e){
                      e.preventDefault();
                      e.stopPropagation();
-                    // alert( $(this).attr('data-id'));
                      var formData = {
                          'proizvod_id': $(this).attr('data-id'),
                          'proizvod_cena': $(this).attr('data-price'),
                          'proizvod_naziv': $(this).attr('data-name')
                      }; 
                      ajaxCall(formData,'<?=_WEB_PATH?>cart/index',function(data){ 
-                           data=JSON.parse(data);
-                       //    console.log(data.data.ukupno_proizvoda_u_korpi);
-                           Object.keys(data.data).forEach(function(key) {
+                           data = JSON.parse(data);
+                           
+                          /* $.each(data.data,function(index, value){
+                                console.log(value.proizvod_naziv); 
+                           });*/
+                           
+                          /* Object.keys(data.data).forEach(function(key) {
 
-                            console.log(key, data.data[key].proizvod_id);
+                            console.log(key, data.data[key].proizvod_naziv);
 
-                           });
-                           //$('#cart-info').html(data.ukupno_proizvoda_u_korpi+' items');
+                           });*/
+                           if(data.error == false){
+                              $('#cart-info').html(data.data.ukupno_proizvoda_u_korpi+' items');
+                           }
+                               
+                              
                     });
                  });
+                 
                 $("#grdView").bind("click", function(e){
                     e.preventDefault();
                     var formData = {'type':'1'}; //Array 
@@ -246,7 +256,17 @@
                 }); 
             });
                 </script>
-                 <?php } ?>
+        <?php } ?>
+            <script>
+                $('#view_cart').on('click', function(e){
+                 e.preventDefault();
+                 $.pgwModal({
+                    target: '#modalContent',
+                    title: 'Modal title 2',
+                    maxWidth: 800
+                });
+             });
+            </script>
         </body>
 </html>
 

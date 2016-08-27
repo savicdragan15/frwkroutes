@@ -24,6 +24,9 @@
                 <link rel="stylesheet" href="<?=_WEB_PATH?>/views/style.css">
                 <link rel="stylesheet" href="<?=_WEB_PATH?>/views/css/responsive.css">
                 <link rel="stylesheet" href="<?=_WEB_PATH?>/views/css/prettyPhoto.css">
+                <link rel="stylesheet" href="<?=_WEB_PATH?>/views/css/pgwmodal.css">
+                <link rel="stylesheet" href="<?=_WEB_PATH?>/views/css/alertify/alertify.core.css">
+                <link rel="stylesheet" href="<?=_WEB_PATH?>/views/css/alertify/alertify.bootstrap.css">
                 
 				
                 <!-- favicon -->
@@ -85,7 +88,7 @@
                             <div class="span2">
                                 <div class="cart">
                                     <ul>
-                                        <li class="first"><a href="#"></a><span></span></li>
+                                        <li class="first" id="view_cart"><a href="#"></a><span></span></li>
                                         <li id="cart-info"><?=(isset($_SESSION['korpa']))?$_SESSION['korpa']['ukupno_proizvoda_u_korpi'].' items':'0 items'?></li>
                                     </ul>
                                 </div>

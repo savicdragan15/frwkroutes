@@ -59,10 +59,10 @@ class productsModuleController extends baseController
              Loader::loadPartialView('_grid', 'products', false,array('params'=>$this->template));
             }
         }else{
-            if(Cookie::get('grid') == 'list' || !Cookie::get('grid'))
-               Loader::loadView('list', 'products', FALSE,$this->template);
+            if(Cookie::get('grid') == 'grid' || !Cookie::get('grid'))
+               Loader::loadView('grid', 'products', FALSE,$this->template);
              else
-               Loader::loadView('grid', 'products', FALSE,$this->template);  
+               Loader::loadView('list', 'products', FALSE,$this->template);  
         }
     }
     public function allProductsBySubCategory($id,$idcat,$page){
