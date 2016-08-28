@@ -105,6 +105,7 @@
                 <script src="<?=_WEB_PATH?>/views/js/jquery.prettyPhoto.js"></script>
                 <script src="<?=_WEB_PATH?>/views/js/pgwmodal.min.js"></script>
                 <script src="<?=_WEB_PATH?>/views/js/alertify.min.js"></script>
+                <script type="text/javascript" src="<?=_WEB_PATH?>/views/js/jssor.slider-21.1.5.mini.js"></script>
                 <script src="<?=_WEB_PATH?>/views/js/custom.js"></script>
                
                 <?php 
@@ -336,6 +337,7 @@
                     openCartDialog(url);
                 });
             </script>
+            
         </body>
 </html>
 
