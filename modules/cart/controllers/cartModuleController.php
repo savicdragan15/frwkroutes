@@ -95,27 +95,31 @@ class cartModuleController extends baseController{
     /**
      * Delete product from cart
      */
-    public function obrisiProizvodIzKorpe(){
-        if(!isset($_POST['id'])) die();
-        $proizvod = $_SESSION['korpa'][$_POST['id']];
-        $umanjena_cena = $_SESSION['korpica']['cena'] - $proizvod['proizvod_cena'];
-        unset($_SESSION['korpa'][$_POST['id']]);
-        $_SESSION['korpica']['cena'] = $umanjena_cena;
-        $broj_proizvoda = count($_SESSION['korpa']);
-        $trenutno_proizvoda  = $_SESSION['korpica']['broj_proizvoda'] - 1;
-        $_SESSION['korpica']['broj_proizvoda'] = $trenutno_proizvoda;
-        unset($_SESSION['poruceni_proizvodi'][$_POST['id']]);
-        $data = array(
-            'message' => 'ok',
-            'ukupna_cena' => $_SESSION['korpica']['cena'],
-            'broj_proizvoda' => $broj_proizvoda,
-            'obrisan_proizvod_id' => $_POST['id']
-        );
-        $this->response($data);
-        if($trenutno_proizvoda == 0){
-            Session::unsetSession('korpa');
-            Session::unsetSession('korpica');
-        }
+    public function removeFromCart(){
+        
+       if(isset($_POST['proizvod_id'])){
+            $id = $this->filter_input($_POST['proizvod_id']);
+            $_SESSION['korpa']['ukupna_cena_korpe'] = $_SESSION['korpa']['ukupna_cena_korpe'] - $_SESSION['korpa'][$id]['ukupna_cena'];
+            unset($_SESSION['inicijalna_korpa'][$id]);
+            unset($_SESSION['korpa'][$id]);
+            $broj_proizvoda_u_korpi = count($_SESSION['inicijalna_korpa']);
+            $_SESSION['korpa']['ukupno_proizvoda_u_korpi'] = $broj_proizvoda_u_korpi;
+            
+            $data = array(
+                "proizvod_id" => $id,
+                "broj_proizvoda_u_korpi" => $_SESSION['korpa']['ukupno_proizvoda_u_korpi'],
+                "ukupna_cena_korpe" => $_SESSION['korpa']['ukupna_cena_korpe'] 
+            );
+            
+            $this->response($data);
+            
+            if($broj_proizvoda_u_korpi <= 0){
+                 unset($_SESSION['korpa']);
+                 unset($_SESSION['inicijalna_korpa']);
+            }
+            
+       }
+       
    }
    
    /**

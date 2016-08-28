@@ -25,4 +25,8 @@ class cartController extends baseController{
     public function cartDialog(){
         $this->cartModuleController->cartDialog();
     }
+    
+    public function removeFromCart(){
+        $this->cartModuleController->removeFromCart();
+    }
 }
