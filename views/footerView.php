@@ -131,7 +131,8 @@
                          'proizvod_id': $(this).attr('data-id'),
                          'proizvod_cena': $(this).attr('data-price'),
                          'proizvod_naziv': $(this).attr('data-name'),
-                         'proizvod_slika': $(this).attr('data-img')
+                         'proizvod_slika': $(this).attr('data-img'),
+                         'proizvod_kolicina': $(this).attr('data-quantity')
                      }; 
                      ajaxCall(formData,'<?=_WEB_PATH?>cart/index',function(data){ 
                            data = JSON.parse(data);
@@ -213,7 +214,8 @@
                          'proizvod_id': $(this).attr('data-id'),
                          'proizvod_cena': $(this).attr('data-price'),
                          'proizvod_naziv': $(this).attr('data-name'),
-                         'proizvod_slika': $(this).attr('data-img')
+                         'proizvod_slika': $(this).attr('data-img'),
+                         'proizvod_kolicina': $(this).attr('data-quantity')
                      }; 
                      ajaxCall(formData,'<?=_WEB_PATH?>cart/index',function(data){ 
                            data = JSON.parse(data);
@@ -298,7 +300,8 @@
                          'proizvod_id': $(this).attr('data-id'),
                          'proizvod_cena': $(this).attr('data-price'),
                          'proizvod_naziv': $(this).attr('data-name'),
-                         'proizvod_slika': $(this).attr('data-img')
+                         'proizvod_slika': $(this).attr('data-img'),
+                         'proizvod_kolicina': $(this).attr('data-quantity')
                      }; 
                      ajaxCall(formData,'<?=_WEB_PATH?>cart/index',function(data){ 
                            data = JSON.parse(data);

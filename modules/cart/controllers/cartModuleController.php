@@ -16,42 +16,49 @@ class cartModuleController extends baseController{
      * @return json Vraca ukupnu cenu i koliko proizvoda je u korpi
      */  
     public function index() {
+       
         if(isset($_POST['proizvod_id']) && !empty($_POST['proizvod_id'])){
           
-        $_SESSION['inicijalna_korpa'][$_POST['proizvod_id']][] = array(
+       /* $_SESSION['inicijalna_korpa'][$_POST['proizvod_id']][] = array(
                 "proizvod_id"=>$_POST['proizvod_id'],
                 "proizvod_cena"=>(float)$_POST['proizvod_cena'],
                 "proizvod_naziv"=>$_POST['proizvod_naziv'],
                 "proizvod_slika" => $_POST['proizvod_slika']
-        );
+        );*/
+        $kolicina = $_POST['proizvod_kolicina'];
+        $cena =  $kolicina * $_POST['proizvod_cena'];
         
+        if(isset($_SESSION['korpa'][$_POST['proizvod_id']])){
+            $kolicina += $_SESSION['korpa'][$_POST['proizvod_id']]['proizvod_kolicina'];
+            $cena = $_SESSION['korpa'][$_POST['proizvod_id']]['ukupna_cena'] + $_POST['proizvod_kolicina'] * $_POST['proizvod_cena'];
+        }
+         
          $_SESSION['korpa'][$_POST['proizvod_id']] = array(
             "proizvod_id" => $_POST['proizvod_id'],
-            "ukupna_cena" => $_POST['proizvod_cena'] * count($_SESSION['inicijalna_korpa'][$_POST['proizvod_id']]),
+            "ukupna_cena" => $cena,
             "proizvod_naziv" => $_POST['proizvod_naziv'],
             "proizvod_slika" => $_POST['proizvod_slika'],
-            "proizvod_kolicina" => count($_SESSION['inicijalna_korpa'][$_POST['proizvod_id']]),
+            "proizvod_kolicina" => $kolicina * $_POST['proizvod_kolicina'],
             "proizvod_cena" => (float)$_POST['proizvod_cena']
          );
-           
+         
+         $ukupno_proizvoda_u_korpi = 0;
          foreach($_SESSION['korpa'] as $proizvod){
-           $cena[] = $proizvod['ukupna_cena'];
-           $ukupan_broj_proizvoda[] = $proizvod['proizvod_kolicina'];
+           $cena_korpe[] = $proizvod['ukupna_cena'];
+           $ukupno_proizvoda_u_korpi += $proizvod['proizvod_kolicina'];
          }
          
-         $_SESSION['korpa']["ukupna_cena_korpe"] = array_sum($cena);
-         $_SESSION['korpa']["ukupno_proizvoda_u_korpi"] = count($_SESSION['inicijalna_korpa']);
+         $_SESSION['korpa']["ukupna_cena_korpe"] = array_sum($cena_korpe);
+         $_SESSION['korpa']["ukupno_proizvoda_u_korpi"] = $ukupno_proizvoda_u_korpi;
          
          $error = false;
          $data = array(
              "data" => $_SESSION['korpa'],
              "error" => $error
          );
-         
+         //var_dump($_SESSION['korpa']); die;
          $this->response($data);
-       }else{
-         $this->response(array('error'=>true,"message"=>"Proizvod nije ubačen u korpu, pokusajte ponovo.","data"=>$_SESSION['korpica']));
-       }   
+       }
     }
     
     public function cartDialog(){
@@ -96,14 +103,14 @@ class cartModuleController extends baseController{
      * Delete product from cart
      */
     public function removeFromCart(){
-        
+        //var_dump($_POST,$_SESSION['korpa']); die;
        if(isset($_POST['proizvod_id'])){
             $id = $this->filter_input($_POST['proizvod_id']);
             $_SESSION['korpa']['ukupna_cena_korpe'] = $_SESSION['korpa']['ukupna_cena_korpe'] - $_SESSION['korpa'][$id]['ukupna_cena'];
-            unset($_SESSION['inicijalna_korpa'][$id]);
+            //unset($_SESSION['inicijalna_korpa'][$id]);
             unset($_SESSION['korpa'][$id]);
-            $broj_proizvoda_u_korpi = count($_SESSION['inicijalna_korpa']);
-            $_SESSION['korpa']['ukupno_proizvoda_u_korpi'] = $broj_proizvoda_u_korpi;
+            $broj_proizvoda_u_korpi = $_POST['izbaceno_proizvoda'];
+            $_SESSION['korpa']['ukupno_proizvoda_u_korpi'] =  $_SESSION['korpa']['ukupno_proizvoda_u_korpi'] - $broj_proizvoda_u_korpi;
             
             $data = array(
                 "proizvod_id" => $id,
@@ -113,12 +120,37 @@ class cartModuleController extends baseController{
             
             $this->response($data);
             
-            if($broj_proizvoda_u_korpi <= 0){
+            if($_SESSION['korpa']['ukupno_proizvoda_u_korpi'] <= 0){
                  unset($_SESSION['korpa']);
-                 unset($_SESSION['inicijalna_korpa']);
+                // unset($_SESSION['inicijalna_korpa']);
             }
             
        }
+       
+   }
+   
+   public function updateCart(){
+       
+        $proizvod_id = $_POST['proizvod_id'];
+        $kolicina = $_POST['kolicina'];
+        $_SESSION['korpa'][$proizvod_id]['ukupna_cena'] = $kolicina * $_SESSION['korpa'][$proizvod_id]['proizvod_cena']; 
+        $predhodna_kolicina = $_SESSION['korpa'][$proizvod_id]['proizvod_kolicina'];
+        $_SESSION['korpa'][$proizvod_id]['proizvod_kolicina'] = $kolicina;
+        
+        //$_SESSION['korpa']['ukupno_proizvoda_u_korpi'] = $kolicina;
+        foreach($_SESSION['korpa'] as $proizvod){
+           $cena_korpe[] = $proizvod['ukupna_cena'];
+         }
+        $_SESSION['korpa']['ukupna_cena_korpe'] = array_sum($cena_korpe);
+        
+        $data = array(
+            "proizvod_id" => $proizvod_id,
+            "ukupna_cena_korpe" => $_SESSION['korpa']['ukupna_cena_korpe'],
+            "cena_proizvoda" => $_SESSION['korpa'][$proizvod_id]['ukupna_cena'],
+            "ukupno_proizvoda_u_korpi" => ($_SESSION['korpa']['ukupno_proizvoda_u_korpi'] - $predhodna_kolicina) + $kolicina
+        );
+        $this->response($data);
+       // var_dump($_SESSION['korpa']);
        
    }
    

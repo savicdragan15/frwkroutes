@@ -23,12 +23,12 @@
                                             <p><span>Size:</span> 12</p>
                                         </li>
                                         <li>
-                                            <input type="number" value="<?=$product['proizvod_kolicina']?>">
+                                            <input class="product-quantity-cart" type="number" min="1" data-product-id="<?=$product['proizvod_id']?>" value="<?=$product['proizvod_kolicina']?>">
                                         </li>
                                         <li><?=number_format($product['proizvod_cena'], 2, '.', '');?> €</li>
-                                        <li><?=number_format($product['ukupna_cena'], 2, '.', '');?> €</li>
+                                        <li class="price-product<?=$product['proizvod_id']?>"><?=number_format($product['ukupna_cena'], 2, '.', '');?> €</li>
                                         <li class="last" >
-                                            <a class="remove-from-cart-dialog" data-product-id="<?=$product['proizvod_id']?>" href="#">X</a>
+                                            <a class="remove-from-cart-dialog" data-product-id="<?=$product['proizvod_id']?>"  data-product-quantity="<?=$product['proizvod_kolicina']?>" href="#">X</a>
                                         </li>
                                     </ul>
                             <?php    } 
@@ -85,17 +85,49 @@
                     $('.remove-from-cart-dialog').click(function(e){
                         e.preventDefault();
                         e.stopPropagation();
+                        alertify.set({ labels: {
+                                ok     : "Da",
+                                cancel : "Ne"
+                            } });
                         var formData = {
-                        'proizvod_id': $(this).attr('data-product-id')
-                      }; 
-                    ajaxCall(formData,'<?=_WEB_PATH?>cart/removeFromCart',function(data){
-                        data = JSON.parse(data);
-                        $('#row'+data.proizvod_id).remove();
-                        $('#cart-info').html(data.broj_proizvoda_u_korpi+' items');
-                        $('#total-price-cart').html(data.ukupna_cena_korpe+'.00 €');
-                        if(data.broj_proizvoda_u_korpi == 0){
-                           $('.shopping-cart').html("Vasa korpa je prazna.");
-                        }
-                    });
+                                'proizvod_id': $(this).attr('data-product-id'),
+                                'izbaceno_proizvoda' : $(this).attr('data-product-quantity')
+                            };
+                        // confirm dialog
+                        alertify.confirm("Da li ste sigurni?", function (e) {
+                            if (e) {
+                                ajaxCall(formData,'<?=_WEB_PATH?>cart/removeFromCart',function(data){
+                                    data = JSON.parse(data);
+                                    $('#row'+data.proizvod_id).remove();
+                                    $('#cart-info').html(data.broj_proizvoda_u_korpi+' items');
+                                    $('#total-price-cart').html(data.ukupna_cena_korpe+'0 €');
+                                    if(data.broj_proizvoda_u_korpi == 0){
+                                       $('.shopping-cart').html("Vasa korpa je prazna.");
+                                       $('#total-price-cart').html('0.00 €');
+                                    }
+                                });
+                            } else {
+                                // user clicked "cancel"
+                            }
+                        });
+                    
+                });
+                
+                $('.product-quantity-cart').on('change keyup', function(){
+                     
+                     var quantity = $(this).val();
+                     var formData = {
+                                'proizvod_id': $(this).attr('data-product-id'),
+                                'kolicina' : quantity
+                            };
+                     if(quantity != 0  && quantity != ''){
+                         
+                         ajaxCall(formData,'<?=_WEB_PATH?>cart/updateCart',function(data){
+                             data = JSON.parse(data);
+                             console.log(data);
+                             $('#total-price-cart').html(data.ukupna_cena_korpe+'.00 €');
+                             $('.price-product'+data.proizvod_id).html(data.cena_proizvoda+'.00 €');
+                         });
+                     }
                 });
                 </script>
