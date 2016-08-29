@@ -59,13 +59,13 @@
 
                             <!-- SLIDER -->
                             
-              <div class="" id="jssor_1" style="position: relative; margin: 0 auto 20px; top: 0px; left: 25px; width: 1000px; height: 500px; overflow: hidden; visibility: hidden;">
+              <div class="" id="jssor_1" style="position: relative; margin: 0 auto 20px; top: 0px; left: 0px; width: 1000px; height: 373px; overflow: hidden; visibility: hidden;">
         <!-- Loading Screen -->
         <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
             <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
             <div style="position:absolute;display:block;background:url('<?=_WEB_PATH?>/views/img/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
         </div>
-        <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 1000px; height: 500px; overflow: hidden;">
+        <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 1000px; height:373px; overflow: hidden;">
             <div data-p="112.50" style="display: none;">
                 <img data-u="image" src="http://placehold.it/870x373" />
                 <div data-u="caption" data-t="0" style="position: absolute; top: 320px; left: 30px; width: 350px; height: 30px; background-color: rgba(235,81,0,0.5); font-size: 20px; color: #ffffff; line-height: 30px; text-align: center;">mobile ready, touch swipe</div>
@@ -148,9 +148,8 @@
                                             <h1>SUMMER<span> COLLECTION 35% OFF</span> <small>  - Limited Offer</small></h1>
                                         </div>
                                     </figure>
-                                </div> -->
-
-                                <!-- <div class="offers">
+                                </div> 
+                                 <div class="offers">
                                     <figure>
                                         <a href="#"><img src="http://placehold.it/270x171" alt=""></a>
                                         <div class="overlay">
