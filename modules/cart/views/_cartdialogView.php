@@ -99,8 +99,10 @@
                                 ajaxCall(formData,'<?=_WEB_PATH?>cart/removeFromCart',function(data){
                                     data = JSON.parse(data);
                                     $('#row'+data.proizvod_id).remove();
+                                    
                                     $('#cart-info').html(data.broj_proizvoda_u_korpi+' items');
-                                    $('#total-price-cart').html(data.ukupna_cena_korpe+'0 €');
+                                      //$('#total-price-cart').html(parseFloat(data.ukupna_cena_korpe).toFixed(2)+' €');
+                                    $('#total-price-cart').html(parseFloat(data.ukupna_cena_korpe).toFixed(2)+' €');
                                     if(data.broj_proizvoda_u_korpi == 0){
                                        $('.shopping-cart').html("Vasa korpa je prazna.");
                                        $('#total-price-cart').html('0.00 €');
@@ -124,9 +126,9 @@
                          
                          ajaxCall(formData,'<?=_WEB_PATH?>cart/updateCart',function(data){
                              data = JSON.parse(data);
-                             
-                             $('#total-price-cart').html(data.ukupna_cena_korpe+'0 €');
-                             $('.price-product'+data.proizvod_id).html(data.cena_proizvoda+'0 €');
+                             //parseFloat((10.02745).toFixed(2));
+                             $('#total-price-cart').html(parseFloat(data.ukupna_cena_korpe).toFixed(2)+' €');
+                             $('.price-product'+data.proizvod_id).html(parseFloat(data.cena_proizvoda).toFixed(2)+' €');
                              $('#cart-info').html(data.ukupno_proizvoda_u_korpi+' items');
                              
                          });
