@@ -131,23 +131,29 @@ class cartModuleController extends baseController{
    
    public function updateCart(){
        
+       /*var_dump($_SESSION['korpa']);
+       die;*/
+       
         $proizvod_id = $_POST['proizvod_id'];
         $kolicina = $_POST['kolicina'];
         $_SESSION['korpa'][$proizvod_id]['ukupna_cena'] = $kolicina * $_SESSION['korpa'][$proizvod_id]['proizvod_cena']; 
-        $predhodna_kolicina = $_SESSION['korpa'][$proizvod_id]['proizvod_kolicina'];
+       // $predhodna_kolicina = $_POST['kolicina']-$_SESSION['korpa'][$proizvod_id]['proizvod_kolicina'];
         $_SESSION['korpa'][$proizvod_id]['proizvod_kolicina'] = $kolicina;
         
         //$_SESSION['korpa']['ukupno_proizvoda_u_korpi'] = $kolicina;
         foreach($_SESSION['korpa'] as $proizvod){
            $cena_korpe[] = $proizvod['ukupna_cena'];
+           $kolicina_korpe[] = $proizvod['proizvod_kolicina'];
          }
         $_SESSION['korpa']['ukupna_cena_korpe'] = array_sum($cena_korpe);
-        
+        $_SESSION['korpa']['ukupno_proizvoda_u_korpi'] = array_sum($kolicina_korpe);
+       /* var_dump($_SESSION['korpa']);
+       die;*/
         $data = array(
             "proizvod_id" => $proizvod_id,
             "ukupna_cena_korpe" => $_SESSION['korpa']['ukupna_cena_korpe'],
             "cena_proizvoda" => $_SESSION['korpa'][$proizvod_id]['ukupna_cena'],
-            "ukupno_proizvoda_u_korpi" => ($_SESSION['korpa']['ukupno_proizvoda_u_korpi'] - $predhodna_kolicina) + $kolicina
+            "ukupno_proizvoda_u_korpi" => $_SESSION['korpa']['ukupno_proizvoda_u_korpi']
         );
         $this->response($data);
        // var_dump($_SESSION['korpa']);
