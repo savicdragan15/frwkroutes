@@ -124,9 +124,11 @@
                          
                          ajaxCall(formData,'<?=_WEB_PATH?>cart/updateCart',function(data){
                              data = JSON.parse(data);
-                             console.log(data);
-                             $('#total-price-cart').html(data.ukupna_cena_korpe+'.00 €');
-                             $('.price-product'+data.proizvod_id).html(data.cena_proizvoda+'.00 €');
+                             
+                             $('#total-price-cart').html(data.ukupna_cena_korpe+'0 €');
+                             $('.price-product'+data.proizvod_id).html(data.cena_proizvoda+'0 €');
+                             $('#cart-info').html(data.ukupno_proizvoda_u_korpi+' items');
+                             
                          });
                      }
                 });
