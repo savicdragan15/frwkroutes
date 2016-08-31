@@ -39,14 +39,29 @@
                                                     <option>XXS</option>
                                                 </select>
                                             </div>
-
+                                          <!-- ovde cemo iz baze dobavljati kolicinu proci kroz foreach i selectovati broj proizvoda iz korpe-->
                                             <div>
                                                 <label>Quantity</label>
-                                                <select>
+                                                <select id="product-quantity">
                                                     <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                    <option>6</option>
+                                                    <option>7</option>
+                                                    <option>8</option>
                                                 </select>
                                             </div>
-
+                                            <script>
+                                                window.onload = function() {
+                                                    $('#product-quantity').on('change', function(){
+                                                       var quantity = $(this).val(); 
+                                                       $('.add-to-cart-single-page').attr('data-quantity', quantity);
+                                                    });
+                                                };
+                                              
+                                            </script>
                                             <div class="color">
                                                 <label>Color</label>
                                                 <select>
@@ -54,10 +69,9 @@
                                                 </select>
                                             </div>
                                         </div>
-
                                         <div class="buttons">
                                             <a href="#" class="wish big-button">Add to Wishlist</a>
-                                            <a href="#" class="cart big-button">Add to Cart</a>
+                                            <a href="#" class="cart big-button add-to-cart-single-page" data-id="<?=$product->ID?>" data-price="<?=$product->product_price?>" data-name="<?=$product->product_name?>" data-img="<?=$product->image_name?>" data-quantity="1" >Add to Cart</a>
                                             <a href="#" class="compare big-button">Add to Compare</a>
                                         </div>
                                     </div>

@@ -38,7 +38,7 @@ class cartModuleController extends baseController{
             "ukupna_cena" => $cena,
             "proizvod_naziv" => $_POST['proizvod_naziv'],
             "proizvod_slika" => $_POST['proizvod_slika'],
-            "proizvod_kolicina" => $kolicina * $_POST['proizvod_kolicina'],
+            "proizvod_kolicina" => $kolicina,
             "proizvod_cena" => (float)$_POST['proizvod_cena']
          );
          
@@ -54,7 +54,8 @@ class cartModuleController extends baseController{
          $error = false;
          $data = array(
              "data" => $_SESSION['korpa'],
-             "error" => $error
+             "error" => $error,
+             "index" => 1
          );
          //var_dump($_SESSION['korpa']); die;
          $this->response($data);
@@ -133,9 +134,15 @@ class cartModuleController extends baseController{
        
        /*var_dump($_SESSION['korpa']);
        die;*/
-       
+      
         $proizvod_id = $_POST['proizvod_id'];
-        $kolicina = $_POST['kolicina'];
+        $kolicina = $_POST['proizvod_kolicina'];
+        
+         if(!isset($_SESSION['korpa'][$proizvod_id])){
+             $this->index();
+             die;
+         }
+        
         $_SESSION['korpa'][$proizvod_id]['ukupna_cena'] = $kolicina * $_SESSION['korpa'][$proizvod_id]['proizvod_cena']; 
        // $predhodna_kolicina = $_POST['kolicina']-$_SESSION['korpa'][$proizvod_id]['proizvod_kolicina'];
         $_SESSION['korpa'][$proizvod_id]['proizvod_kolicina'] = $kolicina;

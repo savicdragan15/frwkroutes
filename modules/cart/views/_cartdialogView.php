@@ -28,7 +28,7 @@
                                         <li><?=number_format($product['proizvod_cena'], 2, '.', '');?> €</li>
                                         <li class="price-product<?=$product['proizvod_id']?>"><?=number_format($product['ukupna_cena'], 2, '.', '');?> €</li>
                                         <li class="last" >
-                                            <a class="remove-from-cart-dialog" data-product-id="<?=$product['proizvod_id']?>"  data-product-quantity="<?=$product['proizvod_kolicina']?>" href="#">X</a>
+                                            <a class="remove-from-cart-dialog" id="remove-from-cart-dialog<?=$product['proizvod_id']?>" data-product-id="<?=$product['proizvod_id']?>"  data-product-quantity="<?=$product['proizvod_kolicina']?>" href="#">X</a>
                                         </li>
                                     </ul>
                             <?php    } 
@@ -118,9 +118,11 @@
                 $('.product-quantity-cart').on('change keyup', function(){
                      
                      var quantity = $(this).val();
+                     var x = $('#remove-from-cart-dialog'+$(this).attr('data-product-id'));
+                     x.attr('data-product-quantity',quantity);
                      var formData = {
                                 'proizvod_id': $(this).attr('data-product-id'),
-                                'kolicina' : quantity
+                                'proizvod_kolicina' : quantity
                             };
                      if(quantity != 0  && quantity != ''){
                          
