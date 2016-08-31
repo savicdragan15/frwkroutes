@@ -55,7 +55,7 @@
     </style>
 <div class="wrapper">
                     <div class="container">
-                        <div class="row ">
+                        <div class="row" style="margin-left:0px">
 
                             <!-- SLIDER -->
                             
