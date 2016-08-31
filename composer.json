@@ -9,6 +9,7 @@
     ],
     "require": {
         "centralapps/pagination": "v1.0.0",
-        "amstaffix/pagination": "^1.1"
+        "amstaffix/pagination": "^1.1",
+        "triadev/password-hashing": "^1.0"
     }
 }
