@@ -5,7 +5,7 @@ class loginModel extends baseModel{
     public static $table = "users";
     
     public function getUserforLogin(){
-      $user = $this->getAll("*","WHERE email='{$this->email}' and sifra='{$this->sifra}' limit 1");
+      $user = $this->getAll("*","WHERE email='{$this->email}' limit 1");
       return $user;
     }
      public function setSessions(){

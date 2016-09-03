@@ -1,6 +1,6 @@
 <?php 
 define("_MODULE_MODE_", true);
-$modules = ['products','registracija','login','users','admin','cart'];
+$modules = ['products','register','login','users','admin','cart'];
 if(_MODULE_MODE_){
     function autoload_module($className) {
         global $modules;

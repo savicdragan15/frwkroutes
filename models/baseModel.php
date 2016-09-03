@@ -73,7 +73,8 @@ abstract class baseModel
             $q.="')";
             if ($this->db->exec($q) > 0) {
                 return $this->db->lastInsertId();
-            }
+            }else
+                return false;
         } catch (PDOException $e) {
             echo $e->getMessage();
             return false;

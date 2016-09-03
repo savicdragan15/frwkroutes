@@ -42,26 +42,27 @@
                     <div class="container">
                         <div class="row">
                             <div class="pric-icon span2">
-                                <a href="#" class="active">&#x20ac;</a>
+                               <!-- <a href="#" class="active">&#x20ac;</a>
                                 <a href="#">&#xa3;</a>
-                                <a href="#">&#36;</a>
-                            </div>
+                                <a href="#">&#36;</a>-->
+                            </div> 
 
                             <div class="span10 right">
                                 <div class="social-strip">
                                     <ul>
-                                        <li><a href="#" class="account">My Account</a></li>
+                                        <li><a href="<?=_WEB_PATH?>login" class="account">My Account</a></li>
                                         <li><a href="#" class="wish">Wish List</a></li>
                                         <li><a href="#" class="check">Checkout</a></li>
+                                        <li><a href="<?=_WEB_PATH?>register" class="account">Register</a></li>
                                     </ul>
                                 </div>
 
-                                <div class="languages">
+                               <!-- <div class="languages">
                                     <a href="#" class="english active"><img src="<?=_WEB_PATH?>/views/images/english.png" alt=""></a>
                                     <a href="#" class="german"><img src="<?=_WEB_PATH?>/views/images/german.png" alt=""></a>
                                     <a href="#" class="japan"><img src="<?=_WEB_PATH?>/views/images/japan.png" alt=""></a>
                                     <a href="#" class="turkish"><img src="<?=_WEB_PATH?>/views/images/turkish.png" alt=""></a>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
