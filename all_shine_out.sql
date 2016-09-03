@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 30, 2016 at 09:47 PM
+-- Generation Time: Sep 04, 2016 at 12:39 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -146,6 +146,31 @@ INSERT INTO `products` (`ID`, `product_name`, `product_description`, `product_pr
 (10, 'Test product 10', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique. ', '60.00', 1, 2, 0),
 (11, 'Test product 11', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique. ', '60.00', 1, 2, 0),
 (12, 'Test product 12', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique. ', '60.00', 1, 2, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(250) NOT NULL,
+  `company` varchar(100) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`ID`, `first_name`, `last_name`, `email`, `password`, `company`) VALUES
+(1, 'Tester', 'Testerovic', 'jovan.jagodic@link.co.rs', '$2y$12$Jk9zUCVtVEM4P3R2RG1BZeRfuDKLRP8.Qv.vTKC390nZEVd8tA7ia', ''),
+(2, 'Pepa ', 'prase', 'sadsadsa', '$2y$12$SEhHMllLcFM5QmpxUypqW.2Z4K1ykUyMnh2nGKpK6YtbYET8m5rSW', 'MediaWorks'),
+(3, 'Proba', 'Probic', 'savicdragan2707@gmail.com', '$2y$12$RUJkQmh4c2lxTmF6ZXc/ZuYCzv0QbbbSddU8ruqIMaZJWu1eyO6wi', '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
