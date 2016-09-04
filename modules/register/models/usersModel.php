@@ -18,7 +18,15 @@ class usersModel extends baseModel{
         $this->password = $password_hash;
         $this->email = $data['email'];
         $this->company = $data['company'];
+        $this->salt = $data['salt'];
         
         return $this->insert();
+    }
+    
+    public function getUserBySalt($salt){
+       return $this->getAll('ID,salt', "WHERE salt='{$salt}'");
+    }
+    public function getUserByEmail($email){
+       return $this->getAll('email', "WHERE email='{$email}'");
     }
 }

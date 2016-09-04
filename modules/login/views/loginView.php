@@ -16,7 +16,7 @@
                                 <label>Your e-mail address</label>
                                 <input name="email" type="text" placeholder="yourmail@domain.com"><br/>
                                 <label>Your Password</label>
-                                <input name="password" type="text" placeholder="enter your password"><br/>
+                                <input name="password" type="password" placeholder="enter your password"><br/>
                                 <a href="#" >Forgot your password ?</a>
                                 <input name="login" type="submit" value="Login">
                             </form>

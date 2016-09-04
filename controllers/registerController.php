@@ -21,4 +21,8 @@ class registerController extends frontendController{
     public function index() {
         $this->registerModuleController->index();
     }
+    
+    public function confirm($salt){
+        $this->registerModuleController->confirm($salt);
+    }
 }

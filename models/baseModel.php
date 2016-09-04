@@ -94,7 +94,10 @@ abstract class baseModel
             $q = rtrim($q, ",");
             $keyString = static::$key;
             $q.= " WHERE " . $keyString . " = " . $this->$keyString;
-            return $count = $this->db->exec($q);
+             if($this->db->exec($q) > 0){
+               return true;   
+             }
+            return false;
         } catch (PDOException $e) {
             echo $e->getMessage();
             return false;

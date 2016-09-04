@@ -18,7 +18,7 @@
                                 <label>Company</label>
                                 <input name="company" type="text"/>
                                 <label>Password</label>
-                                <input name="password" type="text"/>
+                                <input name="password" type="password"/>
                             </fieldset>
 
                             <fieldset class="last">
@@ -27,7 +27,7 @@
                                 <label>E-mail Address</label>
                                 <input name="email" type="text"/>
                                 <label>Re-password</label>
-                                <input name="re-password" type="text"/>
+                                <input name="re-password" type="password"/>
                             </fieldset>
                             
                             <label>Address</label>
