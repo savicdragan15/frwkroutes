@@ -10,6 +10,7 @@
     "require": {
         "centralapps/pagination": "v1.0.0",
         "amstaffix/pagination": "^1.1",
-        "triadev/password-hashing": "^1.0"
+        "triadev/password-hashing": "^1.0",
+        "ircmaxell/password-compat": "^1.0"
     }
 }
