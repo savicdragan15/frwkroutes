@@ -9,6 +9,7 @@ if(file_exists(realpath("controllers/frontendController.php")))
 }
 Loader::loadClass('Session');
 Loader::loadClass('Cookie');
+Loader::loadClass('User');
 Session::start();
 
 

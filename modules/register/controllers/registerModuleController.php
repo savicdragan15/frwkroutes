@@ -47,7 +47,7 @@ class registerModuleController extends baseController{
        $salt = $this->filter_input($salt);
        $user = $this->usersModel->getUserBySalt($salt);
        if(!empty($user)){
-           $this->usersModel->ID = $user[0]->ID;
+           $this->usersModel->ID = (int)$user[0]->ID;
            $this->usersModel->active = 1;
            $this->usersModel->salt = $this->generateSalt(22, true).md5(uniqid(rand(), true));
            if($this->usersModel->update()){

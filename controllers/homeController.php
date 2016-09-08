@@ -19,6 +19,11 @@ class homeController extends frontendController{
     }
     
     public function test(){
+        var_dump(User::isLogin());
+       // $_SESSION['user']['user_ime'] = 'spodoba';
+        
+        //Session::stop();
+        //var_dump($_SESSION);
 //        try {
 //            $this->productsModel->ID = '';
 //            $this->productsModel->product_price = 20.00;

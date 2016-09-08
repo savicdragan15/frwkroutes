@@ -23,10 +23,13 @@ class loginModuleController extends baseController
             //var_dump($user); die;
             if($user){
                if(PasswordHash::verify($password, $user[0]->password)){
-                   Session::set("first_name", $user[0]->first_name);
-                   Session::set("last_name", $user[0]->last_name);
-                   Session::set("email", $user[0]->email);
-                   echo "Welcome ".Session::get("first_name")." ".Session::get("last_name");
+                   $_SESSION['user']['first_name'] = $user[0]->first_name;
+                   $_SESSION['user']['last_name'] = $user[0]->last_name;
+                   $_SESSION['user']['email'] = $user[0]->email;
+//                   Session::set("first_name", $user[0]->first_name);
+//                   Session::set("last_name", $user[0]->last_name);
+//                   Session::set("email", $user[0]->email);
+                   echo "Welcome ".$_SESSION['user']['first_name']." ".$_SESSION['user']['last_name'];
                }else{
                    echo "Neispravni podaci";
                } 
@@ -56,9 +59,7 @@ class loginModuleController extends baseController
     
     
     public function logOut(){
-        Session::unsetSession("first_name");
-        Session::unsetSession("last_name");
-        Session::unsetSession("email");
+        Session::unsetSession("user");
         $this->redirect(_WEB_PATH);
     }
 }
