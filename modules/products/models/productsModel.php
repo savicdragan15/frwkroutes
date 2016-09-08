@@ -56,4 +56,16 @@ class productsModel extends baseModel{
             return $this->join()[0];
     }
     
+    public function getLatestProducts(){
+        $this->join = array(
+            array("table"=>"images","realtion"=>"products.ID = images.product_id")
+        );
+
+        $this->limit = 8;
+        $this->orderBy = "products.ID DESC";
+        $product_array = $this->join();
+        
+        return $product_array;
+    }
+    
 }

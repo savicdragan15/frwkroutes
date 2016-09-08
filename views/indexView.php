@@ -169,103 +169,41 @@
                     <div class="container">
                         <div class="row heading-wrap">
                             <div class="span12 heading">
-                                <h2>Featured Products <span></span></h2>
+                                <h2>Neue produkte <span></span></h2>
                             </div>
                         </div>
                         
                         <div class="row">
-                            <div class="span3 product">
+                             <?php foreach($latestProducts as $product){?>
+                                    <div class="span3 product">
+                                        <div>
+                                            <figure>
+                                                <a href="#"><img src="<?=_WEB_PATH?>views/images/products_gallery/thumbnail/<?=$product->image_name?>" alt=""></a>
+                                                <div class="overlay">
+                                                    <a href="<?=_WEB_PATH?>views/images/products_gallery/normal/<?=$product->image_name?>" class="zoom"></a>
+                                                    <a href="<?=_WEB_PATH?>products/singleProduct/<?=$product->ID?>/<?=$product->product_name_url?>" class="link"></a>
+                                                </div>
+                                            </figure>
+                                            <div class="detail">
+                                                <span><?=$product->product_price?> €</span>
+                                                <a href="<?=_WEB_PATH?>products/singleProduct/<?=$product->ID?>/<?=$product->product_name_url?>"><h4><?=$product->product_name?></h4></a>
+                                                <div class="icon">
+                                                    <a href="#" class="add-to-cart one tooltip" data-id="<?=$product->ID?>" data-price="<?=$product->product_price?>" data-name="<?=$product->product_name?>" data-img="<?=$product->image_name?>" data-quantity="1" title="Add to wish list"></a>
+                                                    <a href="#" class="two tooltip " title="Add to cart"></a>
+                                                    <a href="#" class="three tooltip" title="Add to compare"></a>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                <div>
-                                    <figure>
-                                        <a href="#"><img src="http://placehold.it/270x186" alt=""></a>
-                                        <div class="overlay">
-                                            <a href="http://placehold.it/270x186" class="zoom prettyPhoto"></a>
-                                            <a href="#" class="link"></a>
-                                        </div>
-                                    </figure>
-                                    <div class="detail">
-                                        <span>$244.00</span>
-                                        <h4>Brown Wood Chair</h4>
-                                        <div class="icon">
-                                            <a href="#" class="one tooltip" title="Add to wish list"></a>
-                                            <a href="#" class="two tooltip " title="Add to cart"></a>
-                                            <a href="#" class="three tooltip" title="Add to compare"></a>
-                                        </div>
                                     </div>
+                                <?php } ?>
+                        </div>
+                            <div class="row heading-wrap">
+                                <div class="span12 heading">
+                                    <h2>Lager <span></span></h2>
                                 </div>
-
                             </div>
-
-                            <div class="span3 product">
-
-                                <div>
-                                    <figure>
-                                        <a href="#"><img src="http://placehold.it/270x186" alt=""></a>
-                                        <div class="overlay">
-                                            <a href="http://placehold.it/270x186" class="zoom"></a>
-                                            <a href="#" class="link"></a>
-                                        </div>
-                                    </figure>
-                                    <div class="detail">
-                                        <span>$244.00</span>
-                                        <h4>Brown Wood Chair</h4>
-                                        <div class="icon">
-                                            <a href="#" class="one tooltip" title="Add to wish list"></a>
-                                            <a href="#" class="two tooltip " title="Add to cart"></a>
-                                            <a href="#" class="three tooltip" title="Add to compare"></a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="span3 product">
-
-                                <div>
-                                    <figure>
-                                        <a href="#"><img src="http://placehold.it/270x186" alt=""></a>
-                                        <div class="overlay">
-                                            <a href="http://placehold.it/270x186" class="zoom"></a>
-                                            <a href="#" class="link"></a>
-                                        </div>
-                                    </figure>
-                                    <div class="detail">
-                                        <span>$244.00</span>
-                                        <h4>Brown Wood Chair</h4>
-                                        <div class="icon">
-                                            <a href="#" class="one tooltip" title="Add to wish list"></a>
-                                            <a href="#" class="two tooltip " title="Add to cart"></a>
-                                            <a href="#" class="three tooltip" title="Add to compare"></a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="span3 product">
-
-                                <div>
-                                    <figure>
-                                        <a href="#"><img src="http://placehold.it/270x186" alt=""></a>
-                                        <div class="overlay">
-                                            <a href="http://placehold.it/270x186" class="zoom"></a>
-                                            <a href="#" class="link"></a>
-                                        </div>
-                                    </figure>
-                                    <div class="detail">
-                                        <span>$244.00</span>
-                                        <h4>Brown Wood Chair</h4>
-                                        <div class="icon">
-                                            <a href="#" class="one tooltip" title="Add to wish list"></a>
-                                            <a href="#" class="two tooltip " title="Add to cart"></a>
-                                            <a href="#" class="three tooltip" title="Add to compare"></a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
+                        <div class="row">
                             <div class="span3 product">
 
                                 <div>

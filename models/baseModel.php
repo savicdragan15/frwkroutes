@@ -127,9 +127,14 @@ abstract class baseModel
             $join = (array_key_exists("join",$table)) ? $table['join'] : "INNER";
             $query .=" ".$join." JOIN " . $table['table'] . " ON " . $table['realtion'];
           }
+          
         if (isset($this->where))
             $query .= " WHERE " . $this->where;
-     
+        if (isset($this->orderBy))
+             $query .= " ORDER BY " . $this->orderBy;
+        if (isset($this->limit))
+            $query .= " LIMIT " . $this->limit;
+       
         try {
             $res = $this->db->query($query);
             $datas = $res->fetchAll(PDO::FETCH_CLASS, "stdClass");

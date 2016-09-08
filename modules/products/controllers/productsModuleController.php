@@ -176,4 +176,14 @@ class productsModuleController extends baseController
         Loader::loadView('singleProduct', 'products', FALSE, $this->template);
     }
     
+    public function homePage(){
+        $latestProducts =  $this->productsModel->getLatestProducts();
+         foreach ($latestProducts as $product){
+            $product->product_name_url = $this->url_friendly($product->product_name);
+        }
+        $this->template['latestProducts'] = $latestProducts;
+        
+        Loader::loadView("index","",false,$this->template);
+    }
+    
 }
