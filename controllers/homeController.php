@@ -17,5 +17,16 @@ class homeController extends frontendController{
     public function page404(){
         Loader::loadView('page404');
     }
+    
+    public function test(){
+//        try {
+//            $this->productsModel->ID = '';
+//            $this->productsModel->product_price = 20.00;
+//            $this->productsModel->update();
+//        } catch (Exception $e) {
+//            echo $e->getMessage();
+//           // var_dump($e->getLine(), $e->getFile(),$e->getTraceAsString());
+//        }
+    }
 }
 

@@ -82,6 +82,11 @@ abstract class baseModel
    }
    
    public function update() {
+       $keyString = static::$key;
+       
+       if(!isset($this->$keyString) || !is_int($this->$keyString) || empty($this->$keyString))
+           throw new Exception('Primary is not set or not Integer or empty');
+       
        try {
             $q = "UPDATE " . static::$table . " SET ";
             $polja_arr = get_object_vars($this);
@@ -92,7 +97,7 @@ abstract class baseModel
                 $q.= $key . "='" . $value . "',";
             }
             $q = rtrim($q, ",");
-            $keyString = static::$key;
+            
             $q.= " WHERE " . $keyString . " = " . $this->$keyString;
              if($this->db->exec($q) > 0){
                return true;   
