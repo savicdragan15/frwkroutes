@@ -99,7 +99,17 @@ abstract class baseController
         }
         return true;
     }
-
+    
+    /**
+     * Check if Ajax request, return true if Ajax request otherwise false
+     * @return boolean
+     */
+    public function isAjaxRequest(){
+        if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+	   return true;
+        }
+        return false;
+    }
     /**
      * Converts all accent characters to ASCII characters.
      *

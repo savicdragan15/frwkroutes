@@ -61,7 +61,7 @@ class productsModel extends baseModel{
             array("table"=>"images","realtion"=>"products.ID = images.product_id")
         );
 
-        $this->limit = 8;
+        $this->limit = _NEW_PRODUCT_HOME_PAGE;
         $this->orderBy = "products.ID DESC";
         $product_array = $this->join();
         

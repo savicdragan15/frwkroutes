@@ -7,3 +7,4 @@ define("_DEFAULT_CONTROLLER", "home");
 define("_WEB_PATH","http://localhost/all_shine_out/");
 define("_COOKIE_WEB_PATH","localhost/all_shine_out/");
 define("_POSTARINA",250);
+define("_NEW_PRODUCT_HOME_PAGE",8);
