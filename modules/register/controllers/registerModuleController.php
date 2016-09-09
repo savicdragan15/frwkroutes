@@ -29,7 +29,8 @@ class registerModuleController extends baseController{
             
             $data = $this->validate($_POST);
             $data['salt'] = $this->generateSalt(22, true).md5(uniqid(rand(), true));
-            if(empty($this->usersModel->getUserByEmail($data['email']))){
+            $usr_mod=$this->usersModel->getUserByEmail($data['email']);
+            if(empty($usr_mod)){
                 if(!$this->usersModel->insertUser($data,$password_hash)){
                     echo "Nije uspelo";
                 }else{

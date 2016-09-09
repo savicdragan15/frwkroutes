@@ -19,8 +19,8 @@ class User {
      * @return boolean
      */
     public static function isLogin(){
-        
-        if(!empty(Session::get('user'))){
+        $usr=Session::get('user');
+        if(!empty($usr)){
             return true;
         }
         return false;
