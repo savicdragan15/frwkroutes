@@ -68,4 +68,14 @@ class productsModel extends baseModel{
         return $product_array;
     }
     
+   public function verifyProductPrice($id, $price){
+       
+       $product = $this->getAll('count(ID) as number_records', "WHERE ID=".$id." AND product_price=".$price);
+       
+       if(!empty($product)){
+           return $product[0];
+       }
+       
+   }
+    
 }

@@ -23,7 +23,7 @@
                                             <p><span>Size:</span> 12</p>
                                         </li>
                                         <li>
-                                            <input class="product-quantity-cart" type="number" min="1" data-product-id="<?=$product['proizvod_id']?>" value="<?=$product['proizvod_kolicina']?>">
+                                            <input class="product-quantity-cart" type="number" min="1" data-product-id="<?=$product['proizvod_id']?>" data-product-price="<?=number_format($product['proizvod_cena'], 2, '.', '');?>" value="<?=$product['proizvod_kolicina']?>">
                                         </li>
                                         <li><?=number_format($product['proizvod_cena'], 2, '.', '');?> €</li>
                                         <li class="price-product<?=$product['proizvod_id']?>"><?=number_format($product['ukupna_cena'], 2, '.', '');?> €</li>
@@ -122,16 +122,20 @@
                      x.attr('data-product-quantity',quantity);
                      var formData = {
                                 'proizvod_id': $(this).attr('data-product-id'),
-                                'proizvod_kolicina' : quantity
+                                'proizvod_kolicina' : quantity,
+                                'proizvod_cena' : $(this).attr('data-product-price')
                             };
                      if(quantity != 0  && quantity != ''){
                          
                          ajaxCall(formData,'<?=_WEB_PATH?>cart/updateCart',function(data){
                              data = JSON.parse(data);
-                             //parseFloat((10.02745).toFixed(2));
-                             $('#total-price-cart').html(parseFloat(data.ukupna_cena_korpe).toFixed(2)+' €');
-                             $('.price-product'+data.proizvod_id).html(parseFloat(data.cena_proizvoda).toFixed(2)+' €');
-                             $('#cart-info').html(data.ukupno_proizvoda_u_korpi+' items');
+                             if(data.error == true){
+                                 alert('Hack attempt!!!');
+                             }else{
+                                $('#total-price-cart').html(parseFloat(data.ukupna_cena_korpe).toFixed(2)+' €');
+                                $('.price-product'+data.proizvod_id).html(parseFloat(data.cena_proizvoda).toFixed(2)+' €');
+                                $('#cart-info').html(data.ukupno_proizvoda_u_korpi+' items');
+                             }
                              
                          });
                      }

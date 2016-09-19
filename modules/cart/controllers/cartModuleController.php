@@ -1,30 +1,31 @@
 <?php
 class cartModuleController extends baseController{
-    private $porudzbinaModel, $slikeModel, $mailer;
-  /*  public function __construct() {
-        Loader::loadModel($this, "proizvodi", "korpa");
-        Loader::loadModel($this, "porudzbina","korpa");
-        Loader::loadModel($this, "slike", "korpa");
-        Loader::loadClass("Mailer");
-        $this->proizvodiModel = $this->models['proizvodi'];
-        $this->porudzbinaModel = $this->models['porudzbina'];
-        $this->slikeModel = $this->models['slike'];
-        $this->mailer = new Mailer();
-    }*/
+    private $productsModel;
+    
+    public function __construct() {
+        Loader::loadModel($this, "products", "products");
+        $this->productsModel = $this->models['products'];
+        
+    }
+    
     /**
      * Metoda koja ubacuje i proverava da li proizvod postoji u korpi
      * @return json Vraca ukupnu cenu i koliko proizvoda je u korpi
      */  
     public function index() {
-       
+        
         if(isset($_POST['proizvod_id']) && !empty($_POST['proizvod_id'])){
-          
-       /* $_SESSION['inicijalna_korpa'][$_POST['proizvod_id']][] = array(
-                "proizvod_id"=>$_POST['proizvod_id'],
-                "proizvod_cena"=>(float)$_POST['proizvod_cena'],
-                "proizvod_naziv"=>$_POST['proizvod_naziv'],
-                "proizvod_slika" => $_POST['proizvod_slika']
-        );*/
+            
+        $product = $this->productsModel->verifyProductPrice($this->filter_input($_POST['proizvod_id']), $this->filter_input($_POST['proizvod_cena']));
+        //var_dump($product); die;
+        if($product->number_records <= 0){
+          $this->response(array(
+              "error" => true,
+              "message" => "Hack attempt!!!"
+          ));
+          die;
+        }
+         
         $kolicina = $_POST['proizvod_kolicina'];
         $cena =  $kolicina * $_POST['proizvod_cena'];
         
@@ -131,12 +132,19 @@ class cartModuleController extends baseController{
    }
    
    public function updateCart(){
-       
-       /*var_dump($_SESSION['korpa']);
-       die;*/
       
         $proizvod_id = $_POST['proizvod_id'];
         $kolicina = $_POST['proizvod_kolicina'];
+        
+        $product = $this->productsModel->verifyProductPrice($this->filter_input($proizvod_id), $this->filter_input($_POST['proizvod_cena']));
+        
+        if($product->number_records <= 0){
+          $this->response(array(
+              "error" => true,
+              "message" => "Hack attempt!!!"
+          ));
+          die;
+        }
         
          if(!isset($_SESSION['korpa'][$proizvod_id])){
              $this->index();

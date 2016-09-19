@@ -202,6 +202,10 @@
                                         // user clicked "cancel"
                                     }
                                 });
+                           }else{
+                              alertify.alert(data.message, function(){
+                                  alertify.message('OK OK');
+                              });
                            }
                                
                               
@@ -288,6 +292,10 @@
                                         // user clicked "cancel"
                                     }
                                 });
+                           }else{
+                              alertify.alert(data.message, function(){
+                                  alertify.message('OK OK');
+                              });
                            }
                                
                               
@@ -316,7 +324,14 @@
                          ajaxCall(formData,'<?=_WEB_PATH?>cart/updateCart',function(data){
                              data = JSON.parse(data);
                              //parseFloat((10.02745).toFixed(2));
-                             if(data.index == 1){
+                             if(data.error == true){
+                                 alertify.set({ labels: {
+                                     ok    : 'OK OK'    
+                                 } });
+                                 alertify.alert(data.message, function(){});
+                             }else{
+                                 
+                               if(data.index == 1){
                                  $('#cart-info').html(data.data.ukupno_proizvoda_u_korpi+' items');
                               // custom OK and Cancel label
                                 // default: OK, Cancel
@@ -356,9 +371,10 @@
                                         // user clicked "cancel"
                                     }
                                 });
-                             }
-                         });
-                     
+                             }  
+                        }   
+                    });
+                    
                    });  
                    
                   $(".add-to-cart").on("click", function(e){
@@ -392,6 +408,10 @@
                                         // user clicked "cancel"
                                     }
                                 });
+                           }else{
+                              alertify.alert(data.message, function(){
+                                  alertify.message('OK OK');
+                              });
                            }
                                
                               
