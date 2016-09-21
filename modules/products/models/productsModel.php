@@ -6,34 +6,41 @@
 class productsModel extends baseModel{
     public static $key = "ID";
     public static $table = "products";
- 
+    
+     
     public function getProductsByCategory($id, $limit, $offset){
         
         $this->join = array(
-            array("table"=>"images","realtion"=>"products.ID = images.product_id")
+            array("table"=>"images","relation"=>"products.ID = images.product_id")
         );
         
-        $this->where = "products.product_category={$id} LIMIT {$limit} OFFSET {$offset}";
+        $this->limit = $limit;
+        $this->offset = $offset;
+        $this->where = "products.product_category={$id}";
 
         return $this->join();
     }
     public function getProductsBySubCategory($id,$idcat, $limit, $offset){
         
         $this->join = array(
-            array("table"=>"images","realtion"=>"products.ID = images.product_id")
+            array("table"=>"images","relation"=>"products.ID = images.product_id")
         );
         
-        $this->where = "products.product_category={$idcat} and products.product_subcategory={$id} LIMIT {$limit} OFFSET {$offset}";
+        $this->limit = $limit;
+        $this->offset = $offset;
+        $this->where = "products.product_category={$idcat} and products.product_subcategory={$id}";
 
         return $this->join();
     }
     
     public function getProductsBySubCatChild($id, $idsubcat, $idcat, $offset, $limit){
         $this->join = array(
-            array("table"=>"images","realtion"=>"products.ID = images.product_id")
+            array("table"=>"images","relation"=>"products.ID = images.product_id")
         );
         
-        $this->where = "products.product_category={$idcat} and products.product_subcategory={$idsubcat} and products.product_sub_subcategory={$id} LIMIT {$limit} OFFSET {$offset}";
+        $this->limit = $limit;
+        $this->offset = $offset;
+        $this->where = "products.product_category={$idcat} and products.product_subcategory={$idsubcat} and products.product_sub_subcategory={$id}";
 
         return $this->join();
     }
@@ -47,7 +54,7 @@ class productsModel extends baseModel{
     public function getProduct($id){
        
         $this->join = array(
-            array("table"=>"images","realtion"=>"products.ID = images.product_id")
+            array("table"=>"images","relation"=>"products.ID = images.product_id")
         );
         
         $this->where = "products.ID ={$id}";
@@ -58,7 +65,7 @@ class productsModel extends baseModel{
     
     public function getLatestProducts(){
         $this->join = array(
-            array("table"=>"images","realtion"=>"products.ID = images.product_id")
+            array("table"=>"images","relation"=>"products.ID = images.product_id")
         );
 
         $this->limit = _NEW_PRODUCT_HOME_PAGE;

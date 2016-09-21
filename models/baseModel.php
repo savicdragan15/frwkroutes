@@ -3,6 +3,43 @@ abstract class baseModel
 {
     private static $instance=NULL;
     public $db;
+    
+    /**
+     * WHERE clause 
+     * Example "id=1"
+     * @var string 
+     */
+    protected $where;
+    /**
+     * GROUP BY clause
+     * @var string 
+     */
+    protected $groupBy;
+    /**
+     *ORDER BY clause
+     * @var string 
+     */
+    protected $orderBy;
+    /**
+     * LIMIT clause
+     * @var int 
+     */
+    protected $limit;
+    
+    /**
+     * OFFSET clause
+     * @var int 
+     */
+    protected $offset;
+    /**
+     * array with table name and relation <br>
+     * Example:<br>  $this->join = array( <br>
+            array("table"=>"images","relation"=>"products.ID = images.product_id")<br>
+        );
+     * @var array 
+     */
+    protected $join;
+    
     public function __construct()
     {
         $this->db=self::dbInstance();
@@ -26,16 +63,35 @@ abstract class baseModel
     }
     
     /**
-     * Metoda za dobavljanje podataka
-     * @param type $fields
-     * @param type $filter
-     * @return type
+     * getl records from database 
+     * @param string $fields
+     * @param string $filter
+     * @return array
      */
     public function getAll($fields = "*", $filter = "") {
-
+        
+        $query = "SELECT " . $fields . " FROM " . static::$table;
+        
+        if($filter != '')
+            $query .= " " . $filter;
+        
+        if(isset($this->where))
+            $query .= " WHERE " . $this->where;
+        
+        if(isset($this->groupBy))
+            $query .=" GROUP BY " . $this->groupBy;
+        
+        if (isset($this->orderBy))
+             $query .= " ORDER BY " . $this->orderBy;
+        
+        if (isset($this->limit))
+            $query .= " LIMIT " . $this->limit;
+        
+        if (isset($this->offset))
+             $query .= " OFFSET " . $this->offset;
+       
         try {
-            $sql = "SELECT " . $fields . " FROM " . static::$table . " " . $filter;
-            $res = $this->db->query($sql);
+            $res = $this->db->query($query);
             return $res->fetchAll(PDO::FETCH_CLASS, get_called_class());
         } catch (PDOException $e) {
             echo $e->getMessage();
@@ -43,9 +99,9 @@ abstract class baseModel
         }
     }
     /**
-     * Dobavaljanje po id-u
-     * @param int $id
-     * @param string $fields
+     * Get records by primary key
+     * @param int $id Prymary key
+     * @param string $fields table fileds
      * @return array
      */
     public function get($id, $fields="*") {
@@ -60,6 +116,10 @@ abstract class baseModel
         }
     }
     
+    /**
+     * Insert record to database
+     * @return boolean Return last insert id on succes or false on failed
+     */
     public function insert() {
         try {
             $q = "INSERT INTO " . static::$table . " ";
@@ -81,6 +141,11 @@ abstract class baseModel
         }
    }
    
+   /**
+    * Update record to database
+    * @return boolean
+    * @throws Exception
+    */
    public function update() {
        $keyString = static::$key;
        
@@ -109,6 +174,11 @@ abstract class baseModel
         }
     }
     
+    /**
+     * Delete record form table by primary key
+     * @param int $id
+     * @return boolean
+     */
     public function delete($id){
         try {
             $query = "DELETE from " . static::$table . " WHERE " . static::$key . "='{$id}'";
@@ -119,8 +189,8 @@ abstract class baseModel
         }
     }
     
-  /**
-     * 
+    /**
+     * Join tables
      * @return boolean
      */
     public function join() {
@@ -128,25 +198,34 @@ abstract class baseModel
         $join_table = $this->join;
         
         $query = "SELECT " . $fields . " FROM " . static::$table;
+        
         foreach($join_table as $table){
             $join = (array_key_exists("join",$table)) ? $table['join'] : "INNER";
-            $query .=" ".$join." JOIN " . $table['table'] . " ON " . $table['realtion'];
+            $query .=" ".$join." JOIN " . $table['table'] . " ON " . $table['relation'];
           }
           
         if (isset($this->where))
             $query .= " WHERE " . $this->where;
+        
+        if(isset($this->groupBy))
+            $query .=" GROUP BY " . $this->groupBy;
+        
         if (isset($this->orderBy))
              $query .= " ORDER BY " . $this->orderBy;
+        
         if (isset($this->limit))
             $query .= " LIMIT " . $this->limit;
-       
-        try {
+        
+        if (isset($this->offset))
+             $query .= " OFFSET " . $this->offset;
+        
+         try {
             $res = $this->db->query($query);
             $datas = $res->fetchAll(PDO::FETCH_CLASS, "stdClass");
             foreach ($datas as $data) {
                 unset($data->db);
-            }
-          return $datas;
+        }
+            return $datas;
         } catch (PDOException $e) {
             echo $e->getMessage();
             return false;

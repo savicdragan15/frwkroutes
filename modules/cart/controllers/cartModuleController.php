@@ -221,9 +221,9 @@ class cartModuleController extends baseController{
         $porudzbine = $this->porudzbinaModel->getAll();
         //$this->proizvodiModel->select = "slike.id,slike.proizvod_id,slike.slika_naziv";
         $this->proizvodiModel->join = array(
-            array("table"=>"kategorije","realtion"=>"proizvodi.kategorija_id = kategorije.id","join"=>"LEFT"),
-            array("table"=>"podkategorije","realtion"=>"proizvodi.podkategorija_id = podkategorije.id"),
-            array("table"=>"slike","realtion"=>"proizvodi.id = slike.proizvod_id")
+            array("table"=>"kategorije","relation"=>"proizvodi.kategorija_id = kategorije.id","join"=>"LEFT"),
+            array("table"=>"podkategorije","relation"=>"proizvodi.podkategorija_id = podkategorije.id"),
+            array("table"=>"slike","relation"=>"proizvodi.id = slike.proizvod_id")
         );
         //$this->proizvodiModel->where = "kategorije.id = 2";
         var_dump($this->proizvodiModel->join());
