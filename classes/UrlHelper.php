@@ -11,6 +11,8 @@
  *
  * @author Dragan
  */
+namespace Url;
+
 class UrlHelper {
    
     /**
@@ -21,7 +23,7 @@ class UrlHelper {
      * @param string $string Text that might have accent characters
      * @return string Filtered string with replaced "nice" characters.
      */
-    public static function remove_accents($string) {
+    public function remove_accents($string) {
         if (!preg_match('/[\x80-\xff]/', $string))
             return $string;
 

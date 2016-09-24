@@ -3,6 +3,7 @@
  * abstrktni kontroler koji sluzi za nasledjivanje
  *
  */
+require_once '/classes/UrlHelper.php';
 abstract class baseController
 {
     protected $models=array();
@@ -79,9 +80,8 @@ abstract class baseController
      */
     public function url_friendly($string)
     {
-       Loader::loadClass("UrlHelper");
-       
-       return str_replace(" ","_",UrlHelper::remove_accents($string));
+       $urlHelper = new Url\UrlHelper();
+       return str_replace(" ","_",$urlHelper->remove_accents($string));
     }
 }
 
