@@ -146,7 +146,7 @@ abstract class baseModel
     
     /**
      * Get last record from table
-     * @return boolean Return object on succes otherwise return false
+     * @return boolean Return object on success otherwise return false
      */
     public function last(){
         $this->orderBy = static::$key;
