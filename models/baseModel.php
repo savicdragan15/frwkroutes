@@ -149,7 +149,7 @@ abstract class baseModel
      * @return boolean Return object on succes otherwise return false
      */
     public function last(){
-        $this->groupBy = static::$key;
+        $this->orderBy = static::$key;
         $this->order = "DESC";
         $this->limit = 1;
         $data = $this->getAll("*");
