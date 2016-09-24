@@ -188,6 +188,6 @@ class productsModuleController extends baseController
     
     public function test() {
         $d = $this->productsModel->last();
-        var_dump($d);
+       dump($d);
     }
 }

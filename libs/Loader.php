@@ -112,9 +112,11 @@ class Loader
     public static function loadClass($className){
         global $config;
         $class_folder = _FOLDER_CLASSES;
+        
         $path_to_class = realpath($class_folder."/".$className.".php");
         if(file_exists($path_to_class)){
-            include $path_to_class;
+          
+            include_once $path_to_class;
         }
         else{
             echo $config['poruke']['noClass'];

@@ -158,6 +158,24 @@ abstract class baseModel
         else
             return false;
     }
+    
+    /**
+     * Unset fields not rewuired for insert and update
+     * @param type $polja_arr
+     */
+    private function unsetFields(&$polja_arr)
+    {
+       
+            unset($polja_arr['db']);
+            unset($polja_arr['where']);
+            unset($polja_arr['groupBy']);
+            unset($polja_arr['orderBy']);
+            unset($polja_arr['limit']);
+            unset($polja_arr['offset']);
+            unset($polja_arr['join']);
+            unset($polja_arr['order']);
+           // return $polja_arr;
+    }
     /**
      * Insert record to database
      * @return boolean Return last insert id on succes or false on failed
@@ -167,7 +185,14 @@ abstract class baseModel
             $q = "INSERT INTO " . static::$table . " ";
             //$q.= static::$table;
             $polja_arr = get_object_vars($this);
-            unset($polja_arr['db']);
+            
+            
+            $this->unsetFields($polja_arr);
+            /* var_dump($this->db);
+            die;*/
+           // dump($polja_arr);
+           // die;
+           // $this->unsetFields($polja_arr);
             $polja = array_keys($polja_arr);
             $q.= "(" . implode(",", $polja) . ") VALUES ";
             $q.= "('";
@@ -197,7 +222,8 @@ abstract class baseModel
        try {
             $q = "UPDATE " . static::$table . " SET ";
             $polja_arr = get_object_vars($this);
-            unset($polja_arr['db']);
+            $this->unsetFields($polja_arr);
+           
             foreach ($polja_arr as $key => $value) {
                 if ($key == static::$key)
                     continue;

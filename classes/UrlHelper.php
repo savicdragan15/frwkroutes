@@ -11,7 +11,7 @@
  *
  * @author Dragan
  */
-namespace Url;
+//namespace Url;
 
 class UrlHelper {
    

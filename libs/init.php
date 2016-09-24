@@ -7,6 +7,7 @@ if(file_exists(realpath("controllers/frontendController.php")))
 {
    include_once  realpath("controllers/frontendController.php");
 }
+
 Loader::loadClass('Session');
 Loader::loadClass('Cookie');
 Loader::loadClass('User');
