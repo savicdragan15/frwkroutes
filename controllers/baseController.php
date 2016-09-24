@@ -3,7 +3,7 @@
  * abstrktni kontroler koji sluzi za nasledjivanje
  *
  */
-require_once '/classes/UrlHelper.php';
+require_once _FOLDER_CLASSES."/UrlHelper.php";
 abstract class baseController
 {
     protected $models=array();
