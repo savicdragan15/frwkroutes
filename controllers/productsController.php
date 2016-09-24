@@ -40,4 +40,8 @@ class productsController extends frontendController{
     public function singleProduct($id){
         $this->productsModuleController->singleProduct($id);
     }
+    
+    public function test() {
+        $this->productsModuleController->test();
+    }
 }

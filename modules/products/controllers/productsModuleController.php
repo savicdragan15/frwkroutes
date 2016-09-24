@@ -186,4 +186,8 @@ class productsModuleController extends baseController
         Loader::loadView("index","",false,$this->template);
     }
     
+    public function test() {
+        $d = $this->productsModel->last();
+        var_dump($d);
+    }
 }

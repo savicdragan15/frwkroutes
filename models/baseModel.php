@@ -1,7 +1,19 @@
 <?php
+/**
+ * 
+ */
 abstract class baseModel
 {
+    /**
+     *
+     * @var type 
+     */
     private static $instance=NULL;
+    
+    /**
+     *
+     * @var type 
+     */
     public $db;
     
     /**
@@ -10,6 +22,7 @@ abstract class baseModel
      * @var string 
      */
     protected $where;
+    
     /**
      * GROUP BY clause
      * @var string 
@@ -20,6 +33,13 @@ abstract class baseModel
      * @var string 
      */
     protected $orderBy;
+    
+    /**
+     * ASC or DESC
+     * @var string 
+     */
+    protected $order;
+    
     /**
      * LIMIT clause
      * @var int 
@@ -31,6 +51,7 @@ abstract class baseModel
      * @var int 
      */
     protected $offset;
+    
     /**
      * array with table name and relation <br>
      * Example:<br>  $this->join = array( <br>
@@ -63,10 +84,10 @@ abstract class baseModel
     }
     
     /**
-     * getl records from database 
-     * @param string $fields
+     * get records from database 
+     * @param string $fields fileds wrapper by comma  id,name...
      * @param string $filter
-     * @return array
+     * @return array On success return array of records
      */
     public function getAll($fields = "*", $filter = "") {
         
@@ -84,15 +105,22 @@ abstract class baseModel
         if (isset($this->orderBy))
              $query .= " ORDER BY " . $this->orderBy;
         
+        if(isset($this->order)) 
+            $query .= " " . $this->order . " ";
+        
         if (isset($this->limit))
             $query .= " LIMIT " . $this->limit;
         
         if (isset($this->offset))
              $query .= " OFFSET " . $this->offset;
-       
+        
         try {
             $res = $this->db->query($query);
-            return $res->fetchAll(PDO::FETCH_CLASS, get_called_class());
+            $data =  $res->fetchAll(PDO::FETCH_CLASS, get_called_class());
+            foreach($data as $record){
+                unset($record->db);
+            }
+            return $data;
         } catch (PDOException $e) {
             echo $e->getMessage();
             return false;
@@ -116,6 +144,20 @@ abstract class baseModel
         }
     }
     
+    /**
+     * Get last record from table
+     * @return boolean Return object on succes otherwise return false
+     */
+    public function last(){
+        $this->groupBy = static::$key;
+        $this->order = "DESC";
+        $this->limit = 1;
+        $data = $this->getAll("*");
+        if(!empty($data))
+            return $data[0];
+        else
+            return false;
+    }
     /**
      * Insert record to database
      * @return boolean Return last insert id on succes or false on failed
@@ -213,6 +255,9 @@ abstract class baseModel
         if (isset($this->orderBy))
              $query .= " ORDER BY " . $this->orderBy;
         
+        if (isset($this->order))
+             $query .= " " . $this->order . " ";          
+            
         if (isset($this->limit))
             $query .= " LIMIT " . $this->limit;
         
@@ -221,11 +266,11 @@ abstract class baseModel
         
          try {
             $res = $this->db->query($query);
-            $datas = $res->fetchAll(PDO::FETCH_CLASS, "stdClass");
-            foreach ($datas as $data) {
-                unset($data->db);
+            $data = $res->fetchAll(PDO::FETCH_CLASS, "stdClass");
+            foreach ($data as $record) {
+                unset($record->db);
         }
-            return $datas;
+            return $data;
         } catch (PDOException $e) {
             echo $e->getMessage();
             return false;
