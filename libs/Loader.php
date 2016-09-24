@@ -111,7 +111,7 @@ class Loader
     }
     public static function loadClass($className){
         global $config;
-        $class_folder = "classes";
+        $class_folder = _FOLDER_CLASSES;
         $path_to_class = realpath($class_folder."/".$className.".php");
         if(file_exists($path_to_class)){
             include $path_to_class;

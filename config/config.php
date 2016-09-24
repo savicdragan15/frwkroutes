@@ -9,3 +9,4 @@ define('_WEB_PATH',"http://".$_SERVER['HTTP_HOST'].str_replace(basename($_SERVER
 define("_COOKIE_WEB_PATH","localhost/all_shine_out/");
 define("_POSTARINA",250);
 define("_NEW_PRODUCT_HOME_PAGE",8);
+define("_FOLDER_CLASSES", "classes");
