@@ -100,8 +100,9 @@ abstract class baseModel
             $query .= " WHERE " . $this->where;
         
         if(isset($this->like)){
+             $query .= " WHERE ";
             foreach ($this->like as $like){
-              $query .= " WHERE " . $like['field'];
+              $query .= $like['field'];
               $query .= " LIKE '{$like['condition']}'";
             }
         }
@@ -121,7 +122,7 @@ abstract class baseModel
         if (isset($this->offset))
              $query .= " OFFSET " . $this->offset;
         
-        
+         var_dump($query);
         try {
             $res = $this->db->query($query);
             $data =  $res->fetchAll(PDO::FETCH_CLASS, get_called_class());
@@ -167,6 +168,20 @@ abstract class baseModel
             return false;
     }
     
+    /**
+     * 
+     * @param type $fields
+     * @param array $condition
+     * Here is an inline example:
+     * <pre><code>
+     * <?php
+     * $condition = array(
+     *     array("field" => "product_name", "condition" => "%12%")
+     *  );
+     * ?>
+     * </code></pre>
+     * @return type
+     */
     public function like($fields="*", $condition){
         $this->like = $condition;
         return $this->getAll($fields);

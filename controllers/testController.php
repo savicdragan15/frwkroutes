@@ -3,14 +3,16 @@ class testController extends baseController
 {
     public function __construct()
     {
-        
-        $this->_callMdl("navigation");
-       //var_dump($nest);
-       // echo $_callMdl;
+        $this->_callMdl("products", "products");
     }
+    
     public function index()
     {
-        var_dump($this->_navigation->getAll());
+        $condition = array(
+          array("field" => "product_name", "condition" => "%12%")
+        );
+        
+        var_dump($this->_products->like("*",$condition));
     }
 }
 
