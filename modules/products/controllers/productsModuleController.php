@@ -187,7 +187,9 @@ class productsModuleController extends baseController
     }
     
     public function test() {
-        $d = $this->productsModel->last();
-       dump($d);
+        $d = $this->productsModel->like("*", array(
+            array("field" => "product_name", "condition" => "%12%")
+        ));
+       var_dump($d);
     }
 }

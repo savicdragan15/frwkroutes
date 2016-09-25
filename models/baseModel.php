@@ -1,6 +1,6 @@
 <?php
 /**
- * 
+ * @abstract Abstract class baseModel
  */
 abstract class baseModel
 {
@@ -99,6 +99,13 @@ abstract class baseModel
         if(isset($this->where))
             $query .= " WHERE " . $this->where;
         
+        if(isset($this->like)){
+            foreach ($this->like as $like){
+              $query .= " WHERE " . $like['field'];
+              $query .= " LIKE '{$like['condition']}'";
+            }
+        }
+        
         if(isset($this->groupBy))
             $query .=" GROUP BY " . $this->groupBy;
         
@@ -113,6 +120,7 @@ abstract class baseModel
         
         if (isset($this->offset))
              $query .= " OFFSET " . $this->offset;
+        
         
         try {
             $res = $this->db->query($query);
@@ -148,15 +156,20 @@ abstract class baseModel
      * Get last record from table
      * @return boolean Return object on success otherwise return false
      */
-    public function last(){
+    public function last($fields="*"){
         $this->orderBy = static::$key;
         $this->order = "DESC";
         $this->limit = 1;
-        $data = $this->getAll("*");
+        $data = $this->getAll($fields);
         if(!empty($data))
             return $data[0];
         else
             return false;
+    }
+    
+    public function like($fields="*", $condition){
+        $this->like = $condition;
+        return $this->getAll($fields);
     }
     
     /**
@@ -186,13 +199,7 @@ abstract class baseModel
             //$q.= static::$table;
             $polja_arr = get_object_vars($this);
             
-            
             $this->unsetFields($polja_arr);
-            /* var_dump($this->db);
-            die;*/
-           // dump($polja_arr);
-           // die;
-           // $this->unsetFields($polja_arr);
             $polja = array_keys($polja_arr);
             $q.= "(" . implode(",", $polja) . ") VALUES ";
             $q.= "('";
