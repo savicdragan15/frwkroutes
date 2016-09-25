@@ -1,10 +1,11 @@
 <?php
 /**
  * abstrktni kontroler koji sluzi za nasledjivanje
- *
+ *@author Jovan
  */
 //require_once _FOLDER_CLASSES."/UrlHelper.php";
-abstract class baseController
+use interfaces\base as base;
+abstract class baseController implements base
 {
     protected $models=array();
     protected $modules=array();
@@ -84,6 +85,18 @@ abstract class baseController
     //   dump($s);
      $urlHelper = new UrlHelper();
      return str_replace(" ","_",$urlHelper->remove_accents($string));
+    }
+    /**
+     * shorcut to model call
+     * @author Jovan Jagodic
+     * @param string $model name of model to be called
+     * @return object object of current model
+     */
+    public function _callMdl($model)
+    {
+        Loader::LoadModel($this,$model);
+        $mdl="_".$model;
+        return $this->$mdl=$this->models[$model];
     }
 }
 
