@@ -6,11 +6,19 @@
  */
 
 use interfaces\base as base;
+use duncan3dc\Laravel\BladeInstance;
 
 abstract class baseController implements base
 {
-    protected $models=array();
-    protected $modules=array();
+    protected $models  = array();
+    protected $modules = array();
+    
+    public function __construct() {
+        
+       $this->view = new BladeInstance(_VIEWS_PATH, _CACHE_FOLDER);
+       
+    }
+    
     /**
      * 
      * @param string $name name of model
@@ -18,7 +26,7 @@ abstract class baseController implements base
      */
     public function setModel($name,$value)
     {
-        $this->models[$name]=$value;
+        $this->models[$name] = $value;
     }
     
     /**
@@ -28,7 +36,7 @@ abstract class baseController implements base
      */
     public function setModule($name,$value)
     {
-        $this->modules[$name]=$value;
+        $this->modules[$name] = $value;
     }
     
     /**

@@ -1,9 +1,13 @@
 <?php
+
 use duncan3dc\Laravel\BladeInstance;
+use duncan3dc\Laravel\Blade;
+
 class testController extends baseController
 {
     public function __construct()
     {
+        parent::__construct();
         $this->_callMdl("products", "products");
     }
     
@@ -13,18 +17,18 @@ class testController extends baseController
           array("field" => "product_name", "condition" => "%12%")
         );
         
-        var_dump($this->_products->like("*",$condition));
+        //var_dump($this->_products->like("*",$condition));
     }
     
     public function test(){
+        $condition = array(
+          array("field" => "product_name", "condition" => "%12%")
+        );
         
-        $views ="C:/wamp/www/all_shine_out/views";
-        $cache = __DIR__ . '/cache';
-        
-        $blade = new BladeInstance($views, $cache);
-
-        echo $blade->render("test",['name' => 'Dragan']);
-        
+        echo $this->view->render("test", array(
+            'name' => 'Dragan',
+            "data" =>  $this->_products->like("*",$condition)[0]
+        ));
      
     }
 }

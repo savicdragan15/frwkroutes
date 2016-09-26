@@ -1,3 +1,4 @@
 /vendor/
 /composer.lock
 /views/js/pgwcookie.js
+/views/cache/

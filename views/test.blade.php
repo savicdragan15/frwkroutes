@@ -1,5 +1,9 @@
 @extends('layout')
 
 @section('content')
-  <?php echo $name;?>
+
+    {{ dump($data) }}
+    {{ $data->ID }} <br>
+    {{ $data->product_description }}
+    
 @endsection
