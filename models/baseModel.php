@@ -122,7 +122,7 @@ abstract class baseModel
         if (isset($this->offset))
              $query .= " OFFSET " . $this->offset;
         
-         var_dump($query);
+        
         try {
             $res = $this->db->query($query);
             $data =  $res->fetchAll(PDO::FETCH_CLASS, get_called_class());
