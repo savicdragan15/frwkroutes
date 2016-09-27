@@ -27,9 +27,12 @@ class testController extends baseController
         
         echo $this->view->render("test", array(
             'name' => 'Dragan',
-            "data" =>  $this->_products->like("*",$condition)[0]
+            "data" =>  $this->_productsMdl->like("*",$condition)[0]
         ));
-     
+        
+      /*  $this->_callMdl("products", "products");
+        var_dump($this->_productsMdl);
+     */
     }
 }
 

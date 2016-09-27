@@ -129,8 +129,20 @@ abstract class baseController implements base
     public function _callMdl($model, $module="")
     {
         Loader::LoadModel($this,$model, $module);
-        $mdl="_".$model;
+        $mdl="_".$model."Mdl";
         return $this->$mdl=$this->models[$model];
+    }
+    
+    /**
+     * 
+     * @param type $module_name
+     * @return type
+     */
+    public function _callMod($module_name)
+    {
+        Loader::loadModule($this, $module_name."Module");
+        $module ="_".$module_name."Mod";
+        return $this->$module = $this->modules[$module_name."Module"];
     }
 }
 
