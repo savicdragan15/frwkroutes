@@ -9,15 +9,43 @@ class testController extends baseController
     {
         parent::__construct();
         $this->_callMdl("products", "products");
+        Loader::loadClass("Uploader");
     }
     
     public function index()
     {
+      /*  $condition = array(
+          array("field" => "product_name", "condition" => "%12%")
+        );*/
+        
+        //var_dump($this->_products->like("*",$condition));
+        
         $condition = array(
           array("field" => "product_name", "condition" => "%12%")
         );
+        echo $this->view->render("test", array(
+            'name' => 'Dragan',
+            "data" =>  $this->_productsMdl->like("*",$condition)[0]
+        ));
         
-        //var_dump($this->_products->like("*",$condition));
+    }
+    
+    public function upload(){
+        $file_to_upload = $_FILES['fileToUpload'];
+        
+        $path = __DIR__."/";
+        
+        $this->uploader = new Uploader($file_to_upload, $path);
+        $this->uploader->setFileName("Dragan_S_CV_2016");
+        $this->uploader->setIvalidformatMessage("Neodgovarajuci format");
+        
+        if($this->uploader->upload()){
+            echo "ok";
+        }else{
+            echo $this->uploader->message;
+        }
+        
+          
     }
     
     public function test(){
