@@ -91,7 +91,7 @@ class Uploader {
     }
     /**
      * Set filename
-     * @param type $name
+     * @param string $name
      */
     public function setFileName($name) {
         $this->file_name = $name;
@@ -99,7 +99,7 @@ class Uploader {
 
     /**
      * Set your custom message for Invalid format file error
-     * @param type $message
+     * @param string $message
      */
     public function setIvalidformatMessage($message) {
         $this->invalid_format_message = $message;
@@ -107,7 +107,7 @@ class Uploader {
 
     /**
      * Set your custom message when file not found
-     * @param type $message
+     * @param string $message
      */
     public function setSelecFileMessage($message) {
         $this->select_file_message = $message;
@@ -115,7 +115,7 @@ class Uploader {
 
     /**
      * Set your custom message for upload failed
-     * @param type $message
+     * @param string $message
      */
     public function setFailedUploadMessage($message) {
         $this->failed_upload_message = $message;
@@ -123,7 +123,7 @@ class Uploader {
     
     /**
      * Set your custom message for max file size error
-     * @param type $message
+     * @param string $message
      */
     public function setMaxFileSizeMessage($message){
         $this->file_size_message = $message;
