@@ -69,7 +69,7 @@ class Uploader {
                     if (move_uploaded_file($this->file_to_upload['tmp_name'], $this->path . $file_name)) {
                         return true;
                     } else {
-                        echo $this->failed_upload_message;
+                        $this->message = $this->failed_upload_message;
                         return false;
                     }
                 }else{
@@ -81,7 +81,7 @@ class Uploader {
                 return false;
             }
         } else {
-            echo $this->select_file_message;
+            $this->message = $this->select_file_message;
             return false;
         }
     }
