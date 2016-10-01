@@ -30,24 +30,25 @@ class testController extends baseController
         
     }
     
-    public function upload(){
-        $file_to_upload = $_FILES['fileToUpload'];
+    public function upload() {
         
-        $path = __DIR__."/";
+        $path = __DIR__ . "/";
         
-        $this->uploader = new Uploader($file_to_upload, $path);
-        $this->uploader->setFileName("Dragan_S_CV_2016");
-        $this->uploader->setIvalidformatMessage("Neodgovarajuci format");
-        
-        if($this->uploader->upload()){
-            echo "ok";
-        }else{
-            echo $this->uploader->message;
+        if (isset($_FILES['fileToUpload'])) {
+            $file_to_upload = $_FILES['fileToUpload'];
+            $this->uploader = new Uploader($file_to_upload, $path);
+            $this->uploader->setFileName("Dragan_S_CV_2016");
+            $this->uploader->setIvalidformatMessage("Neodgovarajuci format");
+
+            if ($this->uploader->upload()) {
+                echo "ok";
+            } else {
+                echo $this->uploader->message;
+            }
         }
         
-          
     }
-    
+
     public function test(){
         $condition = array(
           array("field" => "product_name", "condition" => "%12%")
