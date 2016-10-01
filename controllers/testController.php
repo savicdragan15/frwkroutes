@@ -31,13 +31,22 @@ class testController extends baseController
     }
     
     public function upload() {
-        
         $path = __DIR__ . "/";
+        $this->uploader = new Uploader();
+        $this->uploader->setPath($path);
+        $this->uploader->setFileName("test");
+        if($this->uploader->uploadImage($_FILES['fileToUpload'])){
+            echo "ok ok";
+        }else{
+           echo $this->uploader->message;
+        }
+        die;
         
+        /*$path = __DIR__ . "/";
         if (isset($_FILES['fileToUpload'])) {
             $file_to_upload = $_FILES['fileToUpload'];
             $this->uploader = new Uploader($file_to_upload, $path);
-            $this->uploader->setFileName("Dragan_S_CV_2016");
+            $this->uploader->setFileName("123");
             $this->uploader->setIvalidformatMessage("Neodgovarajuci format");
 
             if ($this->uploader->upload()) {
@@ -45,7 +54,7 @@ class testController extends baseController
             } else {
                 echo $this->uploader->message;
             }
-        }
+        }*/
         
     }
 

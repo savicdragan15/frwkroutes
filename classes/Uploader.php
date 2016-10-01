@@ -11,7 +11,10 @@
  *
  * @author Draga Savic <savicdragan2707@gmail.com>
  */
-class Uploader {
+Loader::loadClass("SimpleImage");
+use Image\SimpleImage as SimpleImageClass;
+
+class Uploader extends SimpleImageClass{
 
     /**
      *
@@ -51,7 +54,7 @@ class Uploader {
     
     public $message;
     
-    public function __construct($file_to_upload, $path) {
+    public function __construct($file_to_upload = null, $path = null) {
         $this->file_to_upload = $file_to_upload;
         $this->path = $path;
     }
@@ -85,9 +88,56 @@ class Uploader {
             return false;
         }
     }
+    
+    /**
+     * This method used for upload only image file
+     * @param type $image
+     * @return boolean
+     */
+    public function uploadImage($image) {
+        $this->_setFileToUpload($image);
 
-    public function multipleUpload(){
-        var_dump($this->file_to_upload);
+        if ($this->path != '' && $this->file_to_upload['name'] != '') {
+            try {
+                $this->load($this->file_to_upload['tmp_name']);
+                list($name, $extension) = explode(".", $this->file_to_upload['name']);
+                if (in_array($extension, $this->valid_formats)) {
+                    if ($this->get_original_info()['exif']['FileSize'] < $this->size) {
+                        $file_name = isset($this->file_name) ? $this->file_name . "." . $extension : $this->file_to_upload['name'];
+                        $this->save($this->path . $file_name);
+                        return true;
+                    } else {
+                        $this->message = $this->file_size_message;
+                        return false;
+                    }
+                } else {
+                    $this->message = $this->invalid_format_message;
+                    return false;
+                }
+            } catch (Exception $e) {
+                echo $e->getMessage();
+                return false;
+            }
+        } else {
+            $this->message = $this->select_file_message;
+            return false;
+        }
+    }
+    
+    /**
+     * 
+     * @param type $path
+     */
+    public function setPath($path){
+        $this->path = $path;
+    }
+    
+    /**
+     * 
+     * @param array $file
+     */
+    private function _setFileToUpload($file){
+         $this->file_to_upload = $file;
     }
     /**
      * Set filename
