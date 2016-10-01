@@ -115,7 +115,7 @@ class Uploader extends SimpleImageClass{
                     return false;
                 }
             } catch (Exception $e) {
-                echo $e->getMessage();
+                $this->message = $e->getMessage();
                 return false;
             }
         } else {
