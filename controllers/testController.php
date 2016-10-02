@@ -35,8 +35,9 @@ class testController extends baseController
         $path = __DIR__ . "/uploads/";
         $this->uploader = new Uploader();
         $this->uploader->setPath($path);
+       
         if($this->uploader->multipleUpload($_FILES['fileToUpload'])){
-            echo "Lagano je porslo";
+            echo "Lagano je proslo";
         }else{
             echo $this->uploader->message;
         }
