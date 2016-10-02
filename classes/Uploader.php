@@ -45,7 +45,7 @@ class Uploader extends SimpleImageClass{
      * Array of available upload formats
      * @var type 
      */
-    private $valid_formats = array("jpg", "png", "gif", "bmp");
+    private $valid_formats = array("pdf","jpg", "png", "gif", "bmp");
     
     private $select_file_message = "Please select file..!";
     private $invalid_format_message = "Invalid file format..";
@@ -124,6 +124,52 @@ class Uploader extends SimpleImageClass{
         }
     }
     
+    public function multipleUpload($files){
+        $files_arr = $this->_reArrayFiles($files);
+       
+        foreach($files_arr as $file){
+            list($name, $extension) = explode(".", $file['name']);
+            if (in_array($extension, $this->valid_formats)) {
+                if ($file['size'] < $this->size) {
+                    $file_name = uniqid().date('Y-m-d-h-i-s').$file['name'];
+                    if (move_uploaded_file($file['tmp_name'], $this->path . $file_name)) {
+                        
+                    } else {
+                        $this->message = $this->failed_upload_message;
+                        return false;
+                    }
+                }else{
+                   $this->message = $this->file_size_message;
+                   return false; 
+                }
+            }else{
+               $this->message = $this->invalid_format_message;
+               return false; 
+            }
+        }
+       return true; 
+    }
+   
+   /**
+    * 
+    * @param type $file_post
+    * @return type
+    */
+   private function _reArrayFiles(&$file_post) {
+
+        $file_ary = array();
+        $file_count = count($file_post['name']);
+        $file_keys = array_keys($file_post);
+
+        for ($i = 0; $i < $file_count; $i++) {
+            foreach ($file_keys as $key) {
+                $file_ary[$i][$key] = $file_post[$key][$i];
+            }
+        }
+
+        return $file_ary;
+    }
+
     /**
      * 
      * @param type $path
@@ -146,7 +192,14 @@ class Uploader extends SimpleImageClass{
     public function setFileName($name) {
         $this->file_name = $name;
     }
-
+    public function setFileNames($arr_names, $new_names){
+        foreach ($arr_names as $key => $value) {
+            var_dump($key, $value);
+            if($key == 'name'){
+                
+            }
+        }
+    }
     /**
      * Set your custom message for Invalid format file error
      * @param string $message

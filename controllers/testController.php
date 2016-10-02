@@ -31,7 +31,16 @@ class testController extends baseController
     }
     
     public function upload() {
-        $path = __DIR__ . "/";
+        //var_dump($_FILES);
+        $path = __DIR__ . "/uploads/";
+        $this->uploader = new Uploader();
+        $this->uploader->setPath($path);
+        if($this->uploader->multipleUpload($_FILES['fileToUpload'])){
+            echo "Lagano je porslo";
+        }else{
+            echo $this->uploader->message;
+        }
+        /*$path = __DIR__ . "/";
         $this->uploader = new Uploader();
         $this->uploader->setPath($path);
         $this->uploader->setFileName("test");
@@ -40,7 +49,7 @@ class testController extends baseController
         }else{
            echo $this->uploader->message;
         }
-        die;
+        die;*/
         
         /*$path = __DIR__ . "/";
         if (isset($_FILES['fileToUpload'])) {
