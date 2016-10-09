@@ -25,5 +25,9 @@ class adminController extends baseController{
     public function login(){
         $this->_adminMod->login();
     }
+    
+    public function uploadImage(){
+        $this->_adminMod->uploadImage();
+    }
 
 }

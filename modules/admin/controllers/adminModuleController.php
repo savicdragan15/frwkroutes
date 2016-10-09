@@ -3,11 +3,13 @@
  * Admin modul
  * @var $this->_navigationMdl navigationModel
  */
+use Image\SimpleImage;
 class adminModuleController extends baseController{
    
       public function __construct() {
           $this->_callMdl("products", "products");
           $this->_callMdl("navigation");
+          Loader::loadClass("SimpleImage");
       }
       
       /**
@@ -44,6 +46,13 @@ class adminModuleController extends baseController{
         Loader::loadView("insertproducts", "admin", true, $this->template);
     }
     
+    public function uploadImage(){
+        var_dump($_FILES);
+        $image = new SimpleImage($_FILES['image']['tmp_name']);
+       
+        $image->fit_to_height(300)->save(_VIEWS_PATH."/images/products_gallery/thumbnail/probica.jpg");
+        var_dump($image);
+    }
     /**
      * 
      */

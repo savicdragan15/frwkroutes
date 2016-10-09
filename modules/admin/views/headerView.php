@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.6.1/css/themes/bootstrap.min.css"/>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <!-- End CSS ALERTIFY -->
-   <script src="<?=_WEB_PATH?>modules/admin/views/assets/js/jquery-1.10.2.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
    <script src="<?=_WEB_PATH?>modules/admin/views/assets/js/notify.js"></script>
       <!-- DATA TABLE SCRIPTS -->
     <script src="<?=_WEB_PATH?>modules/admin/views/assets/js/dataTables/jquery.dataTables.js"></script>

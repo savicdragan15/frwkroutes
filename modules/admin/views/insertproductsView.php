@@ -7,7 +7,7 @@
         <div class="row">
         <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12">
             <div class="form-group">
-                <form action="" method="POST" id="unos_proizvoda">
+                <form action="" method="POST" id="insert_product">
                     <div class="form-group">
                         <i class="fa fa-file-text-o"></i> <label for="proizvod_naziv">Naziv proizvoda</label>
                         <input class="form-control" id="proizvod_naziv" name="proizvod_naziv"  placeholder="Naziv proizvoda">
@@ -230,30 +230,38 @@
     }
     //upload slike za porizvod
     //jQuery.noConflict();    
-    formdata = new FormData();      
+    //formdata = new FormData(); 
     $("#image_to_upload").on("change", function() {
-      $('#ajaxLoader').show();
-        var file = this.files[0];
-        console.log(file);
-        if (formdata) {
-            formdata.append("image", file);
-            console.log(formdata);
-            jQuery.ajax({
-                url: "<?=_WEB_PATH?>admin/unesiSliku",
-                type: "POST",
-                data: formdata,
-                dataType: 'json',
-                processData: false,
-                contentType: false,
-                success:function(response){
-                if(response.error == false){
-                    $('#ajaxLoader').hide();
-                    //$('#image_to_upload').attr('disabled', 'disabled');
-                    getImage(response.last_id);
-                   }
-                }
-            });
-            }
+      formdata = new FormData();
+      
+      var image = this.files[0];
+      console.log(image);
+      //$('#ajaxLoader').show();
+        formdata.append("image", image);
+        
+        ajaxCall(formdata, '<?=_WEB_PATH?>admin/uploadImage', function(data){
+           // data = JSON.parse(data);
+            //getImage(response.last_id);
+        }, "POST", true);
+//        if (formdata) {
+//            formdata.append("image", file);
+//            console.log(formdata);
+//            jQuery.ajax({
+//                url: "<?=_WEB_PATH?>admin/unesiSliku",
+//                type: "POST",
+//                data: formdata,
+//                dataType: 'json',
+//                processData: false,
+//                contentType: false,
+//                success:function(response){
+//                if(response.error == false){
+//                    $('#ajaxLoader').hide();
+//                    //$('#image_to_upload').attr('disabled', 'disabled');
+//                    getImage(response.last_id);
+//                   }
+//                }
+//            });
+//            }
         });                      
     }); 
 

@@ -217,14 +217,33 @@
 //}(jQuery));
 (function ($) {
    // $(document).ready(function () {
-      $('#main-menu').metisMenu();
+     // $('#main-menu').metisMenu();
     //});
   }(jQuery)); 
 
-  function ajaxCall(data,url,callback,method)
+  function ajaxCall(data,url,callback,method, upload)
     {
        method = typeof method !== 'undefined' ? method : "POST";
-        $.ajax({
+       upload = typeof upload !== 'undefined' ? upload : false;
+       if(upload === true){
+           var parameters = {
+            url : url,//"products/allProductsByCategory/1/1/Exterior",
+            type: method,
+            data : data,
+            processData: false,
+            contentType: false, 
+            success: function(data, textStatus, jqXHR)
+            {
+                //data - response from server
+              callback(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+
+            }
+           }
+       }else{
+           var parameters = {
             url : url,//"products/allProductsByCategory/1/1/Exterior",
             type: method,
             data : data,
@@ -237,5 +256,9 @@
             {
 
             }
-        });
+           }
+       }
+        $.ajax(
+            parameters
+        );
     }

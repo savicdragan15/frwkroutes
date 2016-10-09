@@ -219,6 +219,8 @@ $(document).ready(function(e) {
             url : url,//"products/allProductsByCategory/1/1/Exterior",
             type: method,
             data : data,
+            processData: false,
+            contentType: false,
             success: function(data, textStatus, jqXHR)
             {
                 //data - response from server
