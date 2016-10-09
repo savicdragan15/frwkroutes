@@ -1,14 +1,14 @@
 <?php 
- if(!isset($_SESSION['status']) || $_SESSION['status'] !== '1'){
+/* if(!isset($_SESSION['status']) || $_SESSION['status'] !== '1'){
      header("Location:"._WEB_PATH."admin/index");
- }
+ }*/
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
       <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ženski ugao Admin</title>
+    <title>All out shine Admin</title>
 	<!-- BOOTSTRAP STYLES-->
     <link href="<?=_WEB_PATH?>modules/admin/views/assets/css/bootstrap.css" rel="stylesheet" />
      <!-- FONTAWESOME STYLES-->
@@ -35,17 +35,19 @@
     <!-- BOOTSTRAP SCRIPTS -->
     <script src="<?=_WEB_PATH?>modules/admin/views/assets/js/bootstrap.min.js"></script>
    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+   
  <script>
     tinymce.init({ 
       selector:'textarea', 
       height: 250
     });
     $(document).ready(function(){
-       $('#main-menu').find("a[href$='<?=$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']?>']").addClass("active-menu");
+       $('#main-menu').find("a[href$='<?=$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']?>']").addClass("active-menu");
     });
 </script>
    <!-- Alertify CDN -->
   <script src="//cdn.jsdelivr.net/alertifyjs/1.6.1/alertify.min.js"></script>
+  <script src="<?=_WEB_PATH?>modules/admin/views/assets/js/custom.js"></script>
 </head>
 <body>
     <div id="wrapper">
@@ -57,12 +59,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?=_WEB_PATH?>admin">Ženski ugao</a> 
+                <a class="navbar-brand" href="<?=_WEB_PATH?>admin">All out shine</a> 
             </div>
   <div style="color: white;
 padding: 15px 50px 5px 50px;
 float: right;
-font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="<?=_WEB_PATH?>admin/logOut" class="btn btn-danger square-btn-adjust">Logout</a> </div>
+font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="<?=_WEB_PATH?>login/logOut" class="btn btn-danger square-btn-adjust">Logout</a> </div>
         </nav>   
            <!-- /. NAV TOP  -->
                 <nav class="navbar-default navbar-side" role="navigation">
@@ -76,7 +78,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="<?=_WEB_PATH?>admin
                         <a  href="<?=_WEB_PATH?>admin/kontrolnaTabla"><i class="fa fa-dashboard fa-2x"></i>Kontrolna tabla</a>
                     </li>
                     <li>
-                        <a  href="<?=_WEB_PATH?>admin/unos_proizvoda"><i class="fa fa-archive fa-2x"></i>Unos proizvoda</a>
+                        <a  href="<?=_WEB_PATH?>admin/insertProducts"><i class="fa fa-archive fa-2x"></i>Unos proizvoda</a>
                     </li>
                      <li>
                         <a  href="<?=_WEB_PATH?>admin/administracijaProizvoda"><i class="fa fa-pencil fa-2x"></i>Adminitracija proizvoda</a>

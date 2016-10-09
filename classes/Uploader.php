@@ -133,6 +133,7 @@ class Uploader extends SimpleImageClass{
         $files_arr = $this->_reArrayFiles($files);
         
         foreach($files_arr as $file){
+            if($file['name'] != ''){
             list($name, $extension) = explode(".", $file['name']);
             if (in_array($extension, $this->valid_formats)) {
                 if ($file['size'] < $this->size) {
@@ -151,7 +152,12 @@ class Uploader extends SimpleImageClass{
                $this->message = $this->invalid_format_message;
                return false; 
             }
+            }else{
+                $this->message = $this->select_file_message;
+                return false;
+            }
         }
+        
        return $names; 
     }
    

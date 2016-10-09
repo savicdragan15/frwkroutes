@@ -1,7 +1,12 @@
 <?php
 /**
+ * @property int $ID primary key
  * @property string $product_name Name of product
+ * @property string $product_description Description of product
  * @property string $product_price Price
+ * @property int $product_category Category
+ * @property int $product_subcategory Subcategory
+ * @property int $product_sub_subcategory Sub sub category
  */
 class productsModel extends baseModel{
     public static $key = "ID";
