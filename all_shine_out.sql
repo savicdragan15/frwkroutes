@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 04, 2016 at 07:01 PM
+-- Generation Time: Oct 09, 2016 at 04:01 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -162,16 +162,18 @@ CREATE TABLE IF NOT EXISTS `users` (
   `company` varchar(100) NOT NULL,
   `salt` varchar(100) NOT NULL,
   `active` tinyint(4) NOT NULL DEFAULT '0',
+  `last_login` datetime NOT NULL,
+  `status` tinyint(1) NOT NULL COMMENT '1 - admin 2 - user',
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`ID`, `first_name`, `last_name`, `email`, `password`, `company`, `salt`, `active`) VALUES
-(11, '', '', 'savicdragan15@facebook.com', '$2y$12$gAFPfixVUWKUSlUIYXAleOlwIE6JNNy7TyLsy0jlK3XdovseZWDzS', '', '4rmCugjw3oEDTlw8SPGd5N65f129db2558e4312021dfa4c19c4186', 1),
-(8, 'Dragan', 'Savic', 'savicdragan2707@gmail.com', '$2y$12$c2Y2NE1qV1ZiQXBFVCUlaukMYKskrcVRI1TuTErgm.gXF8LkH2zyu', 'MediaWorks', 'aaeuS8aMIOhTBpgiIJSOue3fac8ac0df4b6a52dfda7b752800cb09', 1);
+INSERT INTO `users` (`ID`, `first_name`, `last_name`, `email`, `password`, `company`, `salt`, `active`, `last_login`, `status`) VALUES
+(11, '', '', 'savicdragan15@facebook.com', '$2y$12$gAFPfixVUWKUSlUIYXAleOlwIE6JNNy7TyLsy0jlK3XdovseZWDzS', '', '4rmCugjw3oEDTlw8SPGd5N65f129db2558e4312021dfa4c19c4186', 1, '0000-00-00 00:00:00', 2),
+(12, 'Pera', 'Peric', 'savicdragan2707@gmail.com', '$2y$12$PyNRbDhmUCFwNFYjd3Rza.vGHUIKQHf/A0BMjvGVJb88kug4FSeaS', '', 'wxcKeTI1oHTd8ExHtJx6Vk2ed049e4e924644fcf54efea55f79c6a', 1, '2016-10-09 15:58:48', 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
