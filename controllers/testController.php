@@ -19,13 +19,13 @@ class testController extends baseController
         $pin    = '060CE533BF34484A';              // Secret for authentication / PIN = part of epsp:MD5Fingerprint
         $bic    = 'RLNWATWW';            // BIC code of receiving bank account = epi:BfiBicIdentifier
         $iban   = 'AT133200000112375028';   // IBAN code of receiving bank account = epi:BeneficiaryAccountIdentifier
-        $targetUrl = 'https://routing.eps.or.at/appl/epsSO/transinit/eps/v2_5'; // Target URL to send TransferInitiatorDetails to. 'null' means: Use default URL. For test mode, insert: https://routing.eps.or.at/appl/epsSO-test/transinit/eps/v2_5
+        $targetUrl = null; // Target URL to send TransferInitiatorDetails to. 'null' means: Use default URL. For test mode, insert: https://routing.eps.or.at/appl/epsSO-test/transinit/eps/v2_5
        
         // Return urls
         $transferMsgDetails = new eps_bank_transfer\TransferMsgDetails(
-          'http://localhost:8888/all_shine_out/test/confirm', // The URL that the EPS Scheme Operator (=SO) will call before (= VitaliyCheck) and after payment = epsp:ConfirmationUrl. Use samples/eps_confirm.php as a starting point. You must include a unique query string (and parse it in samples/eps_confirm.php), since the matching of a confirmation to a payment is solely based on this URL!
-          'http://localhost:8888/all_shine_out/test/thanks/1',   // The URL that the buyer will be redirected to on succesful payment = epsp:TransactionOkUrl
-          'http://localhost:8888/all_shine_out/test/thanks/2'     // The URL that the buyer will be redirected to on cancel or failure = epsp:TransactionNokUrl
+          'test/confirm', // The URL that the EPS Scheme Operator (=SO) will call before (= VitaliyCheck) and after payment = epsp:ConfirmationUrl. Use samples/eps_confirm.php as a starting point. You must include a unique query string (and parse it in samples/eps_confirm.php), since the matching of a confirmation to a payment is solely based on this URL!
+          'test/thanks/1',   // The URL that the buyer will be redirected to on succesful payment = epsp:TransactionOkUrl
+          'test/thanks/2'     // The URL that the buyer will be redirected to on cancel or failure = epsp:TransactionNokUrl
         );
        // var_dump($transferMsgDetails);
         
@@ -65,7 +65,7 @@ class testController extends baseController
        
         $xml = new \SimpleXMLElement($plain);
         $soAnswer = $xml->children(eps_bank_transfer\XMLNS_epsp);
-        var_dump($soAnswer); die;
+     //  dump($soAnswer); die;
         $errorDetails = $soAnswer->BankResponseDetails->ErrorDetails;
         if (('' . $errorDetails->ErrorCode) != '000')
         {
@@ -73,11 +73,11 @@ class testController extends baseController
           $errorMsg = '' . $errorDetails->ErrorMsg;
         }
         else
-        {
+       {
           // This is the url you have to redirect the client to.
           $redirectUrl = $soAnswer->BankResponseDetails->ClientRedirectUrl;
           header('Location: ' . $redirectUrl);
-        }
+       }
         
         
     }
