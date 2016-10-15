@@ -48,9 +48,16 @@ class adminModuleController extends baseController{
     
     public function uploadImage(){
         var_dump($_FILES);
+        $name_image = uniqid().date('Y-m-d');
         $image = new SimpleImage($_FILES['image']['tmp_name']);
-       
-        $image->fit_to_height(300)->save(_VIEWS_PATH."/images/products_gallery/thumbnail/probica.jpg");
+        $image->fit_to_height(400)->save(_VIEWS_PATH."/images/products_gallery/normal/{$name_image}.jpg");
+        
+        $thumbnail_image = new SimpleImage($_FILES['image']['tmp_name']); 
+        $thumbnail_image->fit_to_height(300)->save(_VIEWS_PATH."/images/products_gallery/thumbnail/{$name_image}.jpg");
+        
+        /*$small_image = new SimpleImage($_FILES['image']['tmp_name']); 
+        $thumbnail_image->fit_to_height(100)->save(_VIEWS_PATH."/images/products_gallery/thumbnail/probica.jpg");*/
+        
         var_dump($image);
     }
     /**
