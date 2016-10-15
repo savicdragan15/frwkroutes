@@ -20,7 +20,7 @@ class User {
     public static function isLogin() {
         $usr = Session::get('user');
         if (!empty($usr)) {
-            return $admin['status'] == 2 ? true : false;
+            return $usr['status'] == 2 ? true : false;
         }
         return false;
     }

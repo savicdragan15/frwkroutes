@@ -34,10 +34,10 @@
                             <?php    } 
                                     } 
                                   }else{ ?>
-    <div> <p>Vasa korpa je prazna.</p> </div>
+                    <div> <p>Vasa korpa je prazna.</p> </div>
                                 <?php  }?>
                                     <a href="#" class="red-button">Continue Shopping</a>
-                                    <a href="#" class="red-button black">Update Shopping Cart</a>
+                                   <!-- <a href="#" class="red-button black">Update Shopping Cart</a> -->
 
                                 </div>
 
@@ -78,7 +78,11 @@
                                 <ul class="gray">
                                     <li id="total-price-cart"><?=number_format($products['ukupna_cena_korpe'], 2, '.', '');?> €</li>
                                 </ul>
-                                <a href="#" class="red-button">Proceed to Checkout</a>
+                                <?php if(User::isLogin()){ ?>
+                                    <a href="<?=_WEB_PATH.'payment/paymentOption/1'?>" class="red-button">Proceed to Checkout</a>
+                                <?php }else{?>
+                                    <a href="<?=_WEB_PATH.'payment/paymentOption/0'?>" class="red-button">Proceed to Checkout</a>
+                                <?php }?>
                             </div>
                         </div>
                 <script>

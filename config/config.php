@@ -16,3 +16,25 @@ define("_FOLDER_CLASSES", "classes");
 
 define("_VIEWS_PATH", $_SERVER['DOCUMENT_ROOT']."/all_shine_out/"._VIEWS_FOLDER);
 define("_CACHE_FOLDER", $_SERVER['DOCUMENT_ROOT']."/all_shine_out/views/cache/");
+
+
+/**************************Payment**********************************************************/
+define("_userID", "STUZZATWXXX_109197"); // Eps "Händler-ID"/UserID = epsp:UserId
+define("_pin", "D745FAD8B5BCA79F");      // Secret for authentication / PIN = part of epsp:MD5Fingerprint
+define("_bic", "STZZATWWXXX");    // BIC code of receiving bank account = epi:BfiBicIdentifier
+define("_iban", "AT748900000001100075");// IBAN code of receiving bank account = epi:BeneficiaryAccountIdentifier
+define("_targetUrl", "https://routing.eps.or.at/appl/epsSO-test/transinit/eps/v2_5");
+
+/********************************** Redirect Url-s *************************************/
+define("_confirmUrl", "http://www.php-paspartu.com/all_out_shine/test/confirm");
+define("_successUrl", "http://www.php-paspartu.com/all_out_shine/test/thanks/1");
+define("_errorUrl", "http://www.php-paspartu.com/all_out_shine/test/thanks/2");
+
+//Production parameters Eps
+// Connection credentials. Override them for test mode. 
+        /*$userID = 'RLNWATWWXXX_194892';            // Eps "Händler-ID"/UserID = epsp:UserId
+        $pin    = '060CE533BF34484A';              // Secret for authentication / PIN = part of epsp:MD5Fingerprint
+        $bic    = 'RLNWATWW';            // BIC code of receiving bank account = epi:BfiBicIdentifier
+        $iban   = 'AT133200000112375028';   // IBAN code of receiving bank account = epi:BeneficiaryAccountIdentifier
+        $targetUrl = 'https://routing.eps.or.at/appl/epsSO-test/transinit/eps/v2_5'; // Target URL to send TransferInitiatorDetails to. 'null' means: Use default URL. For test mode, insert: https://routing.eps.or.at/appl/epsSO-test/transinit/eps/v2_5
+*/

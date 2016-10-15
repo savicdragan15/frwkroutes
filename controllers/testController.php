@@ -12,6 +12,10 @@ class testController extends baseController
         Loader::loadClass("Uploader");
     }
     
+    public function test1(){
+        var_dump($_SESSION['korpa']);
+    }
+
     public function index()
     {
       // Connection credentials. Override them for test mode. 

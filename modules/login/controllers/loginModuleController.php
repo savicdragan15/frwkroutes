@@ -29,11 +29,19 @@ class loginModuleController extends baseController
                    $_SESSION['user']['email'] = $user[0]->email;
                    $_SESSION['user']['status'] = $user[0]->status;
                    $this->_usersMdl->updateLastLogin($user[0]->ID);
+                   
                    //This is scenario when status user 1 means admin
                    if( $_SESSION['user']['status'] == 1){
                        $this->redirect(_WEB_PATH."admin");
                        die;
                    }
+                   
+                   //This is scenario when user have products in cart
+                   if(isset($_SESSION['korpa'])){
+                       $this->redirect(_WEB_PATH."payment/paymentOption/1");
+                       die;
+                   }
+                   
                    echo "Welcome ".$_SESSION['user']['first_name']." ".$_SESSION['user']['last_name'];
                }else{
                    echo "Neispravni podaci";
