@@ -12,6 +12,7 @@
  * @author Dragan
  */
 use at\externet\eps_bank_transfer;
+
 class paymentModuleController extends baseController{
     //put your code here
     
@@ -90,7 +91,7 @@ class paymentModuleController extends baseController{
             $this->bic,
             'All out shine',         // Name (and optional address) of the receiving account owner = epi:BeneficiaryNameAddressText. In theory, this can be 140 characters; but in practice, Austrian banks only guarantee 70 characters. Line breaks are not allowed (EPS-Pflichtenheft is ambiguous about this).
             $this->iban,
-            "123",                  // epi:ReferenceIdentifier. Mandatory but useless, since you will never (!) get to see this number again - not upon payment confirmation and not at the bank statement (Kontoauszug). It's also not displayed to the customer. Best guess: Use your order number, i.e. same as epi:RemittanceIdentifier.
+            uniqid(),                  // epi:ReferenceIdentifier. Mandatory but useless, since you will never (!) get to see this number again - not upon payment confirmation and not at the bank statement (Kontoauszug). It's also not displayed to the customer. Best guess: Use your order number, i.e. same as epi:RemittanceIdentifier.
             (int)$totalAmount,                   // Total amount in EUR cent ≈ epi:InstructedAmount
             $transferMsgDetails
         );
@@ -112,7 +113,7 @@ class paymentModuleController extends baseController{
         
         // Optional: Include ONE (i.e. not both!) of the following two lines:
         //$transferInitiatorDetails->RemittanceIdentifier = 'Order123';             // "Zahlungsreferenz". Will be returned on payment confirmation = epi:RemittanceIdentifier
-        $transferInitiatorDetails->UnstructuredRemittanceIdentifier = 'Order123'; // "Verwendungszweck". Will be returned on payment confirmation = epi:UnstructuredRemittanceIdentifier
+        $transferInitiatorDetails->UnstructuredRemittanceIdentifier = 'Order - ' .  uniqid(); // "Verwendungszweck". Will be returned on payment confirmation = epi:UnstructuredRemittanceIdentifier
         
         // Optional:
         $transferInitiatorDetails->SetExpirationMinutes(60);     // Sets ExpirationTimeout. Value must be between 5 and 60
@@ -121,14 +122,16 @@ class paymentModuleController extends baseController{
        
         unset($_SESSION['korpa']['ukupna_cena_korpe']);
         unset($_SESSION['korpa']['ukupno_proizvoda_u_korpi']);
+        
         foreach ($_SESSION['korpa'] as $key => $value) {
             
-          $article = new eps_bank_transfer\WebshopArticle(  // = epsp:WebshopArticle
-                $value['proizvod_naziv'],  // Article name
-                $value['proizvod_kolicina'], // Quantity
-                (int)$value['proizvod_cena'] * 100    // Price in EUR cents
+            $article = new eps_bank_transfer\WebshopArticle(  // = epsp:WebshopArticle
+                  $value['proizvod_naziv'],  // Article name
+                  $value['proizvod_kolicina'], // Quantity
+                  (int)$value['proizvod_cena'] * 100    // Price in EUR cents
             );
-          $transferInitiatorDetails->WebshopArticles[] = $article;
+
+            $transferInitiatorDetails->WebshopArticles[] = $article;
           
         }
         
@@ -140,7 +143,7 @@ class paymentModuleController extends baseController{
        
         $xml = new \SimpleXMLElement($plain);
         $soAnswer = $xml->children(eps_bank_transfer\XMLNS_epsp);
-      // dump($soAnswer); die;
+        
         $errorDetails = $soAnswer->BankResponseDetails->ErrorDetails;
         if (('' . $errorDetails->ErrorCode) != '000')
         {
@@ -151,7 +154,8 @@ class paymentModuleController extends baseController{
        {
           // This is the url you have to redirect the client to.
           $redirectUrl = $soAnswer->BankResponseDetails->ClientRedirectUrl;
-          header('Location: ' . $redirectUrl);
+          
+          $this->redirect($redirectUrl);
        }
     }
     
