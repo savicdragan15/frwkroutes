@@ -1,14 +1,21 @@
 <?php 
-/**
- * Admin modul
- * @var $this->_navigationMdl navigationModel
- */
+
 use Image\SimpleImage;
+
+/**
+ * Admin module
+ * 
+ * @property string $_imagesMdl Images model 
+ * @property object $_navigationMdl Navigation model
+ * @property object $_productsMdl Products model
+ */
+
 class adminModuleController extends baseController{
    
       public function __construct() {
           $this->_callMdl("products", "products");
           $this->_callMdl("navigation");
+          $this->_callMdl("images", "admin");
           Loader::loadClass("SimpleImage");
       }
       
@@ -35,31 +42,103 @@ class adminModuleController extends baseController{
      */
     public function insertProducts(){
         $this->_isAdminLogin();
-        /*$this->_productsMdl;
-        if(isset($_POST)){
+        
+        if(isset($_POST['image_id'])){
             
-            die;
-        }*/
+            $data = $this->validate($_POST);
+            $product_id = $this->_productsMdl->insertProduct($data);
+            
+            $error = true;
+            $message = 'Došlo je do greške. Pokušajte ponovo.';
+            
+            if($product_id > 0){
+               if($this->_imagesMdl->setProductId($data['image_id'],$product_id)){
+                   $error = false;
+                   $message = 'Uspešno ste ubacili proizvod';
+               } 
+            }
+            
+            $data = array(
+                   'error' => $error,
+                   'message' => $message
+               );
+               
+            $this->response($data);
+            
+            unset($_POST);
+          die;
+        }
+        
         $categories = $this->_navigationMdl->getCategories();
         
         $this->template['categories'] = $categories;
         Loader::loadView("insertproducts", "admin", true, $this->template);
     }
     
+    /**
+     * Upload image from insertProduct
+     */
     public function uploadImage(){
-        var_dump($_FILES);
+
         $name_image = uniqid().date('Y-m-d');
+        
+        //single product img
         $image = new SimpleImage($_FILES['image']['tmp_name']);
         $image->fit_to_height(400)->save(_VIEWS_PATH."/images/products_gallery/normal/{$name_image}.jpg");
         
+        //thumbnail img
         $thumbnail_image = new SimpleImage($_FILES['image']['tmp_name']); 
         $thumbnail_image->fit_to_height(300)->save(_VIEWS_PATH."/images/products_gallery/thumbnail/{$name_image}.jpg");
         
-        /*$small_image = new SimpleImage($_FILES['image']['tmp_name']); 
-        $thumbnail_image->fit_to_height(100)->save(_VIEWS_PATH."/images/products_gallery/thumbnail/probica.jpg");*/
+        //small image butn not in use for now
+        $small_image = new SimpleImage($_FILES['image']['tmp_name']); 
+        $small_image->fit_to_height(97)->save(_VIEWS_PATH."/images/products_gallery/small/{$name_image}.jpg");
         
-        var_dump($image);
+        $image_id = $this->_imagesMdl->insertImage($name_image.".jpg");
+        
+        $data = array(
+            'error' => false,
+            'image_id' => $image_id
+        );
+        
+        if(!$image_id){
+            $data = array(
+                'error' => true,
+                'message' => "Došlo je do greske. Pokušajte ponovo."
+            );
+        }
+        
+        $this->response($data);
+       
     }
+    
+    /**
+     * 
+     * @return json vraca json objekat slike
+     */
+    public function getImage(){
+        
+        if ((int) isset($_POST['id'])) {
+            $image = $this->_imagesMdl->get($_POST['id']);
+            
+            if (!empty($image)) {
+                $error = false;
+                $message = "Uspesno dobavljena slika";
+            } else {
+                $error = true;
+                $message = "Doslo je do greske prilikom dobavljanja slike";
+            }
+
+            $data = array(
+                "error" => $error,
+                "message" => $message,
+                "data" => $image
+            );
+
+            $this->response($data);
+        }
+    }
+    
     /**
      * 
      */
@@ -119,14 +198,7 @@ class adminModuleController extends baseController{
     public function kontrolnaTabla(){
           Loader::loadView("index", "admin", true);
     }
-     /**
-      * ucitava unos proizvoda stranu u admin delu
-      */
-     public function unos_proizvoda(){
-         $template['kategorije'] = $this->kategorijeModel->getAll('*',"WHERE kategorija_status=1");
-         Loader::loadView("unosproizvoda","admin",true,$template);
-     }
-     
+  
      /**
       * unosi proizvod u tabelu proizvodi
       */
@@ -212,30 +284,6 @@ class adminModuleController extends baseController{
            );
            $this->response($data);
         }
-    }
-    
-    /**
-     * dobavlja samo jednu sliku za proizvod
-     * @return json vraca json objekat slike
-     */
-    public function dobaviSliku(){
-       //var_dump($_POST); exit;
-         if((int)isset($_POST['id'])){
-             $slika = $this->slikeModel->get($_POST['id']);
-             if(!empty($slika)){
-                 $error = false;
-                 $message = "Uspesno dobavljena slika";
-             }  else {
-                $error = true;
-                $message = "Doslo je do greske prilikom dobavljanja slike"; 
-             }
-             $data = array(
-                 "error"=>$error,
-                 "message"=>$message,
-                 "data"=>$slika
-             );
-             $this->response($data);
-         }
     }
     
     /**

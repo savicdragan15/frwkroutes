@@ -651,7 +651,7 @@ footer .back-top a { position: absolute; top: -30px; left: 45px;}
 
 #carousel { position: relative; }
 
-#carousel-wrapper .caroufredsel_wrapper { height: 450px !important; }
+#carousel-wrapper .caroufredsel_wrapper { height: 475px !important; }
 
 #carousel > span { height: 311px !important; }
 #carousel > span img {  width: 100%; }

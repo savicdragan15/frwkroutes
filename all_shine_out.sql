@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 15, 2016 at 09:24 PM
+-- Generation Time: Oct 16, 2016 at 05:29 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -31,25 +31,19 @@ CREATE TABLE IF NOT EXISTS `images` (
   `product_id` int(11) NOT NULL,
   `image_name` varchar(250) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `images`
 --
 
 INSERT INTO `images` (`ID`, `product_id`, `image_name`) VALUES
-(1, 1, 'test1.png'),
-(2, 2, 'test2.png'),
-(3, 3, 'test3.png'),
-(4, 4, 'test1.png'),
-(5, 5, 'test1.png'),
-(6, 6, 'test1.png'),
-(7, 7, 'test1.png'),
-(8, 8, 'test1.png'),
-(9, 9, 'test1.png'),
-(10, 10, 'test1.png'),
-(11, 11, 'test1.png'),
-(12, 12, '58027b89c43df2016-10-15.jpg');
+(1, 1, '580383ba3c09d2016-10-16.jpg'),
+(2, 2, '580384add557c2016-10-16.jpg'),
+(3, 3, '580385229c9fa2016-10-16.jpg'),
+(4, 4, '5803862e76dc22016-10-16.jpg'),
+(5, 5, '580391594b3cf2016-10-16.jpg'),
+(6, 6, '5803923b56b202016-10-16.jpg');
 
 -- --------------------------------------------------------
 
@@ -123,29 +117,25 @@ CREATE TABLE IF NOT EXISTS `products` (
   `product_name` varchar(250) NOT NULL,
   `product_description` text NOT NULL,
   `product_price` decimal(20,2) NOT NULL,
+  `product_quantity` tinyint(4) NOT NULL,
   `product_category` int(11) NOT NULL,
   `product_subcategory` int(11) NOT NULL,
   `product_sub_subcategory` int(11) NOT NULL,
+  `product_status` tinyint(4) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`ID`, `product_name`, `product_description`, `product_price`, `product_category`, `product_subcategory`, `product_sub_subcategory`) VALUES
-(1, 'Test product 1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique. ', '10.00', 1, 2, 0),
-(2, 'Test product 2', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique.', '20.00', 1, 3, 0),
-(3, 'Test product 3', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique.', '30.00', 21, 29, 30),
-(4, 'Test product 4', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique. ', '50.00', 21, 29, 30),
-(5, 'Test product 5', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique. ', '60.00', 21, 29, 30),
-(6, 'Test product 6', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique. ', '60.00', 21, 29, 31),
-(7, 'Test product 7', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique. ', '60.30', 1, 4, 0),
-(8, 'Test product 8', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique. ', '60.50', 1, 2, 0),
-(9, 'Test product 9', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique. ', '60.00', 1, 2, 0),
-(10, 'Test product 10', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique. ', '60.00', 1, 2, 0),
-(11, 'Test product 11', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique. ', '60.00', 1, 2, 0),
-(12, 'Test product 12', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a luctus ligula, aliquam placerat tortor. Nam at venenatis mi. Integer malesuada leo eget nisl porta, id ultrices magna auctor. Proin laoreet egestas elit non maximus. Morbi sit amet eleifend turpis. Praesent a eros at dolor scelerisque placerat a id nibh. Fusce nec quam id erat facilisis luctus sit amet sit amet enim. Aenean pellentesque vel eros quis tristique. ', '60.00', 1, 2, 0);
+INSERT INTO `products` (`ID`, `product_name`, `product_description`, `product_price`, `product_quantity`, `product_category`, `product_subcategory`, `product_sub_subcategory`, `product_status`) VALUES
+(1, 'Konzerva', 'Konzerva', '50.00', 10, 1, 2, 0, 1),
+(2, 'Konzerva1111', '<p>KonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzerva</p>\n<p>KonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzerva</p>\n<p>KonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzerva</p>\n<p>KonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzerva</p>', '50.00', 10, 1, 2, 0, 1),
+(3, 'Girl', '<p>KonzervaKonzerva</p>', '100.00', 10, 1, 2, 0, 1),
+(4, 'Mikrofiber', '<p>Mikrofiber</p>', '150.00', 50, 1, 2, 0, 1),
+(5, 'Test new', '<p>opis</p>', '100.00', 10, 1, 2, 0, 1),
+(6, 'Probaaa', '<p>sadsadsadsadsasadas</p>', '50.00', 10, 1, 2, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -165,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `last_login` datetime NOT NULL,
   `status` tinyint(1) NOT NULL COMMENT '1 - admin 2 - user',
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `users`
@@ -173,7 +163,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`ID`, `first_name`, `last_name`, `email`, `password`, `company`, `salt`, `active`, `last_login`, `status`) VALUES
 (11, '', '', 'savicdragan15@facebook.com', '$2y$12$gAFPfixVUWKUSlUIYXAleOlwIE6JNNy7TyLsy0jlK3XdovseZWDzS', '', '4rmCugjw3oEDTlw8SPGd5N65f129db2558e4312021dfa4c19c4186', 1, '0000-00-00 00:00:00', 2),
-(12, 'Pera', 'Peric', 'savicdragan2707@gmail.com', '$2y$12$PyNRbDhmUCFwNFYjd3Rza.vGHUIKQHf/A0BMjvGVJb88kug4FSeaS', '', 'wxcKeTI1oHTd8ExHtJx6Vk2ed049e4e924644fcf54efea55f79c6a', 1, '2016-10-15 19:42:03', 1);
+(13, '', '', 'savicdragan2707@gmail.com', '$2y$12$NldVbmRDZGRYNlRyUmZSceraucNc4pGYgBPZG1s260WpFJleRrexi', '', 'aCpMLzu41S2ymSHxyDupRL27bdc63b4bb93bf490a8172ae35bbf60', 1, '2016-10-16 15:51:58', 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

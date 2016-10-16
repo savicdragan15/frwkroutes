@@ -4,9 +4,11 @@
  * @property string $product_name Name of product
  * @property string $product_description Description of product
  * @property string $product_price Price
+ * @property int $product_quantity Quantity
  * @property int $product_category Category
  * @property int $product_subcategory Subcategory
  * @property int $product_sub_subcategory Sub sub category
+ * @property int $product_status Product status
  */
 class productsModel extends baseModel{
     public static $key = "ID";
@@ -88,6 +90,20 @@ class productsModel extends baseModel{
            return $product[0];
        }
        
+   }
+   
+   public function insertProduct($data){
+    
+       $this->product_name = $data['product_name'];
+       $this->product_description = $data['product_description'];
+       $this->product_price = $data['product_price'];
+       $this->product_quantity = $data['quantity'];
+       $this->product_category = $data['product_category'];
+       $this->product_subcategory = $data['product_subcategory'];
+       $this->product_sub_subcategory = $data['product_subsubcategory'];
+       $this->product_status = $data['product_status'];
+       
+       return $this->insert();
    }
     
 }

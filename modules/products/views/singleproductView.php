@@ -13,17 +13,17 @@
                                             <a href="#" class="prev"></a><a href="#" class="next"></a>
                                         </div>
 
-                                        <div class="bottom">
+                                        <!-- <div class="bottom">
                                             <div id="thumbs-wrapper">
                                                 <div id="thumbs">
-                                                    <a href="#image1" class="selected"><img src="<?=_WEB_PATH?>views/images/products_gallery/thumbnail/<?=$product->image_name?>"  alt="" /></a>
+                                                    <a href="#image1" class="selected"><img src="<?=_WEB_PATH?>views/images/products_gallery/small/<?=$product->image_name?>"  alt="" /></a>
                                                     <a href="#image2"><img src="http://placehold.it/97x60" alt="" /></a>
                                                   
                                                 </div>
                                                 <a id="prev" href="#"></a>
                                                 <a id="next" href="#"></a>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
 
                                     <div class="span4">
@@ -72,7 +72,7 @@
                                         <div class="buttons">
                                             <a href="#" class="wish big-button">Add to Wishlist</a>
                                             <a href="#" class="cart big-button add-to-cart-single-page" data-id="<?=$product->ID?>" data-price="<?=$product->product_price?>" data-name="<?=$product->product_name?>" data-img="<?=$product->image_name?>" data-quantity="1" >Add to Cart</a>
-                                            <a href="#" class="compare big-button">Add to Compare</a>
+                                            <!-- <a href="#" class="compare big-button">Add to Compare</a> -->
                                         </div>
                                     </div>
                                 </div>

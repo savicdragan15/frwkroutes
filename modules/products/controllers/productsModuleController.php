@@ -27,7 +27,7 @@ class productsModuleController extends baseController
         
         $category_name = $this->navigationModel->getCategoryName($id); 
         $nubmerOfRecords = $this->productsModel->getNumberOfRecords("products.product_category",$id);
-        $pagination = new Pagination($nubmerOfRecords, $page, 2 ,2);
+        $pagination = new Pagination($nubmerOfRecords, $page, 6 ,2);
         $offset = $pagination->offset();
         $limit = $pagination->limit();
         $products = $this->productsModel->getProductsByCategory($id,$limit,$offset);
@@ -178,6 +178,7 @@ class productsModuleController extends baseController
     
     public function homePage(){
         $latestProducts =  $this->productsModel->getLatestProducts();
+       
          foreach ($latestProducts as $product){
             $product->product_name_url = $this->url_friendly($product->product_name);
         }

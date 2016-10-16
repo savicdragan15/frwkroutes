@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @property object $_adminMod Admin module
+ */
 class adminController extends baseController{
        
     public function __construct(){
@@ -29,5 +32,8 @@ class adminController extends baseController{
     public function uploadImage(){
         $this->_adminMod->uploadImage();
     }
-
+    
+    public function getImage(){
+        $this->_adminMod->getImage();
+    }
 }

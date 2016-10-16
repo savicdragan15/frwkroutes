@@ -71,7 +71,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="<?=_WEB_PATH?>login
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
                 <li class="text-center">
-                    <img src="<?=_WEB_PATH?>modules/admin/views/assets/img/find_user.png" class="user-image img-responsive"/>
+                    <img src="<?=_WEB_PATH?>modules/admin/views/assets/img/logo.jpg" class="user-image img-responsive"/>
                 </li>
                     
                     <li>

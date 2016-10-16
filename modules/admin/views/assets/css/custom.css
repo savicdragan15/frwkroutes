@@ -198,21 +198,21 @@ color: #8d8888;
 
 .user-image {
     margin: 25px auto;
--webkit-border-radius: 10px;
--moz-border-radius: 10px;
-border-radius: 10px;
-max-height:170px;
-max-width:170px;
+    -webkit-border-radius: 64px;
+    -moz-border-radius: 64px;
+    border-radius: 64px;
+    max-height:170px;
+    max-width:170px;
 }
 
 .navbar-cls-top .navbar-brand {
-	color: #fff;
-background: #C90000;
-width: 260px;
-text-align: center;
-height: 60px;
-font-size: 30px;
-font-weight: 700;
+    color: #fff;
+    background: #C90000;
+    width: 260px;
+    text-align: center;
+    height: 60px;
+    font-size: 30px;
+    font-weight: 700;
 }
 .active-menu {
     background-color:#C90000!important;
