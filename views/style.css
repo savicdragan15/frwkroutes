@@ -192,7 +192,7 @@ header nav > ul > li ul li a{display: block;}
 .heading h2 { border-bottom:1px solid #e9e9e9; background: #474747; position: relative; padding: 10px 20px; color: #ffffff; display: inline-block;  }
 .heading h2 span { width: 23px;height: 48.4px; display: block;position: absolute; right: -23px; top: -1px; background: url("images/heading-errow.png") no-repeat;}
 
-.product { margin-bottom: 30px;-webkit-transition:  0.5s; -moz-transition:  0.5s; -o-transition: 0.5s; -ms-transition: 0.5s; }
+.product { margin-bottom: 30px;-webkit-transition:  0.5s; -moz-transition:  0.5s; -o-transition: 0.5s; -ms-transition: 0.5s; border: 1px solid gray; }
 .product figure { position: relative;width: 270px; height: 250px !important;}
 .product figure > a { width: 270px; height: 250px; }
 .product figure > a > img { width: 100%; height: 100%; }
@@ -861,6 +861,21 @@ footer .back-top a { position: absolute; top: -30px; left: 45px;}
     color: #222222;
 }
 
+#check-accordion input[type="password"] {
+    border-radius: 0;
+    box-shadow: none;
+    margin-bottom: 22px;
+    outline: 0 none;
+    width: 213px;
+}
 
+.billing-form fieldset input[type="password"] {
+    border: 1px solid #dddddd;
+    width: 97% !important;
+}
 
-
+.billing-form input[type="password"] {
+    height: 26px !important;
+    margin-bottom: 19px !important;
+    width: 98.5% !important;
+}

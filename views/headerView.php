@@ -50,10 +50,27 @@
                             <div class="span10 right">
                                 <div class="social-strip">
                                     <ul>
-                                        <li><a href="<?=_WEB_PATH?>login" class="account">My Account</a></li>
+                                        <li>
+                                            <?php  if(User::isLogin()){ ?>
+                                                <a href="<?=_WEB_PATH?>login" class="account"><?=$_SESSION['user']['email']?></a>
+                                            <?php  } ?>  
+                                        </li>
+                                        
                                         <li><a href="#" class="wish">Wish List</a></li>
                                         <li><a href="#" class="check">Checkout</a></li>
-                                        <li><a href="<?=_WEB_PATH?>register" class="account">Register</a></li>
+                                        
+                                        <?php if(!User::isLogin()){?>
+                                             <li><a href="<?=_WEB_PATH?>register" class="account">Register</a></li>
+                                        <?php }  ?>
+                                             
+                                            <li>
+                                             <?php if(!User::isLogin()){?>
+                                                <a href="<?=_WEB_PATH?>login" class="account">Login</a>
+                                             <?php }else{?>
+                                                <a href="<?=_WEB_PATH?>login/logOut" class="account">Logout</a>
+                                             <?php } ?>
+                                            </li>
+                                       
                                     </ul>
                                 </div>
 

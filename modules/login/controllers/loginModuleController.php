@@ -15,6 +15,7 @@ class loginModuleController extends baseController
      * Login for users
      */
     public function index(){
+        $this->isUSerLogin();
         
         if(isset($_POST['login'])){
             $email = $this->filter_input($_POST['email']);
@@ -22,7 +23,7 @@ class loginModuleController extends baseController
             $this->loginModel->email = $email;
             $user = $this->loginModel->getUserforLogin();
             
-            if($user){
+            if($user && $user[0]->status != 1){
                if(PasswordHash::verify($password, $user[0]->password)){
                    $_SESSION['user']['first_name'] = $user[0]->first_name;
                    $_SESSION['user']['last_name'] = $user[0]->last_name;
@@ -36,7 +37,7 @@ class loginModuleController extends baseController
                        die;
                    }
                    
-                   echo "Welcome ".$_SESSION['user']['first_name']." ".$_SESSION['user']['last_name'];
+                   $this->redirect(_WEB_PATH);
                }else{
                    echo "Neispravni podaci";
                } 
@@ -49,7 +50,15 @@ class loginModuleController extends baseController
         Loader::loadView("login", "login");
     }
     
-    
+    /**
+     * Check if user login
+     */
+    private function isUSerLogin(){
+        if(User::isLogin()){
+            $this->redirect(_WEB_PATH);
+        }
+    }
+
     public function adminLogin(){
         if(isset($_POST['login'])){
             $email = $this->filter_input($_POST['email']);
@@ -57,7 +66,7 @@ class loginModuleController extends baseController
             $this->loginModel->email = $email;
             $user = $this->loginModel->getUserforLogin();
             
-            if($user){
+            if($user && $user[0]->status != 2){
                if(PasswordHash::verify($password, $user[0]->password)){
                    $_SESSION['user']['first_name'] = $user[0]->first_name;
                    $_SESSION['user']['last_name'] = $user[0]->last_name;
