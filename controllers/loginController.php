@@ -15,15 +15,18 @@ class loginController extends frontendController{
     
      public function __construct() {
        parent::__construct();
-       Loader::loadModule($this, 'loginModule');
-       $this->loginModuleController = $this->modules['loginModule'];
+       $this->_callMod("login");
     }
     
     public function index() {
-        $this->loginModuleController->index();
+        $this->_loginMod->index();
+    }
+    
+    public function adminLogin(){
+        $this->_loginMod->adminLogin();
     }
     
     public function logOut(){
-        $this->loginModuleController->logOut();
+        $this->_loginMod->logOut();
     }
 }

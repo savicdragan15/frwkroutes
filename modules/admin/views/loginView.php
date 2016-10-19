@@ -33,7 +33,7 @@
                         <strong>   Enter Details To Login </strong>  
                             </div>
                             <div class="panel-body">
-                                <form action="<?=_WEB_PATH?>login/index" method="POST" role="form">
+                                <form action="<?=_WEB_PATH?>login/adminLogin" method="POST" role="form">
                                        <br />
                                      <div class="form-group input-group">
                                             <span class="input-group-addon"><i class="fa fa-tag"  ></i></span>
