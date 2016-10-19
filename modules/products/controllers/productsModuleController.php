@@ -27,7 +27,7 @@ class productsModuleController extends baseController
         
         $category_name = $this->navigationModel->getCategoryName($id); 
         $nubmerOfRecords = $this->productsModel->getNumberOfRecords("products.product_category",$id);
-        $pagination = new Pagination($nubmerOfRecords, $page, 6 ,2);
+        $pagination = new Pagination($nubmerOfRecords, $page, 9 ,2);
         $offset = $pagination->offset();
         $limit = $pagination->limit();
         $products = $this->productsModel->getProductsByCategory($id,$limit,$offset);
@@ -72,7 +72,7 @@ class productsModuleController extends baseController
         $sub_category_name = $this->navigationModel->getCategoryName($id);
         
         $nubmerOfRecords = $this->productsModel->getNumberOfRecords("products.product_subcategory",$id);
-        $pagination = new Pagination($nubmerOfRecords, $page, 2 ,2);
+        $pagination = new Pagination($nubmerOfRecords, $page, 9 ,2);
         $offset = $pagination->offset();
         $limit = $pagination->limit();
         $products = $this->productsModel->getProductsBySubCategory($id,$idcat,$limit,$offset);
@@ -120,7 +120,7 @@ class productsModuleController extends baseController
         $sub_sub_category_name = $this->navigationModel->getCategoryName($id);
         
         $nubmerOfRecords = $this->productsModel->getNumberOfRecords("products.product_sub_subcategory",$id);
-        $pagination = new Pagination($nubmerOfRecords, $page, 2 ,2);
+        $pagination = new Pagination($nubmerOfRecords, $page, 9 ,2);
         $offset = $pagination->offset();
         $limit = $pagination->limit();
         
