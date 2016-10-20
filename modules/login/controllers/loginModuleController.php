@@ -1,29 +1,35 @@
 <?php
-/**
- * 
- */
 use Triadev\PasswordHashing\PasswordHash;
+/**
+ * @property object $_loginMdl Login model
+ * @property object $_usersMdl Users model
+ */
 class loginModuleController extends baseController
 {
+    static $adminStatus = 1;
+    static $userStatus = 2;
+    
     private $loginModel;
+    
     public function __construct() {
-        Loader::loadModel($this, "login", "login");
+        //Loader::loadModel($this, "login", "login");
         $this->_callMdl("users", "register");
-        $this->loginModel = $this->models['login'];
+        //$this->loginModel = $this->models['login'];
+        $this->_callMdl("login", "login");
     }
     /**
      * Login for users
      */
     public function index(){
-        $this->isUSerLogin();
+        $this->isUserLogin();
         
         if(isset($_POST['login'])){
             $email = $this->filter_input($_POST['email']);
             $password = $_POST['password'];
-            $this->loginModel->email = $email;
-            $user = $this->loginModel->getUserforLogin();
+            $this->_loginMdl->email = $email;
+            $user = $this->_loginMdl->getUserforLogin();
             
-            if($user && $user[0]->status != 1){
+            if($user && $user[0]->status == self::$userStatus){
                if(PasswordHash::verify($password, $user[0]->password)){
                    $_SESSION['user']['first_name'] = $user[0]->first_name;
                    $_SESSION['user']['last_name'] = $user[0]->last_name;
@@ -53,7 +59,7 @@ class loginModuleController extends baseController
     /**
      * Check if user login
      */
-    private function isUSerLogin(){
+    private function isUserLogin(){
         if(User::isLogin()){
             $this->redirect(_WEB_PATH);
         }
@@ -63,15 +69,15 @@ class loginModuleController extends baseController
         if(isset($_POST['login'])){
             $email = $this->filter_input($_POST['email']);
             $password = $_POST['password'];
-            $this->loginModel->email = $email;
-            $user = $this->loginModel->getUserforLogin();
+            $this->_loginMdl->email = $email;
+            $user = $this->_loginMdl->getUserforLogin();
             
-            if($user && $user[0]->status != 2){
+            if($user && $user[0]->status == self::$adminStatus){
                if(PasswordHash::verify($password, $user[0]->password)){
-                   $_SESSION['user']['first_name'] = $user[0]->first_name;
-                   $_SESSION['user']['last_name'] = $user[0]->last_name;
-                   $_SESSION['user']['email'] = $user[0]->email;
-                   $_SESSION['user']['status'] = $user[0]->status;
+                   $_SESSION['admin']['first_name'] = $user[0]->first_name;
+                   $_SESSION['admin']['last_name'] = $user[0]->last_name;
+                   $_SESSION['admin']['email'] = $user[0]->email;
+                   $_SESSION['admin']['status'] = $user[0]->status;
                    $this->_usersMdl->updateLastLogin($user[0]->ID);
                    
                    $this->redirect(_WEB_PATH."admin");
@@ -92,18 +98,23 @@ class loginModuleController extends baseController
     
     
     /**
-     * 
+     * User logout
      */
     public function logOut(){
-        
-        if( $_SESSION['user']['status'] == 1){
-           Session::unsetSession("user");
-           $this->redirect(_WEB_PATH."admin"); 
-           die;
+        if(isset($_SESSION['user'])){
+            Session::unsetSession("user");
         }
-        
-        Session::unsetSession("user");
         $this->redirect(_WEB_PATH);
+    }
+    
+    /**
+     * Admin logout
+     */
+    public function adminLogOut(){
+        if(isset($_SESSION['admin'])){
+           Session::unsetSession("admin");
+        }
+        $this->redirect(_WEB_PATH."admin");
     }
 }
    

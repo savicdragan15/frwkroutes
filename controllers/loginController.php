@@ -10,6 +10,7 @@
  * Description of loginController
  *
  * @author Jovan
+ * @property object $_loginMod Login model
  */
 class loginController extends frontendController{
     
@@ -28,5 +29,9 @@ class loginController extends frontendController{
     
     public function logOut(){
         $this->_loginMod->logOut();
+    }
+    
+    public function adminLogOut() {
+        $this->_loginMod->adminLogOut();
     }
 }

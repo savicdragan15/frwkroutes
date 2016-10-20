@@ -30,7 +30,7 @@ class User {
      * @return boolean
      */
     public static function isAdminLogin() {
-       $admin = Session::get("user");
+       $admin = Session::get("admin");
        if(!empty($admin) ){
           return $admin['status'] == 1 ? true : false;
        }
