@@ -71,7 +71,7 @@
                                         </div>
                                         <div class="buttons">
                                             <a href="#" class="wish big-button">Add to Wishlist</a>
-                                            <a href="#" class="cart big-button add-to-cart-single-page" data-id="<?=$product->ID?>" data-price="<?=$product->product_price?>" data-name="<?=$product->product_name?>" data-img="<?=$product->image_name?>" data-quantity="1" >Add to Cart</a>
+                                            <a href="#" class="cart big-button add-to-cart-single-page" data-id="<?=$product->product_id?>" data-price="<?=$product->product_price?>" data-name="<?=$product->product_name?>" data-img="<?=$product->image_name?>" data-quantity="1" >Add to Cart</a>
                                             <!-- <a href="#" class="compare big-button">Add to Compare</a> -->
                                         </div>
                                     </div>
