@@ -1,91 +1,91 @@
 <div id="page-wrapper" >
-<div id="page-inner">
-         <div class="row">
-             <div class="col-md-12">
-              <h2>Unos proizvoda</h2>
     <div id="page-inner">
         <div class="row">
-        <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12">
-            <div class="form-group">
-                <form action="" method="POST" id="insert_product">
-                    
-                    <div class="form-group">
-                        <i class="fa fa-file-text-o"></i> <label for="proizvod_naziv">Naziv proizvoda</label>
-                        <input class="form-control" id="proizvod_naziv" name="proizvod_naziv"  placeholder="Naziv proizvoda">
+            <div class="col-md-12">
+                <h2>Unos proizvoda</h2>
+                <div id="page-inner">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <form action="" method="POST" id="insert_product">
+
+                                    <div class="form-group">
+                                        <i class="fa fa-file-text-o"></i> <label for="proizvod_naziv">Naziv proizvoda</label>
+                                        <input class="form-control" id="proizvod_naziv" name="proizvod_naziv"  placeholder="Naziv proizvoda">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <i class="fa fa-picture-o"></i> <label>Proizvod slika</label>
+                                        <input type="file" id="image_to_upload"><br>
+                                        <span id="image"></span> 
+                                        <img id="ajaxLoader" style="display: none; width: 34px;" src="<?= _WEB_PATH ?>views/images/ajaxloader.gif" />
+                                    </div>
+
+                                    <br>
+
+                                    <i class="fa fa-file-text-o"></i> <label for="proizvod_opis">Opis proizvoda</label>
+                                    <textarea id="proizvod_opis"></textarea>
+
+                                    <br>
+
+                                    <div class="form-group">
+                                        <label for="category"><i class="fa fa-file-text-o"></i> Kategorija</label>
+                                        <select class="form-control" id="category">
+                                            <option value="0">Izaberite kategoriju</option>
+                                            <?php foreach ($categories as $category) { ?>
+                                                <option value="<?= $category->ID ?>"> <?= $category->name ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="subcategory"><i class="fa fa-file-text-o"></i> Podkategorija</label>
+                                        <select class="form-control" id="subcategory">
+                                            <option value="0">Izaberite podkategoriju</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group subsubcategorylist" >
+                                        <label for="sub_subcategory"><i class="fa fa-file-text-o"></i> Pod podkategorija</label>
+                                        <select class="form-control" id="sub_subcategory">
+                                            <option value="0">Izaberite pod podkategoriju</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <i class="fa fa-file-text-o"></i> <label for="proizvod_kolicina">Količina</label>
+                                        <input class="form-control" id="proizvod_kolicina" name="proizvod_kolicina"  placeholder="Količina">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <i class="fa fa-file-text-o"></i> <label for="proizvod_cena">Cena</label>
+                                        <input class="form-control" id="proizvod_cena" name="proizvod_cena"  placeholder="Cena">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="product_status">Proizvod status:</label>
+                                        <select class="form-control" id="product_status">
+                                            <option value="-1">Izaberite status:</option>
+                                            <option value="1">Proizvod vidljiv</option>
+                                            <option value="0">Proizvod na cekanju</option>
+                                        </select>
+                                    </div>
+
+                                    <button class="btn btn-success" type="submit" name="btn_submit" id="btn_unos_proizvoda" value="Unesi">Unesi  <i class="fa fa-angle-right"></i></button>
+                                    <img id="insert_ajaxLoader" style="display: none; width: 34px;" src="<?= _WEB_PATH ?>views/images/ajaxloader.gif" />
+                                    <button class="btn btn-default" type="reset">Reset  <i class="fa fa-refresh"></i></button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <div class="form-group">
-                       <i class="fa fa-picture-o"></i> <label>Proizvod slika</label>
-                       <input type="file" id="image_to_upload"><br>
-                        <span id="image"></span> 
-                        <img id="ajaxLoader" style="display: none; width: 34px;" src="<?=_WEB_PATH?>views/images/ajaxloader.gif" />
-                    </div>
-                    
-                    <br>
-                    
-                    <i class="fa fa-file-text-o"></i> <label for="proizvod_opis">Opis proizvoda</label>
-                    <textarea id="proizvod_opis"></textarea>
-                    
-                    <br>
-                    
-                    <div class="form-group">
-                    <label for="category"><i class="fa fa-file-text-o"></i> Kategorija</label>
-                      <select class="form-control" id="category">
-                          <option value="0">Izaberite kategoriju</option>
-                       <?php foreach ($categories as $category){?>
-                          <option value="<?=$category->ID?>"> <?= $category->name?></option>
-                       <?php } ?>
-                      </select>
-                    </div>
-                    
-                     <div class="form-group">
-                         <label for="subcategory"><i class="fa fa-file-text-o"></i> Podkategorija</label>
-                         <select class="form-control" id="subcategory">
-                             <option value="0">Izaberite podkategoriju</option>
-                         </select>
-                    </div>
-                    
-                    <div class="form-group subsubcategorylist" >
-                    <label for="sub_subcategory"><i class="fa fa-file-text-o"></i> Pod podkategorija</label>
-                      <select class="form-control" id="sub_subcategory">
-                          <option value="0">Izaberite pod podkategoriju</option>
-                      </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <i class="fa fa-file-text-o"></i> <label for="proizvod_kolicina">Količina</label>
-                        <input class="form-control" id="proizvod_kolicina" name="proizvod_kolicina"  placeholder="Količina">
-                    </div>
-                    
-                    <div class="form-group">
-                        <i class="fa fa-file-text-o"></i> <label for="proizvod_cena">Cena</label>
-                        <input class="form-control" id="proizvod_cena" name="proizvod_cena"  placeholder="Cena">
-                    </div>
-                    
-                     <div class="form-group">
-                        <label for="product_status">Proizvod status:</label>
-                        <select class="form-control" id="product_status">
-                            <option value="-1">Izaberite status:</option>
-                            <option value="1">Proizvod vidljiv</option>
-                            <option value="0">Proizvod na cekanju</option>
-                        </select>
-                    </div>
-                    
-                    <button class="btn btn-success" type="submit" name="btn_submit" id="btn_unos_proizvoda" value="Unesi">Unesi  <i class="fa fa-angle-right"></i></button>
-                    <img id="insert_ajaxLoader" style="display: none; width: 34px;" src="<?=_WEB_PATH?>views/images/ajaxloader.gif" />
-                    <button class="btn btn-default" type="reset">Reset  <i class="fa fa-refresh"></i></button>
-                </form>
+                    <!-- /. PAGE INNER  -->
+                </div>
             </div>
         </div>
+        <!-- /. ROW  -->
+        <hr />
     </div>
     <!-- /. PAGE INNER  -->
-</div>
-             </div>
-         </div>
-          <!-- /. ROW  -->
-    <hr />
-</div>
-      <!-- /. PAGE INNER  -->
 </div>
 
 <script>
