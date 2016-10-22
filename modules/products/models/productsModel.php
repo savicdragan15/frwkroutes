@@ -107,5 +107,16 @@ class productsModel extends baseModel{
        
        return $this->insert();
    }
+   
+   public function getProducts($limit,$offset){
+       $this->limit = $limit;
+       $this->offset = $offset;
+       return $this->getAll();
+   }
+   
+   public function getNumberProducts(){
+       $products = $this->getAll("count(ID) as 'all'");
+       return $products[0]->all;
+   }
     
 }

@@ -25,7 +25,8 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.6.1/css/themes/semantic.min.css"/>
     <!-- Bootstrap theme -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.6.1/css/themes/bootstrap.min.css"/>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" href="<?=_WEB_PATH?>modules/admin/views/assets/js/dataTables/dataTables.bootstrap.css" />
     <!-- End CSS ALERTIFY -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
    <script src="<?=_WEB_PATH?>modules/admin/views/assets/js/notify.js"></script>
@@ -81,7 +82,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="<?=_WEB_PATH?>login
                         <a  href="<?=_WEB_PATH?>admin/insertProducts"><i class="fa fa-archive fa-2x"></i>Unos proizvoda</a>
                     </li>
                      <li>
-                        <a  href="<?=_WEB_PATH?>admin/administracijaProizvoda"><i class="fa fa-pencil fa-2x"></i>Adminitracija proizvoda</a>
+                        <a  href="<?=_WEB_PATH?>admin/productsAdministration"><i class="fa fa-pencil fa-2x"></i>Adminitracija proizvoda</a>
                     </li>
                                        
                 </ul>

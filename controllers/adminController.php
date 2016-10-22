@@ -36,4 +36,12 @@ class adminController extends baseController{
     public function getImage(){
         $this->_adminMod->getImage();
     }
+    
+    public function productsAdministration(){
+        $this->_adminMod->productsAdministration();
+    }
+    
+    public function getProducts($page){
+        $this->_adminMod->getProducts($page);
+    }
 }

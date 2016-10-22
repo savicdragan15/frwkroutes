@@ -351,6 +351,15 @@ font-size: 12px;
 line-height: 1.428571429;
 }
 
+.pagination > li > a{
+    color: black;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    color: white;
+    background-color: #c90000;
+    border-color: #c90000;
+}
 /*==============================================
     MEDIA QUERIES     
     =============================================*/
