@@ -62,9 +62,13 @@
                         <input class="form-control" id="proizvod_cena" name="proizvod_cena"  placeholder="Cena">
                     </div>
                     
-                    <div class="form-group">
-                        <i class="fa fa-file-text-o"></i> <label>Porizvod status <b style="color: red"> 1 - prikazuj 0 - ne prikazuj </b></label>
-                       <input class="form-control" id="proizvod_status" name="proizvod_status"  placeholder="Proizvod status">
+                     <div class="form-group">
+                        <label for="product_status">Proizvod status:</label>
+                        <select class="form-control" id="product_status">
+                            <option value="-1">Izaberite status:</option>
+                            <option value="1">Proizvod vidljiv</option>
+                            <option value="0">Proizvod na cekanju</option>
+                        </select>
                     </div>
                     
                     <button class="btn btn-success" type="submit" name="btn_submit" id="btn_unos_proizvoda" value="Unesi">Unesi  <i class="fa fa-angle-right"></i></button>
@@ -137,10 +141,9 @@
                 return false; 
              }
              
-             if($("#proizvod_status").val() == '' ){
-               // $("#proizvod_status").notify("Obavezno polje", "error" ,{ position:"right" });
-                alert('Obavezno polje');
-                $("#proizvod_status").focus();
+             if($('#product_status').val() == -1){
+                alert('Izaberite status');
+                $("#product_status").focus();
                 return false; 
              }
              
@@ -208,7 +211,7 @@
             'product_category': $("#category").val(),
             'product_subcategory': $("#subcategory").val(),
             'product_subsubcategory' : $("#sub_subcategory").val(),
-            'product_status': $("#proizvod_status").val(),
+            'product_status': $("#product_status").val(),
             'product_description': $('#proizvod_opis').val(),
             'image_id': $('#uploaded_image').attr('data-id'),
             'quantity': $('#proizvod_kolicina').val(),

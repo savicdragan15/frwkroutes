@@ -23,7 +23,7 @@ class productsModel extends baseModel{
         
         $this->limit = $limit;
         $this->offset = $offset;
-        $this->where = "products.product_category={$id}";
+        $this->where = "products.product_category={$id} and products.product_status = 1";
 
         return $this->join();
     }
@@ -35,7 +35,7 @@ class productsModel extends baseModel{
         
         $this->limit = $limit;
         $this->offset = $offset;
-        $this->where = "products.product_category={$idcat} and products.product_subcategory={$id}";
+        $this->where = "products.product_category={$idcat} and products.product_subcategory={$id} and products.product_status = 1";
 
         return $this->join();
     }
@@ -47,13 +47,13 @@ class productsModel extends baseModel{
         
         $this->limit = $limit;
         $this->offset = $offset;
-        $this->where = "products.product_category={$idcat} and products.product_subcategory={$idsubcat} and products.product_sub_subcategory={$id}";
+        $this->where = "products.product_category={$idcat} and products.product_subcategory={$idsubcat} and products.product_sub_subcategory={$id} and products.product_status = 1";
 
         return $this->join();
     }
     
     public function getNumberOfRecords($category,$id){
-        $products = $this->getAll("count(ID) as 'all'", "WHERE {$category}={$id}");
+        $products = $this->getAll("count(ID) as 'all'", "WHERE {$category}={$id} and products.product_status = 1");
         
         return $products[0]->all;
     }
@@ -64,7 +64,8 @@ class productsModel extends baseModel{
             array("table"=>"images","relation"=>"products.ID = images.product_id")
         );
         
-        $this->where = "products.ID ={$id}";
+        $this->where = "products.ID ={$id} and products.product_status = 1";
+        
         $product_array=$this->join();
         if(!empty($product_array))
             return $this->join()[0];
@@ -77,6 +78,7 @@ class productsModel extends baseModel{
 
         $this->limit = _NEW_PRODUCT_HOME_PAGE;
         $this->orderBy = "products.ID DESC";
+        $this->where = "products.product_status = 1";
         $product_array = $this->join();
         
         return $product_array;
