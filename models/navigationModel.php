@@ -37,4 +37,15 @@ class navigationModel extends baseModel{
         return $this->getAll("*");
     }
     
+    public function insertCategory($params)
+    {
+        $this->name=$params['Name'];
+        $this->link=$params['Link'];
+        $this->sort=(int)$params['Sort'];
+        $this->parent=$params['Parent'];
+        $this->subparent=(int)$params['SubParent'];
+        $this->id_parent=(int)$params['IdParent'];
+        $this->id_subparent=(int)$params['IdSubParent'];
+        return $this->insert();
+    }
 }

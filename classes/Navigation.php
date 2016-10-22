@@ -16,7 +16,7 @@ class Navigation extends baseController{
              foreach($parents as $parent){
                  $string .="<li>
                 <a href='"._WEB_PATH."products/allProductsByCategory/".$parent->ID."/1/".$this->url_friendly($parent->name)."'>{$parent->name}</a>";
-                 $children = $navigationModel->getAll('*', 'WHERE id_parent ='.$parent->ID);
+                 $children = $navigationModel->getAll('*', 'WHERE id_parent ='.$parent->ID." AND id_subparent=0");
                  if(count($children) > 0){
                    $string .='<ul class="clearfix sub-menu menu-three">';
                    $string .='<li class="clearfix">';
@@ -24,12 +24,20 @@ class Navigation extends baseController{
                    $i = 0;
                    foreach ($children as $child){
                     if($i%7 == 0) $string .='<p>';
-                       if($child->id_subparent > 0){
+                     $subChildren = $navigationModel->getAll('*', 'WHERE id_subparent ='.$child->ID);
+                      /* if($child->id_subparent > 0){
                            $string .='<a href="'._WEB_PATH."products/allProductsSubCatChild/".$child->ID."/".$child->id_subparent."/".$child->id_parent."/1/".$this->url_friendly($child->name).'" style="text-transform: capitalize;"> >'. $child->name.'</a>';
 
-                       }else
+                       }else*/
+                           
                             $string .="<a href='"._WEB_PATH."products/allProductsBySubCategory/".$child->ID."/".$child->id_parent."/1/".$this->url_friendly($child->name)."'>".$child->name."</a>";
-
+                          
+                            foreach($subChildren as $sub)
+                            {
+                                $string .='<a href="'._WEB_PATH."products/allProductsSubCatChild/".$sub->ID."/".$sub->id_subparent."/".$sub->id_parent."/1/".$this->url_friendly($sub->name).'" style="text-transform: capitalize;"> >'. $sub->name.'</a>';
+                            }
+                           
+                           
                       //  if($i%14 == 0 && $i != 0) $string .='</p>';
                        $i++;
                    }

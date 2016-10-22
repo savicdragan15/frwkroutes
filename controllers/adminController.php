@@ -52,4 +52,11 @@ class adminController extends baseController{
     public function updateImage() {
         $this->_adminMod->updateImage();
     }
+    public function adminCategories() {
+        $this->_adminMod->adminCategories();
+    }
+    public function insertCategory()
+    {
+        $this->_adminMod->insertCategory();
+    }
 }

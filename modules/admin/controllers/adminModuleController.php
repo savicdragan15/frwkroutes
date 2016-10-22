@@ -74,7 +74,35 @@ class adminModuleController extends baseController{
         $this->template['categories'] = $categories;
         Loader::loadView("insertproducts", "admin", true, $this->template);
     }
-    
+    public function adminCategories()
+    {
+        $this->template=array();
+        $categories = $this->_navigationMdl->getCategories();
+        
+        $this->template['categories'] = $categories;
+        Loader::loadView("adminCategories", "admin", true, $this->template);
+    }
+    public function insertCategory()
+    {
+        
+        $params=$this->validate($_POST);
+        $id_cat=$this->_navigationMdl->insertCategory($params);
+        if((int)$id_cat>0)
+        {
+            $data = array(
+                'error' => false,
+                'message' => "Kategorija je uspesno ubacena"
+            );
+        }
+        else
+        {
+            $data = array(
+                'error' => true,
+                'message' => "Doslo je do greske"
+            );
+        }
+        $this->response($data);
+    }
     /**
      * Upload image from insertProduct
      */

@@ -79,11 +79,15 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="<?=_WEB_PATH?>login
                         <a  href="<?=_WEB_PATH?>admin/kontrolnaTabla"><i class="fa fa-dashboard fa-2x"></i>Kontrolna tabla</a>
                     </li>
                     <li>
+                        <a  href="<?=_WEB_PATH?>admin/adminCategories"><i class="fa fa-pencil fa-2x"></i>Adminitracija kategorija</a>
+                    </li>
+                    <li>
                         <a  href="<?=_WEB_PATH?>admin/insertProducts"><i class="fa fa-archive fa-2x"></i>Unos proizvoda</a>
                     </li>
                      <li>
                         <a  href="<?=_WEB_PATH?>admin/productsAdministration"><i class="fa fa-pencil fa-2x"></i>Adminitracija proizvoda</a>
                     </li>
+                     
                                        
                 </ul>
                
