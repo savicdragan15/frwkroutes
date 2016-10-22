@@ -23,7 +23,7 @@ class navigationModel extends baseModel{
      * @return type
      */
     public function getSubcategory($categoryID){
-        $this->where = "id_parent = {$categoryID}";
+        $this->where = "id_parent = {$categoryID} and id_subparent = 0";
         return $this->getAll("*");
     }
     
