@@ -30,4 +30,21 @@ class imagesModel extends baseModel{
         
         return $this->update();
     }
+    
+    /**
+     * 
+     * @param type $productID
+     */
+    public function getImageByProductId($productID){
+        $this->where = "images.product_id = {$productID}";
+        if(!empty($this->getAll()))
+            return $this->getAll()[0];
+    }
+    
+    public function updateImageByImageId($image_id,$image_name){
+        $this->ID = (int)$image_id;
+        $this->image_name = $image_name;
+        
+        return $this->update();
+    }
 }

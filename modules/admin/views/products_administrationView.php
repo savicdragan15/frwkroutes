@@ -4,7 +4,7 @@
             <div class="col-md-12">
                 <h2>Modal Example</h2>
                 <!-- Trigger the modal with a button -->
-                <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+                <!-- <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
                 
                 
                 <!-- Table -->
@@ -47,9 +47,31 @@
             </div>
                  
                 <!-- End table-->
+                <!-- Modal edit image -->
+                <div class="modal fade" id="editImage" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Izmeni sliku</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div style="width: 50%; margin: 0 auto;">
+                                    <img style="width: 100%;" id="modal-image-product" src=""  alt="Slika nije pronadjena"/>
+                                </div>
+                                <div  style="width: 50%; margin: 1em auto;">
+                                    <input type="file" id="uploadImagePoduct" name="image_product" />
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                <!-- End of edit image product modal -->
                 
-                
-                <!-- Modal -->
+                <!-- Modal edit product-->
                 <div class="modal fade" id="myModal" role="dialog">
                     <div class="modal-dialog">
 
@@ -177,9 +199,9 @@
                    content +=    '<td>'+value.product_quantity+'</td>';
                    content +=    '<td class="center">'+value.product_status+'</td>';
                    content +=    '<td>';
-                   content +=       '<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myModal"><i class="fa fa-picture-o actions" aria-hidden="true"></i></button> &nbsp;';
-                   content +=       '<button type="button" class="btn btn-success " data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil actions" aria-hidden="true"></i></button>  &nbsp;';
-                   content +=       '<button type="button" class="btn btn-danger " data-toggle="modal" data-target="#myModal"><i class="fa fa-trash-o  actions actions-basket" aria-hidden="true"></i></button>';
+                   content +=       '<button id="editImageProduct" data-product-id='+value.ID+' title="Izmeni sliku" type="button" class="btn btn-primary " data-toggle="modal" data-target="#editImage"><i class="fa fa-picture-o actions" aria-hidden="true"></i></button> &nbsp;';
+                   content +=       '<button title="Izmena porizvoda" type="button" class="btn btn-success " data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil actions" aria-hidden="true"></i></button>  &nbsp;';
+                   content +=       '<button title="Obirsi proizvod" type="button" class="btn btn-danger " data-toggle="modal" data-target="#123"><i class="fa fa-trash-o  actions actions-basket" aria-hidden="true"></i></button>';
                    content +=    '</td>'
                    content += '</tr>';
                 });
@@ -201,4 +223,63 @@
         }, "POST"); 
       }
       
+      /**
+      * 
+
+       * @param {type} productID
+       * @returns {undefined}       */
+    function getImage(productID){
+        data = {
+            'product_id' : productID
+        };
+         ajaxCall(data, "<?=_WEB_PATH?>admin/getImageByProductId", function(data){
+             response = JSON.parse(data);
+             if(response.error == false){
+                console.log(response.image);
+                 $('#modal-image-product').attr("src", "<?=_WEB_PATH?>views/images/products_gallery/normal/"+response.image.image_name+"");
+                 $('#modal-image-product').attr("data-product-id",response.image.product_id);
+                 $('#modal-image-product').attr("data-image-id",response.image.ID);
+             }else{
+                 $('#modal-image-product').attr("src", "");
+                 $('#modal-image-product').attr("data-product-id",response.product_id);
+                 $('#modal-image-product').attr("data-image-id",response.image.ID);
+                 alert(response.message);
+             }
+         });
+      }
+      
+      /**
+      *  When click on icon edit image
+       */
+      $('body').on('click', '#editImageProduct' , function(){
+         var product_id = $(this).attr('data-product-id');
+         getImage(product_id);
+      });
+      
+      /**
+       * When upload image, on change browse button
+       */
+      $("#uploadImagePoduct").on("change", function() {
+          var product_id = $('#modal-image-product').attr('data-product-id');
+          var image_id = $('#modal-image-product').attr('data-image-id');   
+          //updateImage(product_id);
+          formdata = new FormData();
+      
+         var image = this.files[0];
+      
+      $('#ajaxLoader').show();
+        formdata.append("image", image);
+        formdata.append("product_id", product_id);
+        formdata.append("image_id", image_id);
+        ajaxCall(formdata, '<?= _WEB_PATH ?>admin/updateImage', function(data){
+            data = JSON.parse(data);
+            if(data.error == false){
+                $('#modal-image-product').attr('data-product-id',data.product_id);
+                $('#modal-image-product').attr('data-image-id', data.image_id);
+                $('#modal-image-product').attr("src", "<?=_WEB_PATH?>views/images/products_gallery/normal/"+data.image_name+"");
+            }else{
+                alert(data.message);
+            }
+        }, "POST", true);
+      });  
 </script>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2016 at 05:29 PM
+-- Generation Time: Oct 22, 2016 at 06:03 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -31,19 +31,15 @@ CREATE TABLE IF NOT EXISTS `images` (
   `product_id` int(11) NOT NULL,
   `image_name` varchar(250) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `images`
 --
 
 INSERT INTO `images` (`ID`, `product_id`, `image_name`) VALUES
-(1, 1, '580383ba3c09d2016-10-16.jpg'),
-(2, 2, '580384add557c2016-10-16.jpg'),
-(3, 3, '580385229c9fa2016-10-16.jpg'),
-(4, 4, '5803862e76dc22016-10-16.jpg'),
-(5, 5, '580391594b3cf2016-10-16.jpg'),
-(6, 6, '5803923b56b202016-10-16.jpg');
+(1, 1, '580b8c34c37532016-10-22.jpg'),
+(3, 2, '580b8daca974f2016-10-22.jpg');
 
 -- --------------------------------------------------------
 
@@ -123,19 +119,15 @@ CREATE TABLE IF NOT EXISTS `products` (
   `product_sub_subcategory` int(11) NOT NULL,
   `product_status` tinyint(4) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`ID`, `product_name`, `product_description`, `product_price`, `product_quantity`, `product_category`, `product_subcategory`, `product_sub_subcategory`, `product_status`) VALUES
-(1, 'Konzerva', 'Konzerva', '50.00', 10, 1, 2, 0, 1),
-(2, 'Konzerva1111', '<p>KonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzerva</p>\n<p>KonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzerva</p>\n<p>KonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzerva</p>\n<p>KonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzervaKonzerva</p>', '50.00', 10, 1, 2, 0, 1),
-(3, 'Girl', '<p>KonzervaKonzerva</p>', '100.00', 10, 1, 2, 0, 1),
-(4, 'Mikrofiber', '<p>Mikrofiber</p>', '150.00', 50, 1, 2, 0, 1),
-(5, 'Test new', '<p>opis</p>', '100.00', 10, 1, 2, 0, 1),
-(6, 'Probaaa', '<p>sadsadsadsadsasadas</p>', '50.00', 10, 1, 2, 0, 1);
+(1, '3M - Car Wash Soap', '<p>3M - Car Wash Soap</p>', '12.92', 10, 1, 2, 0, 1),
+(2, 'Auto Finesse - Avalanche', '<h1 class="fn product-title">Auto Finesse - Avalanche</h1>', '17.50', 10, 1, 2, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -155,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `last_login` datetime NOT NULL,
   `status` tinyint(1) NOT NULL COMMENT '1 - admin 2 - user',
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `users`
@@ -163,7 +155,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`ID`, `first_name`, `last_name`, `email`, `password`, `company`, `salt`, `active`, `last_login`, `status`) VALUES
 (11, '', '', 'savicdragan15@facebook.com', '$2y$12$gAFPfixVUWKUSlUIYXAleOlwIE6JNNy7TyLsy0jlK3XdovseZWDzS', '', '4rmCugjw3oEDTlw8SPGd5N65f129db2558e4312021dfa4c19c4186', 1, '0000-00-00 00:00:00', 2),
-(13, '', '', 'savicdragan2707@gmail.com', '$2y$12$NldVbmRDZGRYNlRyUmZSceraucNc4pGYgBPZG1s260WpFJleRrexi', '', 'aCpMLzu41S2ymSHxyDupRL27bdc63b4bb93bf490a8172ae35bbf60', 1, '2016-10-16 15:51:58', 1);
+(13, '', '', 'savicdragan2707@gmail.com', '$2y$12$NldVbmRDZGRYNlRyUmZSceraucNc4pGYgBPZG1s260WpFJleRrexi', '', 'aCpMLzu41S2ymSHxyDupRL27bdc63b4bb93bf490a8172ae35bbf60', 1, '2016-10-19 20:13:40', 2),
+(14, '', '', 'dragan@mediaworks.io', '$2y$12$NnlCQWRvMUlaVzdNb3FCd.1zcM5EqFMaH6JSwTCD7DqQyREClx3Tm', '', 'TIlqD9L13kOM4AL09Jxrcacfdbb05da5a51648b0fe8d22b9c464b8', 1, '2016-10-22 10:32:35', 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

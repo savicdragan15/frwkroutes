@@ -227,5 +227,70 @@ class adminModuleController extends baseController{
         
        $this->response($data);
     }
+    
+    public function getImageByProductID(){
+        
+        $product_id = $this->filter_input($_POST['product_id']);
+        $image = $this->_imagesMdl->getImageByProductID($product_id);
+        
+        $error = true;
+        $message = "Došlo je do greške!";
+        
+        if($image){
+           $error = false;
+           $message = "Success";   
+        }
+        
+        $data = array(
+          'error' => $error,
+          'message' => $message,
+          'image' => $image,
+          'product_id' => $product_id
+        );
+        
+       $this->response($data);
+    }
+    
+    public function updateImage() {
+        
+        $name_image = uniqid().date('Y-m-d');
+        
+        if(isset($_POST['product_id'])){
+            $image_id = $this->filter_input($_POST['image_id']);
+            $productId = $this->filter_input($_POST['product_id']);
+            
+            //single product img
+            $image = new SimpleImage($_FILES['image']['tmp_name']);
+            $image->fit_to_height(400)->save(_VIEWS_PATH."/images/products_gallery/normal/{$name_image}.jpg");
+
+            //thumbnail img
+            $thumbnail_image = new SimpleImage($_FILES['image']['tmp_name']); 
+            $thumbnail_image->fit_to_height(300)->save(_VIEWS_PATH."/images/products_gallery/thumbnail/{$name_image}.jpg");
+
+            //small image butn not in use for now
+            $small_image = new SimpleImage($_FILES['image']['tmp_name']); 
+            $small_image->fit_to_height(97)->save(_VIEWS_PATH."/images/products_gallery/small/{$name_image}.jpg"); 
+            
+            $error = true;
+            $message = "Došlo je do greške!";
+            
+            if($this->_imagesMdl->updateImageByImageId($image_id,$name_image.".jpg")){
+               $error = false;
+               $message = "Success"; 
+            }
+            
+            $data = array(
+                'error' => $error,
+                'message' => $message,
+                'product_id' => $productId,
+                'image_id' => $image_id,
+                'image_name' => $name_image.".jpg"
+            );
+            
+            $this->response($data);
+        }
+        
+        
+    }
   
 }
