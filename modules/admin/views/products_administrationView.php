@@ -69,6 +69,8 @@
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             </div>
                         </div>
+                    </div>
+                </div>
                 <!-- End of edit image product modal -->
                 
                 <!-- Modal edit product-->
@@ -157,7 +159,6 @@
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
