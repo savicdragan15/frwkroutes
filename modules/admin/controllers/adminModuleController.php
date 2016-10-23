@@ -175,13 +175,14 @@ class adminModuleController extends baseController{
 
         $data = array(
             "data" => $sub_categories,
-            "error" => false
+            "error" => false,
+            "subcategory_id" => isset($_POST['subcategory_id']) ? $_POST['subcategory_id'] : null
         );
 
         if (empty($sub_categories)) {
             $data = array(
                 "error" => true,
-                "message" => "Nema podkategorija."
+                "message" => "Nema podkategorija.",
             );
         }
 
@@ -196,7 +197,8 @@ class adminModuleController extends baseController{
 
         $data = array(
             "data" => $sub_subcategories,
-            "error" => false
+            "error" => false,
+            "sub_subcategory_id" => isset($_POST['sub_subcategory_id'])? $_POST['sub_subcategory_id'] : null
         );
 
         if (empty($sub_subcategories)) {
@@ -222,6 +224,34 @@ class adminModuleController extends baseController{
     public function productsAdministration(){
        $this->template['categories'] = $this->_navigationMdl->getCategories();
        Loader::loadView("products_administration", "admin" , true, $this->template);
+    }
+    
+     public function getProduct($product_id){
+          $error = true;
+          $message = "Doslo je do greske!";
+         if(isset($product_id) && $product_id != ''){
+           
+            //scenario for admin 
+            if(isset($_POST['product_status'])){
+                $product = $this->_productsMdl->getProduct($this->filter_input($product_id), $this->filter_input($_POST['product_status']));
+            }else{
+               $product = $this->_productsMdl->getProduct($this->filter_input($product_id));  
+            }
+            
+            if($product){
+                $error = false;
+                $message = 'Success';
+            }
+            
+            $data = array(
+                'error' => $error,
+                'message' => $message,
+                'product' => $product
+            );
+            
+            $this->response($data);
+         }
+         
     }
     
     /**
@@ -254,6 +284,28 @@ class adminModuleController extends baseController{
         );
         
        $this->response($data);
+    }
+    
+    public function updateProduct(){
+        
+        $data = $this->validate($_POST);
+        
+        $update = $this->_productsMdl->updateProduct($data);
+        
+        $error = true;
+        $message = "Došlo je do greške!";
+        
+        if($update){
+            $error = false;
+            $message = "Uspesno ste izmenili podatke.";
+        }
+        
+        $data = array(
+          'error' => $error,
+          'message' => $message
+        );
+        
+        $this->response($data);
     }
     
     public function getImageByProductID(){

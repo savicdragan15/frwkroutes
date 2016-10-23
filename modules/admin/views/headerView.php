@@ -36,6 +36,8 @@
     <!-- BOOTSTRAP SCRIPTS -->
     <script src="<?=_WEB_PATH?>modules/admin/views/assets/js/bootstrap.min.js"></script>
    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+   <!-- form validate -->
+    <script src="<?=_WEB_PATH?>modules/admin/views/assets/js/formValidate.js"></script>
    
  <script>
     tinymce.init({ 

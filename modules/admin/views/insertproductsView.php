@@ -87,11 +87,104 @@
     </div>
     <!-- /. PAGE INNER  -->
 </div>
-
 <script>
+ /**********************************************************************************************************************************************/
+    //kada se klikne na dugme unesi
+    $('#btn_unos_proizvoda').click(function(e){
+        e.preventDefault();
+        tinymce.triggerSave();
+        data = {
+            'product_name': $("#proizvod_naziv").val(),
+            'product_category': $("#category").val(),
+            'product_subcategory': $("#subcategory").val(),
+            'product_subsubcategory' : $("#sub_subcategory").val(),
+            'product_status': $("#product_status").val(),
+            'product_description': $('#proizvod_opis').val(),
+            'image_id': $('#uploaded_image').attr('data-id'),
+            'quantity': $('#proizvod_kolicina').val(),
+            'product_price' : $('#proizvod_cena').val()
+        }
+        
+        if(formValidate()){
+         alertify.confirm("Da li ste sigurni?",function(){
+            $('#insert_ajaxLoader').show();
+            ajaxCall(data, '<?=_WEB_PATH?>admin/insertProducts', function(data){
+                 data = JSON.parse(data);
+                 if(data.error == false){
+                    $('#image').empty();
+                    $('#insert_product')[0].reset();
+                    $('#insert_ajaxLoader').hide();
+                    //$.notify(data.message, "success");
+                    alert(data.message);
+                }else{
+                    //$.notify(data.message, "error");
+                    alert(data.message);
+                } 
+            });  
+//           $.ajax({
+//            url: "<?=_WEB_PATH?>admin/insertProducts",
+//            type: "POST",
+//            dataType: 'json',
+//            data: data,
+//            success: function(response){
+//                console.log(response);
+//                if(response.error == false){
+//                    $('#image_to_upload').removeAttr('disabled','disabled');
+//                    $('#image').empty();
+//                    $('#unos_proizvoda')[0].reset();
+//                    $('#insert_ajaxLoader').hide();
+//                    $.notify(response.message, "success");
+//                }else{
+//                    $.notify(response.message, "error");
+//                }
+//            }
+//        });
+        },function(){
+             //alertify.error('Cancel');
+         });
+     }
+    });
+    
+    /**********************************************************************************************************************************************/
  
-     $(document).ready(function(){
-         function formValidate(){
+    //jQuery.noConflict();    
+    //formdata = new FormData(); 
+    $("#image_to_upload").on("change", function() {
+      formdata = new FormData();
+      
+      var image = this.files[0];
+      console.log(image);
+      $('#ajaxLoader').show();
+        formdata.append("image", image);
+        
+        ajaxCall(formdata, '<?=_WEB_PATH?>admin/uploadImage', function(data){
+            data = JSON.parse(data);
+            console.log(data);
+            if(data.error == false){
+                $('#ajaxLoader').hide();
+                getImage(data.image_id);
+            }
+            
+        }, "POST", true);
+        });                      
+   // }); 
+    
+     /**********************************************************************************************************************************************/
+    function getImage(id){
+        data = {'id': id}
+        var content = '';
+        ajaxCall(data, '<?=_WEB_PATH?>admin/getImage', function(data){
+            response = JSON.parse(data);
+            if(response.error == false){
+               content +="<img id='uploaded_image' data-id='"+response.data.ID+"' src='<?= _WEB_PATH ?>views/images/products_gallery/thumbnail/"+response.data.image_name+"'></img>";
+               $('#image').html(content);
+            }else{
+                content +="Doslo je do greske! Pokusajte ponovo";
+                $('#image').html(content);
+            }
+        }, "POST");
+    }
+   function formValidate(){
              if($('#proizvod_naziv').val() == ''){
                 //$("#proizvod_naziv").notify("Obavezno polje", "error" ,{ position:"right" });
                 alert('Naziv proizvoda je obavezan.');
@@ -149,151 +242,4 @@
              
              return true;
          }
-         
- /*********************************************************************************************************************************************/        
-        /**
-         * kada se bira kategorija i podkategorija
-         */
-        $('body').on('change', '#category',function(){ 
-            var formData = {
-                'category_id' : $(this).val()
-            }
-            //$('.subsubcategorylist').hide();
-            ajaxCall(formData, '<?=_WEB_PATH?>admin/getSubcategories', function(data){
-                data = JSON.parse(data);
-                var content = '';
-                $('#subcategory').empty();
-                if(data.error == false){
-                   content = "<option value='0'>Izaberite podkategoriju</option>";
-                    $.each(data.data, function(index, value){
-                       content += "<option value='"+value.ID+"'>"+value.name+"</option>";
-                    });
-                    $('#subcategory').append(content); 
-                }else{
-                    $('#subcategory').append("<option value='0'>"+data.message+"</option>");
-                }
-            });
-        }); 
-      /********************************************************************************************************************************/ 
-       /*
-        * kada se bira podkategorija
-        */
-       $('body').on('change', '#subcategory',function(){
-           //alert($(this).val());
-           var formData = {
-                'subcategory_id' : $(this).val()
-           }
-           
-           ajaxCall(formData, '<?=_WEB_PATH?>admin/getSubSubCategories', function(data){
-                data = JSON.parse(data);
-                var content = '';
-               // $('.subsubcategorylist').hide();
-                $('#sub_subcategory').empty();
-                if(data.error == false){
-                    $('.subsubcategorylist').show();
-                   content = "<option value='-1'>Izaberite pod podkategoriju</option>";
-                    $.each(data.data, function(index, value){
-                       content += "<option value='"+value.ID+"'>"+value.name+"</option>";
-                    });
-                    $('#sub_subcategory').append(content); 
-                }else{
-                    $('#sub_subcategory').append("<option value='0'>"+data.message+"</option>");
-                }
-            });
-        });
- /**********************************************************************************************************************************************/
-    //kada se klikne na dugme unesi
-    $('#btn_unos_proizvoda').click(function(e){
-        e.preventDefault();
-        tinymce.triggerSave();
-        data = {
-            'product_name': $("#proizvod_naziv").val(),
-            'product_category': $("#category").val(),
-            'product_subcategory': $("#subcategory").val(),
-            'product_subsubcategory' : $("#sub_subcategory").val(),
-            'product_status': $("#product_status").val(),
-            'product_description': $('#proizvod_opis').val(),
-            'image_id': $('#uploaded_image').attr('data-id'),
-            'quantity': $('#proizvod_kolicina').val(),
-            'product_price' : $('#proizvod_cena').val()
-        }
-        
-        if(formValidate()){
-         alertify.confirm("Da li ste sigurni?",function(){
-            $('#insert_ajaxLoader').show();
-            ajaxCall(data, '<?=_WEB_PATH?>admin/insertProducts', function(data){
-                 data = JSON.parse(data);
-                 if(data.error == false){
-                    $('#image').empty();
-                    $('#insert_product')[0].reset();
-                    $('#insert_ajaxLoader').hide();
-                    //$.notify(data.message, "success");
-                    alert(data.message);
-                }else{
-                    //$.notify(data.message, "error");
-                    alert(data.message);
-                } 
-            });  
-//           $.ajax({
-//            url: "<?=_WEB_PATH?>admin/insertProducts",
-//            type: "POST",
-//            dataType: 'json',
-//            data: data,
-//            success: function(response){
-//                console.log(response);
-//                if(response.error == false){
-//                    $('#image_to_upload').removeAttr('disabled','disabled');
-//                    $('#image').empty();
-//                    $('#unos_proizvoda')[0].reset();
-//                    $('#insert_ajaxLoader').hide();
-//                    $.notify(response.message, "success");
-//                }else{
-//                    $.notify(response.message, "error");
-//                }
-//            }
-//        });
-        },function(){
-             //alertify.error('Cancel');
-         });
-     }
-    });
- /**********************************************************************************************************************************************/
-    function getImage(id){
-        data = {'id': id}
-        var content = '';
-        ajaxCall(data, '<?=_WEB_PATH?>admin/getImage', function(data){
-            response = JSON.parse(data);
-            if(response.error == false){
-               content +="<img id='uploaded_image' data-id='"+response.data.ID+"' src='<?= _WEB_PATH ?>views/images/products_gallery/thumbnail/"+response.data.image_name+"'></img>";
-               $('#image').html(content);
-            }else{
-                content +="Doslo je do greske! Pokusajte ponovo";
-                $('#image').html(content);
-            }
-        }, "POST");
-    }
-/**********************************************************************************************************************************************/
- 
-    //jQuery.noConflict();    
-    //formdata = new FormData(); 
-    $("#image_to_upload").on("change", function() {
-      formdata = new FormData();
-      
-      var image = this.files[0];
-      console.log(image);
-      $('#ajaxLoader').show();
-        formdata.append("image", image);
-        
-        ajaxCall(formdata, '<?=_WEB_PATH?>admin/uploadImage', function(data){
-            data = JSON.parse(data);
-            console.log(data);
-            if(data.error == false){
-                $('#ajaxLoader').hide();
-                getImage(data.image_id);
-            }
-            
-        }, "POST", true);
-        });                      
-    }); 
-/**********************************************************************************************************************************************/
 </script>

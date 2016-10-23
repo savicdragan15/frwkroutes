@@ -55,8 +55,18 @@ class adminController extends baseController{
     public function adminCategories() {
         $this->_adminMod->adminCategories();
     }
+    
     public function insertCategory()
     {
         $this->_adminMod->insertCategory();
+    }
+    
+    public function getProduct($product_id)
+    {
+        $this->_adminMod->getProduct($product_id);
+    }
+    
+    public function updateProduct(){
+        $this->_adminMod->updateProduct();
     }
 }

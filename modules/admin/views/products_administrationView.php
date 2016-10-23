@@ -74,7 +74,7 @@
                 <!-- End of edit image product modal -->
                 
                 <!-- Modal edit product-->
-                <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal fade" id="editProduct" role="dialog">
                     <div class="modal-dialog">
 
                         <!-- Modal content-->
@@ -90,13 +90,6 @@
                                     <div class="form-group">
                                         <i class="fa fa-file-text-o"></i> <label for="proizvod_naziv">Naziv proizvoda</label>
                                         <input class="form-control" id="proizvod_naziv" name="proizvod_naziv"  placeholder="Naziv proizvoda">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <i class="fa fa-picture-o"></i> <label>Proizvod slika</label>
-                                        <input type="file" id="image_to_upload"><br>
-                                        <span id="image"></span> 
-                                        <img id="ajaxLoader" style="display: none; width: 34px;" src="<?= _WEB_PATH ?>views/images/ajaxloader.gif" />
                                     </div>
 
                                     <br>
@@ -149,7 +142,7 @@
                                         </select>
                                     </div>
 
-                                    <button class="btn btn-success" type="submit" name="btn_submit" id="btn_unos_proizvoda" value="Unesi">Unesi  <i class="fa fa-angle-right"></i></button>
+                                    <button class="btn btn-success" type="submit" name="btn_submit" id="btn_update" value="Unesi">Unesi  <i class="fa fa-angle-right"></i></button>
                                     <img id="insert_ajaxLoader" style="display: none; width: 34px;" src="<?= _WEB_PATH ?>views/images/ajaxloader.gif" />
                                     <button class="btn btn-default" type="reset">Reset  <i class="fa fa-refresh"></i></button>
                                 </form>
@@ -201,7 +194,7 @@
                    content +=    '<td class="center">'+value.product_status+'</td>';
                    content +=    '<td>';
                    content +=       '<button id="editImageProduct" data-product-id='+value.ID+' title="Izmeni sliku" type="button" class="btn btn-primary " data-toggle="modal" data-target="#editImage"><i class="fa fa-picture-o actions" aria-hidden="true"></i></button> &nbsp;';
-                   content +=       '<button title="Izmena porizvoda" type="button" class="btn btn-success " data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil actions" aria-hidden="true"></i></button>  &nbsp;';
+                   content +=       '<button id="editProductBtn" data-product-id='+value.ID+' title="Izmena porizvoda" type="button" class="btn btn-success " data-toggle="modal" data-target="#editProduct"><i class="fa fa-pencil actions" aria-hidden="true"></i></button>  &nbsp;';
                    content +=       '<button title="Obirsi proizvod" type="button" class="btn btn-danger " data-toggle="modal" data-target="#123"><i class="fa fa-trash-o  actions actions-basket" aria-hidden="true"></i></button>';
                    content +=    '</td>'
                    content += '</tr>';
@@ -236,7 +229,7 @@
          ajaxCall(data, "<?=_WEB_PATH?>admin/getImageByProductId", function(data){
              response = JSON.parse(data);
              if(response.error == false){
-                console.log(response.image);
+                //console.log(response.image);
                  $('#modal-image-product').attr("src", "<?=_WEB_PATH?>views/images/products_gallery/normal/"+response.image.image_name+"");
                  $('#modal-image-product').attr("data-product-id",response.image.product_id);
                  $('#modal-image-product').attr("data-image-id",response.image.ID);
@@ -283,4 +276,195 @@
             }
         }, "POST", true);
       });  
+      
+      function getSubcategories(categoryId){
+         data = {
+            'category_id' : categoryId
+          };
+         var subcategories = {};
+          
+         ajaxCall(data, "<?=_WEB_PATH?>admin/getSubcategories/", function(data){
+              data = JSON.parse(data);
+              //console.log(data);
+         });
+      }
+      
+      /**
+      * When click on edit product
+       */
+      $('body').on('click', '#editProductBtn', function(){
+        //console.log($(this).attr('data-product-id'));
+           var product_id  = $(this).attr('data-product-id');
+           data = {
+               'product_status' : 5
+           }
+           ajaxCall(data, "<?=_WEB_PATH?>admin/getProduct/"+product_id+"", function(data){
+               data = JSON.parse(data);
+               //console.log(data);
+            if(data.error == false){
+                $('#btn_update').attr('data-product-id', data.product.product_id);
+                $('#proizvod_naziv').val(data.product.product_name);
+                tinyMCE.activeEditor.setContent(data.product.product_description);
+                $('#proizvod_kolicina').val(data.product.product_quantity);
+                $('#proizvod_cena').val(data.product.product_price);
+                $('#product_status option').prop("value ="+data.product.product_status);
+
+                $('#category option').each(function(){
+                    if(data.product.product_category == $(this).val())
+                      $(this).attr("selected","selected");   
+                });
+                
+                var categoryID = {
+                    'category_id' : data.product.product_category,
+                    'subcategory_id' : data.product.product_subcategory
+                };
+                 $('#subcategory').empty();
+                //get subcategories
+                ajaxCall(categoryID, "<?=_WEB_PATH?>admin/getSubcategories/", function(data){
+                        data = JSON.parse(data);
+                        if(data.error == false){
+                            
+                          $.each(data.data, function(index, value){
+                            //console.log(value);
+                            var content = "<option value="+value.ID+">"+value.name+"</option>";
+                            $('#subcategory').append(content);
+                            $('#subcategory option').each(function(){
+                                //console.log(value);
+                               if(data.subcategory_id == value.ID){
+                                    $(this).attr("selected","selected");
+                               }
+                           });
+                      });
+                  }else{
+                      $('#subcategory').append("<option value='0'>"+data.message+"</option>"); 
+                  }
+                });
+                
+                var subcategory_id = {
+                    'subcategory_id' : data.product.product_subcategory,
+                    'sub_subcategory_id' : data.product.product_sub_subcategory
+                };
+                
+                //get sub subcategories
+                ajaxCall(subcategory_id, "<?=_WEB_PATH?>admin/getSubSubCategories/", function(data){
+                        data = JSON.parse(data);
+                        $('#sub_subcategory').empty();
+                        
+                        if(data.error == false){
+                            
+                          $.each(data.data, function(index, value){
+                            //console.log(value);
+                            var content = "<option value="+value.ID+">"+value.name+"</option>";
+                            $('#sub_subcategory').append(content);
+                            $('#sub_subcategory option').each(function(){
+                                if(value.ID == data.sub_subcategory_id)
+                                  $(this).attr("selected","selected");   
+                          });
+                      });
+                  }else{
+                      $('#sub_subcategory').append("<option value='0'>"+data.message+"</option>");
+                  }
+                });
+                
+                $('#product_status option').each(function(){
+                    if(data.product.product_status == $(this).val())
+                      $(this).attr("selected","selected");   
+               });
+                  
+            }
+           });
+      });
+    $(document).ready(function(){
+    
+       $('body').on('click', '#btn_update', function(e){
+        e.preventDefault();
+        tinymce.triggerSave();
+        
+        data = {
+            'product_id' : $(this).attr('data-product-id'),
+            'product_name': $("#proizvod_naziv").val(),
+            'product_category': $("#category").val(),
+            'product_subcategory': $("#subcategory").val(),
+            'product_subsubcategory' : $("#sub_subcategory").val(),
+            'product_status': $("#product_status").val(),
+            'product_description': $('#proizvod_opis').val(),
+            'quantity': $('#proizvod_kolicina').val(),
+            'product_price' : $('#proizvod_cena').val()
+        }
+        
+        if(formValidate()){
+         alertify.confirm("Da li ste sigurni?",function(){
+            $('#insert_ajaxLoader').show();
+            ajaxCall(data, '<?=_WEB_PATH?>admin/updateProduct', function(data){
+                 data = JSON.parse(data);
+                 if(data.error == false){
+                    //$('#image').empty();
+                    //$('#insert_product')[0].reset();
+                    $('#insert_ajaxLoader').hide();
+                    //$.notify(data.message, "success");
+                    alert(data.message);
+                }else{
+                    //$.notify(data.message, "error");
+                    alert(data.message);
+                } 
+            });  
+        },function(){
+             //alertify.error('Cancel');
+         });
+     }
+   });
+   
+    function formValidate(){
+             if($('#proizvod_naziv').val() == ''){
+                //$("#proizvod_naziv").notify("Obavezno polje", "error" ,{ position:"right" });
+                alert('Naziv proizvoda je obavezan.');
+                $("#proizvod_naziv").focus();
+                return false;
+             }
+             
+             if($("#category").val() == 0 ){
+                //$("#category").notify("Izaberite kategoriju", "error" ,{ position:"right" });
+                alert('Izaberite kategoriju.');
+                $("#category").focus();
+                return false; 
+             }
+             if($("#subcategory").val() == 0 ){
+                //$("#subcategory").notify("Izaberite podkategoriju", "error" ,{ position:"right" });
+                alert('Izaberite podkategoriju.');
+                $("#subcategory").focus();
+                return false; 
+             }
+             
+            /* if($("#sub_subcategory").val() == 0 ){
+                //$("#sub_subcategory").notify("Izaberite podkategoriju", "error" ,{ position:"right" });
+                alert('Izaberite pod podkategoriju.');
+                $("#sub_subcategory").focus();
+                return false; 
+             }*/
+             
+             
+             if($("#proizvod_kolicina").val() == '' ){
+                //$("#proizvod_kolicina").notify("Obavezno polje", "error" ,{ position:"right" });
+                alert('Unesite količinu proizvoda.');
+                $("#proizvod_kolicina").focus();
+                return false; 
+             }
+             
+             if($("#proizvod_cena").val() == '' ){
+                //$("#proizvod_cena").notify("Obavezno polje", "error" ,{ position:"right" });
+                alert('Unesti cenu proizvoda.');
+                $("#proizvod_cena").focus();
+                return false; 
+             }
+             
+             if($('#product_status').val() == -1){
+                alert('Izaberite status');
+                $("#product_status").focus();
+                return false; 
+             }
+             
+             return true;
+         }
+    });
+  
 </script>

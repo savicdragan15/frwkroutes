@@ -58,13 +58,17 @@ class productsModel extends baseModel{
         return $products[0]->all;
     }
     
-    public function getProduct($id){
-       
+    public function getProduct($id, $status = 1){
         $this->join = array(
             array("table"=>"images","relation"=>"products.ID = images.product_id")
         );
         
-        $this->where = "products.ID ={$id} and products.product_status = 1";
+        if($status == 1){
+           $this->where = "products.ID ={$id} and products.product_status = {$status}"; 
+        }else{
+             $this->where = "products.ID ={$id}"; 
+        }
+            
         
         $product_array=$this->join();
         if(!empty($product_array))
@@ -106,6 +110,21 @@ class productsModel extends baseModel{
        $this->product_status = $data['product_status'];
        
        return $this->insert();
+   }
+   
+   public function updateProduct($data) {
+       
+       $this->ID = (int)$data['product_id'];
+       $this->product_name = $data['product_name'];
+       $this->product_description = $data['product_description'];
+       $this->product_price = $data['product_price'];
+       $this->product_quantity = $data['quantity'];
+       $this->product_category = $data['product_category'];
+       $this->product_subcategory = $data['product_subcategory'];
+       $this->product_sub_subcategory = $data['product_subsubcategory'];
+       $this->product_status = $data['product_status'];
+       
+       return $this->update();
    }
    
    public function getProducts($limit,$offset){
