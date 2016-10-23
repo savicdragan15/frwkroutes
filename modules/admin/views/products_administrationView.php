@@ -10,10 +10,12 @@
                 <!-- Table -->
             <div class="row">
                 <div class="col-md-12">
+                    <button onclick="getProducts($('.pagination > li.active').find('a').attr('data-page'));" title="Osvezi tabelu" class="btn btn-default"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+                    <p></p>
                   <!--   Kitchen Sink -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                           Proizvodi
+                            Proizvodi  
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -62,11 +64,15 @@
                                     <img style="width: 100%;" id="modal-image-product" src=""  alt="Slika nije pronadjena"/>
                                 </div>
                                 <div  style="width: 50%; margin: 1em auto;">
-                                    <input type="file" id="uploadImagePoduct" name="image_product" />
+                                 <input type="file" id="uploadImagePoduct" name="image_product" />
+                                 <span class="span-loader-edit-image" style="display: none;">
+                                     <img id="insert_ajaxLoader" style="width: 34px;" src="<?= _WEB_PATH ?>views/images/ajaxloader.gif" />
+                                     Sačekajte da se slika uploaduje...
+                                 </span>   
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Zatvori <i class="fa fa-times" aria-hidden="true"></i></button>                               
                             </div>
                         </div>
                     </div>
@@ -81,7 +87,7 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Modal Header</h4>
+                                <h4 class="modal-title">Izmena proizvoda</h4>
                             </div>
                             <div class="modal-body">
                             <div class="form-group">
@@ -142,14 +148,14 @@
                                         </select>
                                     </div>
 
-                                    <button class="btn btn-success" type="submit" name="btn_submit" id="btn_update" value="Unesi">Unesi  <i class="fa fa-angle-right"></i></button>
+                                    <button class="btn btn-success" type="submit" name="btn_submit" id="btn_update" value="Unesi"><i class="fa fa-pencil actions" aria-hidden="true"></i> Izmeni  <i class="fa fa-angle-right"></i></button>
                                     <img id="insert_ajaxLoader" style="display: none; width: 34px;" src="<?= _WEB_PATH ?>views/images/ajaxloader.gif" />
-                                    <button class="btn btn-default" type="reset">Reset  <i class="fa fa-refresh"></i></button>
+                                   <!-- <button class="btn btn-default" type="reset">Reset  <i class="fa fa-refresh"></i></button> -->
                                 </form>
                             </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Zatvori <i class="fa fa-times" aria-hidden="true"></i></button>
                             </div>
                         </div>
                     </div>
@@ -180,18 +186,21 @@
     function getProducts(page){
         data = {}
         page = typeof page !== 'undefined' ? page : 1 ;
+        $('.span-loader-edit-image').show();
         var content = '';
             ajaxCall(data, "<?=_WEB_PATH?>admin/getProducts/"+page+"", function(data){
             response = JSON.parse(data);
             if(response.error == false){
+               
                 $.each(response.products, function(index, value){
+                     var status = value.product_status == 1 ? '<i class="fa fa-eye" aria-hidden="true"></i>' : '<i class="fa fa-eye-slash" aria-hidden="true"></i>';
                    content +='';
                    content += '<tr>';
                    content +=    '<td>'+value.ID+'</td>';
                    content +=    '<td>'+value.product_name+'</td>';
                    content +=    '<td>'+value.product_price+' €</td>';
                    content +=    '<td>'+value.product_quantity+'</td>';
-                   content +=    '<td class="center">'+value.product_status+'</td>';
+                   content +=    '<td class="center">'+status+'</td>';
                    content +=    '<td>';
                    content +=       '<button id="editImageProduct" data-product-id='+value.ID+' title="Izmeni sliku" type="button" class="btn btn-primary " data-toggle="modal" data-target="#editImage"><i class="fa fa-picture-o actions" aria-hidden="true"></i></button> &nbsp;';
                    content +=       '<button id="editProductBtn" data-product-id='+value.ID+' title="Izmena porizvoda" type="button" class="btn btn-success " data-toggle="modal" data-target="#editProduct"><i class="fa fa-pencil actions" aria-hidden="true"></i></button>  &nbsp;';
@@ -210,9 +219,11 @@
                             pagination += '<li><a class="pager" data-page='+index+' href="<?=_WEB_PATH?>admin/getProducts">'+index+'</a></li>';
                         }
                 });
-                
+                pagination += '<li><a class="pager span-loader-edit-image" style="display: none;"><img id="insert_ajaxLoader" style="width: 18px;" src="<?= _WEB_PATH ?>views/images/ajaxloader.gif" /></a></li>';
+                $('.span-loader-edit-image').hide('slow');
                 $('.pagination, .pagination-large').html(pagination);
-                $('.table-responsive').find('tbody').html(content);
+                $('.table-responsive').find('tbody').html(content).hide();
+                $('.table-responsive').find('tbody').html(content).show("slow");
             }
         }, "POST"); 
       }
@@ -261,7 +272,7 @@
       
          var image = this.files[0];
       
-      $('#ajaxLoader').show();
+      $('.span-loader-edit-image').show();
         formdata.append("image", image);
         formdata.append("product_id", product_id);
         formdata.append("image_id", image_id);
@@ -271,7 +282,10 @@
                 $('#modal-image-product').attr('data-product-id',data.product_id);
                 $('#modal-image-product').attr('data-image-id', data.image_id);
                 $('#modal-image-product').attr("src", "<?=_WEB_PATH?>views/images/products_gallery/normal/"+data.image_name+"");
+                $('#uploadImagePoduct').val('');
+                $('.span-loader-edit-image').hide();
             }else{
+                $('.span-loader-edit-image').hide();
                 alert(data.message);
             }
         }, "POST", true);
@@ -402,6 +416,7 @@
                     //$('#insert_product')[0].reset();
                     $('#insert_ajaxLoader').hide();
                     //$.notify(data.message, "success");
+                    getProducts($('.pagination > li.active').find('a').attr('data-page'));
                     alert(data.message);
                 }else{
                     //$.notify(data.message, "error");
