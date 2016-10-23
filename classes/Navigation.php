@@ -10,13 +10,13 @@ class Navigation extends baseController{
     
     public function renderNav() {
             $navigationModel = $this->models['navigation'];
-            $parents = $navigationModel->getAll('*', 'WHERE parent = 1');
+            $parents = $navigationModel->getAll('*', 'WHERE parent = 1 order by sort asc');
 
             $string = '';
              foreach($parents as $parent){
                  $string .="<li>
                 <a href='"._WEB_PATH."products/allProductsByCategory/".$parent->ID."/1/".$this->url_friendly($parent->name)."'>{$parent->name}</a>";
-                 $children = $navigationModel->getAll('*', 'WHERE id_parent ='.$parent->ID." AND id_subparent=0");
+                 $children = $navigationModel->getAll('*', 'WHERE id_parent ='.$parent->ID." AND id_subparent=0 order by sort asc");
                  if(count($children) > 0){
                    $string .='<ul class="clearfix sub-menu menu-three">';
                    $string .='<li class="clearfix">';
@@ -24,7 +24,7 @@ class Navigation extends baseController{
                    $i = 0;
                    foreach ($children as $child){
                     if($i%7 == 0) $string .='<p>';
-                     $subChildren = $navigationModel->getAll('*', 'WHERE id_subparent ='.$child->ID);
+                     $subChildren = $navigationModel->getAll('*', 'WHERE id_subparent ='.$child->ID.' order by sort asc');
                       /* if($child->id_subparent > 0){
                            $string .='<a href="'._WEB_PATH."products/allProductsSubCatChild/".$child->ID."/".$child->id_subparent."/".$child->id_parent."/1/".$this->url_friendly($child->name).'" style="text-transform: capitalize;"> >'. $child->name.'</a>';
 

@@ -20,7 +20,9 @@ class adminController extends baseController{
     public function getSubcategories(){
         $this->_adminMod->getSubcategories();
     }
-    
+    public function getCategories(){
+        $this->_adminMod->getCategories();
+    }
     public function getSubSubCategories(){
         $this->_adminMod->getSubSubCategories();
     }
@@ -68,5 +70,11 @@ class adminController extends baseController{
     
     public function updateProduct(){
         $this->_adminMod->updateProduct();
+    }
+    public function getCategory($id){
+        $this->_adminMod->getCategory($id);
+    }
+     public function updateCategory(){
+        $this->_adminMod->updateCategory();
     }
 }

@@ -103,6 +103,70 @@ class adminModuleController extends baseController{
         }
         $this->response($data);
     }
+    public function updateCategory()
+    {
+        
+        $params=$this->validate($_POST);
+        $updated=$this->_navigationMdl->updateCategory($params);
+        if($updated)
+        {
+            $data = array(
+                'error' => false,
+                'message' => "Kategorija je uspesno izmenjena"
+            );
+        }
+        else
+        {
+            $data = array(
+                'error' => true,
+                'message' => "Doslo je do greske"
+            );
+        }
+        $this->response($data);
+    }
+    
+    public function getCategory($id)
+    {
+        $catData=$this->_navigationMdl->getCategory($id);
+        if(is_object($catData))
+        {
+             $data = array(
+                'error' => false,
+                'message' => "Uspesno dobavljeno",
+                'response'=>$catData
+            );
+        }
+        else
+        {
+             $data = array(
+                'error' => true,
+                'message' => "Doslo je do greske",
+                'response'=>null
+                );
+        }
+        $this->response($data);
+    }
+    public function getCategories()
+    {
+        $catData=$this->_navigationMdl->getCategories();
+        if(!empty($catData))
+        {
+             $data = array(
+                'error' => false,
+                'message' => "Uspesno dobavljeno",
+                'data'=>$catData
+            );
+        }
+        else
+        {
+             $data = array(
+                'error' => true,
+                'message' => "Doslo je do greske",
+                'data'=>null
+                );
+        }
+        $this->response($data);
+    }
     /**
      * Upload image from insertProduct
      */
