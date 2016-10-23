@@ -174,33 +174,35 @@ class adminModuleController extends baseController{
 
         $name_image = uniqid().date('Y-m-d');
         
-        //single product img
-        $image = new SimpleImage($_FILES['image']['tmp_name']);
-        $image->fit_to_height(400)->save(_VIEWS_PATH."/images/products_gallery/normal/{$name_image}.jpg");
+        if(isset($_FILES['image']['tmp_name'])){
+            //single product img
+            $image = new SimpleImage($_FILES['image']['tmp_name']);
+            $image->fit_to_height(400)->save(_VIEWS_PATH."/images/products_gallery/normal/{$name_image}.jpg");
         
-        //thumbnail img
-        $thumbnail_image = new SimpleImage($_FILES['image']['tmp_name']); 
-        $thumbnail_image->fit_to_height(300)->save(_VIEWS_PATH."/images/products_gallery/thumbnail/{$name_image}.jpg");
+            //thumbnail img
+            $thumbnail_image = new SimpleImage($_FILES['image']['tmp_name']); 
+            $thumbnail_image->fit_to_height(300)->save(_VIEWS_PATH."/images/products_gallery/thumbnail/{$name_image}.jpg");
         
-        //small image butn not in use for now
-        $small_image = new SimpleImage($_FILES['image']['tmp_name']); 
-        $small_image->fit_to_height(97)->save(_VIEWS_PATH."/images/products_gallery/small/{$name_image}.jpg");
+            //small image butn not in use for now
+            $small_image = new SimpleImage($_FILES['image']['tmp_name']); 
+            $small_image->fit_to_height(97)->save(_VIEWS_PATH."/images/products_gallery/small/{$name_image}.jpg");
         
-        $image_id = $this->_imagesMdl->insertImage($name_image.".jpg");
+            $image_id = $this->_imagesMdl->insertImage($name_image.".jpg");
         
-        $data = array(
-            'error' => false,
-            'image_id' => $image_id
-        );
-        
-        if(!$image_id){
             $data = array(
-                'error' => true,
-                'message' => "Došlo je do greske. Pokušajte ponovo."
+                'error' => false,
+                'image_id' => $image_id
             );
-        }
         
-        $this->response($data);
+            if(!$image_id){
+                $data = array(
+                    'error' => true,
+                    'message' => "Došlo je do greske. Pokušajte ponovo."
+                );
+            }
+        
+            $this->response($data);
+        }
        
     }
     

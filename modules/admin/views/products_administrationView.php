@@ -235,8 +235,8 @@
                  $('#modal-image-product').attr("data-image-id",response.image.ID);
              }else{
                  $('#modal-image-product').attr("src", "");
-                 $('#modal-image-product').attr("data-product-id",response.product_id);
-                 $('#modal-image-product').attr("data-image-id",response.image.ID);
+                 $('#modal-image-product').attr("data-product-id",productID);
+                 //$('#modal-image-product').attr("data-image-id",response.image.ID);
                  alert(response.message);
              }
          });
