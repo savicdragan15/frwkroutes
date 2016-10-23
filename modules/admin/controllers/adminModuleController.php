@@ -80,7 +80,7 @@ class adminModuleController extends baseController{
         $categories = $this->_navigationMdl->getCategories();
         
         $this->template['categories'] = $categories;
-        Loader::loadView("adminCategories", "admin", true, $this->template);
+        Loader::loadView("admin_categories", "admin", true, $this->template);
     }
     public function insertCategory()
     {
