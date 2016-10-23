@@ -171,7 +171,7 @@
                     alert(data.message);
                     
                 }
-                
+               populateCategories(); 
             });
          });
          $('body').on('click', '#podkat_btn',function(){
