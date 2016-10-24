@@ -76,6 +76,7 @@ class adminModuleController extends baseController{
     }
     public function adminCategories()
     {
+        $this->_isAdminLogin();
         $this->template=array();
         $categories = $this->_navigationMdl->getCategories();
         
@@ -288,6 +289,7 @@ class adminModuleController extends baseController{
      * Products administration
      */
     public function productsAdministration(){
+       $this->_isAdminLogin();
        $this->template['categories'] = $this->_navigationMdl->getCategories();
        Loader::loadView("products_administration", "admin" , true, $this->template);
     }

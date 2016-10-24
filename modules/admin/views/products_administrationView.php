@@ -380,11 +380,8 @@
                   }
                 });
                 
-                $('#product_status option').each(function(){
-                    if(data.product.product_status == $(this).val())
-                      $(this).attr("selected","selected");   
-               });
-                  
+               $("#product_status").val(data.product.product_status).change();
+               
             }
            });
       });
