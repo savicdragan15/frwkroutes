@@ -2,7 +2,7 @@
     <div id="page-inner">
         <div class="row">
             <div class="col-md-12">
-                <h2>Administacij proizvoda</h2>
+                <h2>Administracija proizvoda</h2>
                 <!-- Trigger the modal with a button -->
                 <!-- <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
                 <br>
