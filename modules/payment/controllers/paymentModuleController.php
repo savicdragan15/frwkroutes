@@ -31,7 +31,7 @@ class paymentModuleController extends baseController{
                 }
                 unset($products_in_cart[1]);
                 unset($products_in_cart[2]);
-            }
+            
 
             $price_and_quantity['ukupna_cena_korpe'] = $_SESSION['korpa']['ukupna_cena_korpe'];
             $price_and_quantity['ukupno_proizvoda_u_korpi'] = $_SESSION['korpa']['ukupno_proizvoda_u_korpi'];
@@ -41,6 +41,7 @@ class paymentModuleController extends baseController{
 
             Loader::loadView("checkout", "payment", false, $this->template);
             die;
+            }
         }
         
        $this->redirect (_WEB_PATH."login");
