@@ -18,6 +18,14 @@ define("_VIEWS_PATH", $_SERVER['DOCUMENT_ROOT']."/all_shine_out/"._VIEWS_FOLDER)
 define("_CACHE_FOLDER", $_SERVER['DOCUMENT_ROOT']."/all_shine_out/views/cache/");
 
 
+/**************************** Shipping prices /******************************************/
+
+define("_POST", 5);
+define("_DHL", 6);
+define("_SELF_PICK_UP", 0);
+
+/**************************** VAT ******************************************************/
+define("_VAT", 0.2);
 /**************************Payment**********************************************************/
 define("_userID", "STUZZATWXXX_109197"); // Eps "Händler-ID"/UserID = epsp:UserId
 define("_pin", "D745FAD8B5BCA79F");      // Secret for authentication / PIN = part of epsp:MD5Fingerprint

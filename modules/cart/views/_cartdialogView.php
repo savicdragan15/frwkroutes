@@ -79,9 +79,9 @@
                                     <li id="total-price-cart"><?=number_format($products['ukupna_cena_korpe'], 2, '.', '');?> €</li>
                                 </ul>
                                 <?php if(User::isLogin()){ ?>
-                                    <a href="<?=_WEB_PATH.'payment/paymentOption/1'?>" class="red-button">Proceed to Checkout</a>
+                                    <a href="<?=_WEB_PATH.'payment/index/1'?>" class="red-button">Proceed to Checkout</a>
                                 <?php }else{?>
-                                    <a href="<?=_WEB_PATH.'payment/paymentOption/0'?>" class="red-button">Proceed to Checkout</a>
+                                    <a href="<?=_WEB_PATH.'payment/index/0'?>" class="red-button">Proceed to Checkout</a>
                                 <?php }?>
                             </div>
                         </div>

@@ -310,4 +310,25 @@ $(document).ready(function(e) {
             $(window).bind("resize", ScaleSlider);
             $(window).bind("orientationchange", ScaleSlider);
             //responsive code end
+            
         });
+        
+
+    $('body').on('click', 'input[name="shipping_type"]:checked', function(){
+        var shipping_price = $(this).attr('data-price');
+        console.log(shipping_price);
+        $('#shipping-price').html(shipping_price+" €");
+        var total_price = $('#total-price').attr('data-total-price');
+        var total = parseFloat(total_price) + parseFloat(shipping_price);
+        console.log(total);
+        $('#total-price').html(total+" €");
+    });
+    
+     var shipping_price = $('input[name="shipping_type"]:checked').attr('data-price');
+     $('#shipping-price').html(shipping_price+" €");
+        var total_price = $('#total-price').attr('data-total-price');
+        var total = parseFloat(total_price) + parseFloat(shipping_price);
+        console.log(total);
+        $('#total-price').html(total+" €");
+     
+    

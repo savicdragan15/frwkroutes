@@ -20,10 +20,33 @@ class paymentModuleController extends baseController{
         Loader::loadClass("User");
     }
     
-    public function index() {
+    public function index($login = 0) {
+        if ($login == 1 || User::isLogin()) {
+            $products_in_cart = array();
+            $price_and_quantity = array();
+
+            if (isset($_SESSION['korpa'])) {
+                foreach ($_SESSION['korpa'] as $product) {
+                    $products_in_cart[] = $product;
+                }
+                unset($products_in_cart[1]);
+                unset($products_in_cart[2]);
+            }
+
+            $price_and_quantity['ukupna_cena_korpe'] = $_SESSION['korpa']['ukupna_cena_korpe'];
+            $price_and_quantity['ukupno_proizvoda_u_korpi'] = $_SESSION['korpa']['ukupno_proizvoda_u_korpi'];
+
+            $this->template['products_in_cart'] = $products_in_cart;
+            $this->template['price_and_quantity'] = $price_and_quantity;
+
+            Loader::loadView("checkout", "payment", false, $this->template);
+            die;
+        }
         
+       $this->redirect (_WEB_PATH."login");
+       
     }
-    
+
     /**
      * Select payment option
      */

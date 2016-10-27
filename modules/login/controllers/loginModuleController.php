@@ -39,7 +39,7 @@ class loginModuleController extends baseController
                    
                    //This is scenario when user have products in cart
                    if(isset($_SESSION['korpa'])){
-                       $this->redirect(_WEB_PATH."payment/paymentOption/1");
+                       $this->redirect(_WEB_PATH."payment/index/1");
                        die;
                    }
                    

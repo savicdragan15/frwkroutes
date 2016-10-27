@@ -10,6 +10,7 @@
  * Description of paymentController
  *
  * @author Dragan
+ * @property pbject $_paymentMod Payment module
  */
 class paymentController extends frontendController{
     //put your code here
@@ -18,8 +19,8 @@ class paymentController extends frontendController{
         $this->_callMod("payment");
     }
     
-    public function index(){
-       
+    public function index($login = 0){
+       $this->_paymentMod->index($login);
     }
     
     public function paymentOption($login = 0){
