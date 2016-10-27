@@ -57,7 +57,13 @@
                                         </li>
                                         
                                         <li><a href="#" class="wish">Wish List</a></li>
-                                        <li><a href="#" class="check">Checkout</a></li>
+                                        <li>
+                                         <?php if(User::isLogin()){ ?>
+                                            <a href="<?=_WEB_PATH.'payment/index/1'?>" class="check">Checkout</a>
+                                        <?php }else{?>
+                                            <a href="<?=_WEB_PATH.'payment/index/0'?>" class="check">Checkout</a>
+                                        <?php }?>
+                                        </li>
                                         
                                         <?php if(!User::isLogin()){?>
                                              <li><a href="<?=_WEB_PATH?>register" class="account">Register</a></li>
