@@ -30,4 +30,8 @@ class paymentController extends frontendController{
     public function processPayment() {
          $this->_paymentMod->processPayment();
     }
+    
+    public function confirm() {
+         $this->_paymentMod->confirm();
+    }
 }

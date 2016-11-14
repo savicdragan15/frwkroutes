@@ -18,6 +18,8 @@ class paymentModuleController extends baseController{
     
     public function __construct() {
         Loader::loadClass("User");
+        $this->_callMdl('paymentmethods', "payment");
+        $this->_callMdl('shippingmethods', "payment");
     }
     
     public function index($login = 0) {
@@ -38,7 +40,8 @@ class paymentModuleController extends baseController{
 
             $this->template['products_in_cart'] = $products_in_cart;
             $this->template['price_and_quantity'] = $price_and_quantity;
-
+            $this->template['payment_methods'] = $this->_paymentmethodsMdl->getPaymentMethods();
+            $this->template['shipping_methods'] = $this->_shippingmethodsMdl->getShippingMethods();
             Loader::loadView("checkout", "payment", false, $this->template);
             die;
             }
@@ -65,10 +68,10 @@ class paymentModuleController extends baseController{
     }
     
     public function processPayment() {
-       
-        if(isset($_POST['submit']) && isset($_POST['type'])){
+        var_dump($_POST); die;
+        if(isset($_POST['submit']) && isset($_POST['payment_method'])){
             
-            switch ($_POST['type']) {
+            switch ($_POST['payment_method']) {
                 case 'eps':
                   $this->epsPayment(); 
                  break;
@@ -130,7 +133,7 @@ class paymentModuleController extends baseController{
         $transferMsgDetails = $this->getTransferMsgDetails();
         
       
-        $totalAmount = $_SESSION['korpa']['ukupna_cena_korpe'] * 100;
+        $totalAmount = $_POST['total_price'] * 100;
         
         $transferInitiatorDetails = $this->getTransferInitiatorDetails($totalAmount, $transferMsgDetails);
          
@@ -178,9 +181,39 @@ class paymentModuleController extends baseController{
        {
           // This is the url you have to redirect the client to.
           $redirectUrl = $soAnswer->BankResponseDetails->ClientRedirectUrl;
-          
+         // var_dump($redirectUrl); die;
           $this->redirect($redirectUrl);
        }
+    }
+    
+    public function confirm(){
+            /**
+             * @param string $plainXml Raw XML message, according to "Abbildung 6-6: PaymentConfirmationDetails" (eps Pflichtenheft 2.5)
+             * @param at\externet\eps_bank_transfer\BankConfirmationDetails $bankConfirmationDetails
+             * @return true
+             */
+            $paymentConfirmationCallback = function($plainXml, $bankConfirmationDetails)
+            {
+              // Handle "eps:StatusCode": "OK" or "NOK" or "VOK" or "UNKNOWN"
+              if ($bankConfirmationDetails->GetStatusCode() == 'OK')
+              {
+                // TODO: Do your payment completion handling here
+                // You should use $bankConfirmationDetails->GetRemittanceIdentifier();
+                  echo "OK OK";
+              }else{
+                  echo "Error";
+                  return false;
+              }
+              // True is expected to be returned, otherwise the Scheme Operator will be informed that the server could not accept the payment confirmation
+              return true; 
+            };
+            $soCommunicator = new eps_bank_transfer\SoCommunicator();
+            $soCommunicator->HandleConfirmationUrl(
+              $paymentConfirmationCallback,
+              null,                 // Optional: a callback function which is called in case of Vitality-Check
+              'php://input',        // This needs to be the raw post data received by the server. Change this only if you want to test this function with simulation data.
+              'php://output'        // This needs to be the raw output stream which is sent to the Scheme Operator. Change this only if you want to test this function with simulation data.
+            );
     }
     
 }
