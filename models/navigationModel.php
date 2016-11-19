@@ -1,5 +1,14 @@
 <?php
-
+/**
+ * @property int $ID Primary key
+ * @property string $name 
+ * @property string $link 
+ * @property string $sort 
+ * @property string $parent
+ * @property string $subparent
+ * @property string $id_parent   
+ * @property string $id_subparent 
+ */
 class navigationModel extends baseModel{
     public static $key = "ID";
     public static $table = "navigation";

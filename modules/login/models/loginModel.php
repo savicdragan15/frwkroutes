@@ -1,5 +1,16 @@
 <?php
-
+/**
+ * @property int $ID Primary key
+ * @property int $first_name 
+ * @property string $last_name 
+ * @property string $email
+ * @property string $password
+ * @property string $company
+ * @property string $salt
+ * @property string $active
+ * @property datetime $last_login
+ * @property string $status
+ */
 class loginModel extends baseModel{
     public static $key = "id";
     public static $table = "users";
