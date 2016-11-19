@@ -55,15 +55,14 @@ abstract class baseController implements base
      * 
      * 
      */
-    public function filter_input($var){
-       $var = trim($var);
-       
-       if((int)$var !== 0)
-        return filter_var($var,FILTER_SANITIZE_SPECIAL_CHARS);
-       else
-        return (int)$var;   
+    public function filter_input($var) {
+        $var = trim($var);
+        if ((int) $var !== 0)
+            return filter_var($var, FILTER_SANITIZE_SPECIAL_CHARS);
+        else
+            return $var;
     }
-    
+
     /**
      * Validate user input 
      * @param array $datas
