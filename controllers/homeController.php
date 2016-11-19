@@ -19,7 +19,7 @@ class homeController extends frontendController{
     }
     
     public function test(){
-        var_dump(User::isLogin());
+       // var_dump(User::isLogin());
        // $_SESSION['user']['user_ime'] = 'spodoba';
         
         //Session::stop();

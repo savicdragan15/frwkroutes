@@ -23,7 +23,7 @@ class productsModel extends baseModel{
         
         $this->limit = $limit;
         $this->offset = $offset;
-        $this->where = "products.product_category={$id} and products.product_status = 1";
+        $this->where = "products.product_category='{$id}' and products.product_status = 1";
 
         return $this->join();
     }
@@ -47,7 +47,7 @@ class productsModel extends baseModel{
         
         $this->limit = $limit;
         $this->offset = $offset;
-        $this->where = "products.product_category={$idcat} and products.product_subcategory='{$idsubcat}' and products.product_sub_subcategory='{$id}' and products.product_status = 1";
+        $this->where = "products.product_category='{$idcat}' and products.product_subcategory='{$idsubcat}' and products.product_sub_subcategory='{$id}' and products.product_status = 1";
 
         return $this->join();
     }

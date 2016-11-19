@@ -68,7 +68,7 @@ class paymentModuleController extends baseController{
     }
     
     public function processPayment() {
-        var_dump($_POST); die;
+       // var_dump($_POST, $_SESSION); die;
         if(isset($_POST['submit']) && isset($_POST['payment_method'])){
             
             switch ($_POST['payment_method']) {
