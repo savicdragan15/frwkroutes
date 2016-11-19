@@ -35,7 +35,7 @@ class productsModel extends baseModel{
         
         $this->limit = $limit;
         $this->offset = $offset;
-        $this->where = "products.product_category={$idcat} and products.product_subcategory={$id} and products.product_status = 1";
+        $this->where = "products.product_category='{$idcat}' and products.product_subcategory='{$id}' and products.product_status = 1";
 
         return $this->join();
     }
@@ -47,13 +47,13 @@ class productsModel extends baseModel{
         
         $this->limit = $limit;
         $this->offset = $offset;
-        $this->where = "products.product_category={$idcat} and products.product_subcategory={$idsubcat} and products.product_sub_subcategory={$id} and products.product_status = 1";
+        $this->where = "products.product_category={$idcat} and products.product_subcategory='{$idsubcat}' and products.product_sub_subcategory='{$id}' and products.product_status = 1";
 
         return $this->join();
     }
     
     public function getNumberOfRecords($category,$id){
-        $products = $this->getAll("count(ID) as 'all'", "WHERE {$category}={$id} and products.product_status = 1");
+        $products = $this->getAll("count(ID) as 'all'", "WHERE {$category}='{$id}' and products.product_status = 1");
         
         return $products[0]->all;
     }
@@ -64,9 +64,9 @@ class productsModel extends baseModel{
         );
         
         if($status == 1){
-           $this->where = "products.ID ={$id} and products.product_status = {$status}"; 
+           $this->where = "products.ID ='{$id}' and products.product_status = '{$status}'"; 
         }else{
-             $this->where = "products.ID ={$id}"; 
+             $this->where = "products.ID ='{$id}'"; 
         }
             
         
@@ -90,7 +90,7 @@ class productsModel extends baseModel{
     
    public function verifyProductPrice($id, $price){
        
-       $product = $this->getAll('count(ID) as number_records', "WHERE ID=".$id." AND product_price=".$price);
+       $product = $this->getAll('count(ID) as number_records', "WHERE ID='".$id."' AND product_price='".$price."'");
        
        if(!empty($product)){
            return $product[0];

@@ -5,7 +5,8 @@ class navigationModel extends baseModel{
     public static $table = "navigation";
     
     public function getCategoryName($id){
-        return $this->get($id, "name")->name;
+        if($this->get($id, "name"))
+           return $this->get($id, "name")->name;
     }
     
     /**

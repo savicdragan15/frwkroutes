@@ -24,8 +24,8 @@ class productsModuleController extends baseController
     public function allProductsByCategory($id,$page){
         
         $id = $this->filter_input($id);
-        
-        $category_name = $this->navigationModel->getCategoryName($id); 
+        if($id == 0) $this->redirect (_WEB_PATH."home/page404");
+        $category_name = $this->navigationModel->getCategoryName($id);
         $nubmerOfRecords = $this->productsModel->getNumberOfRecords("products.product_category",$id);
         $pagination = new Pagination($nubmerOfRecords, $page, 9 ,2);
         $offset = $pagination->offset();
@@ -68,7 +68,7 @@ class productsModuleController extends baseController
     public function allProductsBySubCategory($id,$idcat,$page){
         $id = $this->filter_input($id);
         $idcat = $this->filter_input($idcat);
-        
+        if($id == 0 || $idcat == 0) $this->redirect (_WEB_PATH."home/page404");
         $sub_category_name = $this->navigationModel->getCategoryName($id);
         
         $nubmerOfRecords = $this->productsModel->getNumberOfRecords("products.product_subcategory",$id);
@@ -116,7 +116,7 @@ class productsModuleController extends baseController
         $id = $this->filter_input($id);
         $idsubcat = $this->filter_input($idsubcat);
         $idcat = $this->filter_input($idcat);
-        
+        if($id == 0 || $idcat == 0 || $idsubcat == 0) $this->redirect (_WEB_PATH."home/page404");
         $sub_sub_category_name = $this->navigationModel->getCategoryName($id);
         
         $nubmerOfRecords = $this->productsModel->getNumberOfRecords("products.product_sub_subcategory",$id);

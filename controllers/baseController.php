@@ -57,21 +57,23 @@ abstract class baseController implements base
      */
     public function filter_input($var){
        $var = trim($var);
-       if(is_string($var) && (int)$var===0 && $var!=='0')
+       
+       if((int)$var !== 0)
         return filter_var($var,FILTER_SANITIZE_SPECIAL_CHARS);
        else
         return (int)$var;   
     }
+    
     /**
      * Validate user input 
      * @param array $datas
      * @return array
      */
     public function validate($data){
-       foreach($data as $d){
-           $this->filter_input($d);
+       foreach($data as $key => $value){
+          $d[$key] =  $this->filter_input($value);
        }
-       return $data;
+       return $d;
    }
    
     /**
