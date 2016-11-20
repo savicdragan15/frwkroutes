@@ -487,6 +487,7 @@ header nav > ul > li ul li a{display: block;}
 .cart-calculator ul.gray li { color: #000000;font: 16px 'arial' sans-serif;margin-bottom: 4.5px; }
 .cart-calculator ul.gray li:last-child { color: #000000;font-weight: 700; font-size: 26px;}
 
+.cart-calculator > .total  { float: right;}
 .cart-calculator .total a { float: left; font-family: arial; font-size: 15px; font-weight: bold;padding: 23px 26px;}
 .cart-calculator .total a:hover { background:#cc2828;  }
 

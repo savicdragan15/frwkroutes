@@ -42,7 +42,7 @@
                                 </div>
 
 <div class="row cart-calculator clearfix">
-                            <div class="span4">
+<!--                            <div class="span4">
                                 <h6>Estimate Shipping & Taxes</h6>
                                 <div class="estimate clearfix">
                                     <form>
@@ -59,9 +59,9 @@
                                         <input type="submit"  class="red-button" value="Get Quotes" >
                                     </form>
                                 </div>
-                            </div>
+                            </div>-->
 
-                            <div class="span4">
+<!--                            <div class="span4">
                                 <h6>Discount Codes</h6>
                                 <div class="estimate clearfix">
                                     <form>
@@ -69,7 +69,7 @@
                                         <input type="submit"  class="red-button" value="Get Quotes" >
                                     </form>
                                 </div>
-                            </div>
+                            </div>-->
 
                             <div class="span4 total clearfix">
                                 <ul class="black">
