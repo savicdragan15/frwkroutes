@@ -31,6 +31,7 @@ class loginModuleController extends baseController
             
             if($user && $user[0]->status == self::$userStatus){
                if(PasswordHash::verify($password, $user[0]->password)){
+                   $_SESSION['user']['user_id'] = $user[0]->ID;
                    $_SESSION['user']['first_name'] = $user[0]->first_name;
                    $_SESSION['user']['last_name'] = $user[0]->last_name;
                    $_SESSION['user']['email'] = $user[0]->email;

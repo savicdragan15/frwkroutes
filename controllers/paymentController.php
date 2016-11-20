@@ -34,4 +34,8 @@ class paymentController extends frontendController{
     public function confirm() {
          $this->_paymentMod->confirm();
     }
+    
+     public function thanks($param){
+           $this->_paymentMod->thanks($param);
+     }
 }

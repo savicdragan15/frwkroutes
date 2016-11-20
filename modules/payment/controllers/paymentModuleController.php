@@ -20,6 +20,8 @@ class paymentModuleController extends baseController{
         Loader::loadClass("User");
         $this->_callMdl('paymentmethods', "payment");
         $this->_callMdl('shippingmethods', "payment");
+        $this->_callMdl('orders', "payment");
+        $this->_callMdl('transactions', "payment");
     }
     
     public function index($login = 0) {
@@ -72,7 +74,7 @@ class paymentModuleController extends baseController{
         if(isset($_POST['submit']) && isset($_POST['payment_method'])){
             
             switch ($_POST['payment_method']) {
-                case 'eps':
+                case '1':
                   $this->epsPayment(); 
                  break;
                 default:
@@ -128,6 +130,11 @@ class paymentModuleController extends baseController{
     
     public function epsPayment(){
         
+        $_SESSION['order_information']['shipping_type'] = $_POST['shipping_type'];
+        $_SESSION['order_information']['payment_method'] = $_POST['payment_method'];
+        $_SESSION['order_information']['total_price'] = $_POST['total_price'];
+        
+        
         $this->setMerchantData();
         
         $transferMsgDetails = $this->getTransferMsgDetails();
@@ -142,11 +149,13 @@ class paymentModuleController extends baseController{
         //$transferInitiatorDetails->RemittanceIdentifier = 'Order123';             // "Zahlungsreferenz". Will be returned on payment confirmation = epi:RemittanceIdentifier
         $transferInitiatorDetails->UnstructuredRemittanceIdentifier = 'Order - ' .  uniqid(); // "Verwendungszweck". Will be returned on payment confirmation = epi:UnstructuredRemittanceIdentifier
         
+        $_SESSION['order_information']['order_id'] =  $transferInitiatorDetails->UnstructuredRemittanceIdentifier;
         // Optional:
         $transferInitiatorDetails->SetExpirationMinutes(60);     // Sets ExpirationTimeout. Value must be between 5 and 60
         
         // Optional: Include information about one or more articles = epsp:WebshopDetails
-       
+        $ukupna_cena_korpe = $_SESSION['korpa']['ukupna_cena_korpe'];
+        $ukupno_proizvoda_u_korpi = $_SESSION['korpa']['ukupno_proizvoda_u_korpi'];
         unset($_SESSION['korpa']['ukupna_cena_korpe']);
         unset($_SESSION['korpa']['ukupno_proizvoda_u_korpi']);
         
@@ -155,13 +164,14 @@ class paymentModuleController extends baseController{
             $article = new eps_bank_transfer\WebshopArticle(  // = epsp:WebshopArticle
                   $value['proizvod_naziv'],  // Article name
                   $value['proizvod_kolicina'], // Quantity
-                  (int)$value['proizvod_cena'] * 100    // Price in EUR cents
+                  (int)($value['proizvod_cena'] * 100)    // Price in EUR cents
             );
 
             $transferInitiatorDetails->WebshopArticles[] = $article;
           
         }
-        
+        $_SESSION['korpa']['ukupna_cena_korpe'] = $ukupna_cena_korpe;
+        $_SESSION['korpa']['ukupno_proizvoda_u_korpi'] = $ukupno_proizvoda_u_korpi;
         // Send TransferInitiatorDetails to Scheme Operator
         $soCommunicator = new eps_bank_transfer\SoCommunicator();
         
@@ -187,33 +197,60 @@ class paymentModuleController extends baseController{
     }
     
     public function confirm(){
-            /**
-             * @param string $plainXml Raw XML message, according to "Abbildung 6-6: PaymentConfirmationDetails" (eps Pflichtenheft 2.5)
-             * @param at\externet\eps_bank_transfer\BankConfirmationDetails $bankConfirmationDetails
-             * @return true
-             */
-            $paymentConfirmationCallback = function($plainXml, $bankConfirmationDetails)
-            {
-              // Handle "eps:StatusCode": "OK" or "NOK" or "VOK" or "UNKNOWN"
-              if ($bankConfirmationDetails->GetStatusCode() == 'OK')
-              {
+           /**
+            * @param string $plainXml Raw XML message, according to "Abbildung 6-6: PaymentConfirmationDetails" (eps Pflichtenheft 2.5)
+            * @param at\externet\eps_bank_transfer\BankConfirmationDetails $bankConfirmationDetails
+            * @return true
+            */
+           $paymentConfirmationCallback = function($plainXml, $bankConfirmationDetails)
+           {
+             
+             
+             // Handle "eps:StatusCode": "OK" or "NOK" or "VOK" or "UNKNOWN"
+             if ($bankConfirmationDetails->GetStatusCode() == 'OK')
+             {
                 // TODO: Do your payment completion handling here
-                // You should use $bankConfirmationDetails->GetRemittanceIdentifier();
-                  echo "OK OK";
-              }else{
-                  echo "Error";
-                  return false;
-              }
-              // True is expected to be returned, otherwise the Scheme Operator will be informed that the server could not accept the payment confirmation
-              return true; 
-            };
-            $soCommunicator = new eps_bank_transfer\SoCommunicator();
-            $soCommunicator->HandleConfirmationUrl(
-              $paymentConfirmationCallback,
-              null,                 // Optional: a callback function which is called in case of Vitality-Check
-              'php://input',        // This needs to be the raw post data received by the server. Change this only if you want to test this function with simulation data.
-              'php://output'        // This needs to be the raw output stream which is sent to the Scheme Operator. Change this only if you want to test this function with simulation data.
-            );
+               // You should use $bankConfirmationDetails->GetRemittanceIdentifier();
+                 
+             }
+             // True is expected to be returned, otherwise the Scheme Operator will be informed that the server could not accept the payment confirmation
+             return true; 
+           };
+           $soCommunicator = new eps_bank_transfer\SoCommunicator();
+           $soCommunicator->HandleConfirmationUrl(
+             $paymentConfirmationCallback,
+             null,                 // Optional: a callback function which is called in case of Vitality-Check
+             'php://input',        // This needs to be the raw post data received by the server. Change this only if you want to test this function with simulation data.
+             'php://output'        // This needs to be the raw output stream which is sent to the Scheme Operator. Change this only if you want to test this function with simulation data.
+           );
     }
     
+     public function thanks($param) {
+       // dump($_SESSION);
+        if ($param == 1) {
+            unset($_SESSION['korpa']['ukupna_cena_korpe']);
+            unset($_SESSION['korpa']['ukupno_proizvoda_u_korpi']);
+
+            $last_transaction_id = $this->_transactionsMdl->insertTransaction(1);
+
+            foreach ($_SESSION['korpa'] as $product) {
+                $this->_ordersMdl->insertOrder($product, $last_transaction_id);
+            }
+            echo "OK OK";
+        } else {
+            unset($_SESSION['korpa']['ukupna_cena_korpe']);
+            unset($_SESSION['korpa']['ukupno_proizvoda_u_korpi']);
+
+            $last_transaction_id = $this->_transactionsMdl->insertTransaction(0);
+
+            foreach ($_SESSION['korpa'] as $product) {
+                $this->_ordersMdl->insertOrder($product, $last_transaction_id);
+            }
+            echo "Failed";
+        }
+        unset($_SESSION['korpa']);
+        unset($_SESSION['order_information']);
+        //dump($_SESSION);
+    }
+
 }

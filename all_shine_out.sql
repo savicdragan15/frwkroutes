@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2016 at 08:28 PM
+-- Generation Time: Nov 20, 2016 at 12:30 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -106,6 +106,20 @@ INSERT INTO `navigation` (`ID`, `name`, `link`, `sort`, `parent`, `subparent`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `ID` int(10) UNSIGNED NOT NULL,
+  `transaction_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `product_quantity` int(11) NOT NULL,
+  `product_unit_price` decimal(20,2) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `payment_methods`
 --
 
@@ -175,6 +189,23 @@ INSERT INTO `shipping_methods` (`ID`, `name`, `price`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `transactions`
+--
+
+CREATE TABLE `transactions` (
+  `ID` int(10) UNSIGNED NOT NULL,
+  `transaction_id` varchar(60) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `shipping_method_id` int(11) NOT NULL,
+  `payment_method_id` int(11) NOT NULL,
+  `total_price` decimal(20,2) NOT NULL,
+  `transaction_date` datetime NOT NULL,
+  `status` varchar(1) NOT NULL COMMENT '0 - failed 1 - ok ok'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -197,7 +228,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`ID`, `first_name`, `last_name`, `email`, `password`, `company`, `salt`, `active`, `last_login`, `status`) VALUES
 (11, '', '', 'savicdragan15@facebook.com', '$2y$12$gAFPfixVUWKUSlUIYXAleOlwIE6JNNy7TyLsy0jlK3XdovseZWDzS', '', '4rmCugjw3oEDTlw8SPGd5N65f129db2558e4312021dfa4c19c4186', 1, '0000-00-00 00:00:00', 2),
-(13, '', '', 'savicdragan2707@gmail.com', '$2y$12$NldVbmRDZGRYNlRyUmZSceraucNc4pGYgBPZG1s260WpFJleRrexi', '', 'aCpMLzu41S2ymSHxyDupRL27bdc63b4bb93bf490a8172ae35bbf60', 1, '2016-11-14 19:39:30', 2),
+(13, '', '', 'savicdragan2707@gmail.com', '$2y$12$NldVbmRDZGRYNlRyUmZSceraucNc4pGYgBPZG1s260WpFJleRrexi', '', 'aCpMLzu41S2ymSHxyDupRL27bdc63b4bb93bf490a8172ae35bbf60', 1, '2016-11-19 23:50:12', 2),
 (14, '', '', 'dragan@mediaworks.io', '$2y$12$NnlCQWRvMUlaVzdNb3FCd.1zcM5EqFMaH6JSwTCD7DqQyREClx3Tm', '', 'TIlqD9L13kOM4AL09Jxrcacfdbb05da5a51648b0fe8d22b9c464b8', 1, '2016-11-04 18:32:00', 1);
 
 --
@@ -217,6 +248,12 @@ ALTER TABLE `navigation`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indexes for table `payment_methods`
 --
 ALTER TABLE `payment_methods`
@@ -232,6 +269,12 @@ ALTER TABLE `products`
 -- Indexes for table `shipping_methods`
 --
 ALTER TABLE `shipping_methods`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `transactions`
+--
+ALTER TABLE `transactions`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -255,6 +298,11 @@ ALTER TABLE `images`
 ALTER TABLE `navigation`
   MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 --
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `payment_methods`
 --
 ALTER TABLE `payment_methods`
@@ -269,6 +317,11 @@ ALTER TABLE `products`
 --
 ALTER TABLE `shipping_methods`
   MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `transactions`
+--
+ALTER TABLE `transactions`
+  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `users`
 --
