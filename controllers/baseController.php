@@ -57,7 +57,7 @@ abstract class baseController implements base
      */
     public function filter_input($var) {
         $var = trim($var);
-        if ((int) $var === 0 && is_string($var))
+        if ((int) $var === 0 && is_string($var) && $var !== '0')
             return filter_var($var, FILTER_SANITIZE_SPECIAL_CHARS);
         else
             return floatval($var);
