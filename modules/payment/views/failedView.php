@@ -3,8 +3,12 @@
 <div class="container">
     <div class="row">
         <div class="span12">
-
-          Failed
+          <div class="alert alert-danger">
+               <strong>Failed! Payment not successeded!</strong>
+          </div>
+            
+            <a href="<?=_WEB_PATH?>"  class="btn btn-default">Back to homepage</a>
+            <br><br>
         </div>
     </div>
 </div>

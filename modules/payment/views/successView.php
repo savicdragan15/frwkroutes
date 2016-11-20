@@ -3,8 +3,11 @@
 <div class="container">
     <div class="row">
         <div class="span12">
-
-         Success
+            <div class="alert alert-success">
+              <strong>Success!</strong>
+            </div>
+             <a href="<?=_WEB_PATH?>"  class="btn btn-default">Back to homepage</a>
+            <br><br>
         </div>
     </div>
 </div>

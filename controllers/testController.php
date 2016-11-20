@@ -3,7 +3,7 @@
 use duncan3dc\Laravel\BladeInstance;
 use duncan3dc\Laravel\Blade;
 use at\externet\eps_bank_transfer;
-class testController extends baseController
+class testController extends frontendController
 {
     public function __construct()
     {
@@ -13,7 +13,7 @@ class testController extends baseController
     }
     
     public function test1(){
-        var_dump($_SESSION['korpa']);
+        Loader::loadView("success", "payment");
     }
 
     public function index()
