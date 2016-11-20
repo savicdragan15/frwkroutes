@@ -23,9 +23,8 @@
                         </div>
                         <div class="span6 cheakout clearfix">
                             <h6>New Customer ? <span>Choose your Checkout options:</span></h6>
-                            <form>
-                                <input type="radio"> <label>Check out as a Guest</label> <br/>
-                                <input type="radio"> <label>Register Account</label>
+                            <form action="<?=_WEB_PATH?>register">
+                                <input type="radio" checked> <label>Register Account</label>
 
                                 <p>By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p>
                                 <input type="submit" value="continue">
