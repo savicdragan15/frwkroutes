@@ -148,5 +148,9 @@ abstract class baseController implements base
         $module ="_".$module_name."Mod";
         return $this->$module = $this->modules[$module_name."Module"];
     }
+    
+    public function page404(){
+        $this->redirect(_WEB_PATH."home/page404");
+    }
 }
 

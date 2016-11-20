@@ -113,7 +113,7 @@
                                 <div class="cart">
                                     <ul>
                                         <li class="first" id="view_cart"><a href="#"></a><span></span></li>
-                                        <li id="cart-info"><?=(isset($_SESSION['korpa']))?$_SESSION['korpa']['ukupno_proizvoda_u_korpi'].' items':'0 items'?></li>
+                                        <li id="cart-info"><?=isset($_SESSION['korpa'])?$_SESSION['korpa']['ukupno_proizvoda_u_korpi'].' items':'0 items'?></li>
                                     </ul>
                                 </div>
                             </div>

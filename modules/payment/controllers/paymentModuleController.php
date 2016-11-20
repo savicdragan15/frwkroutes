@@ -227,7 +227,9 @@ class paymentModuleController extends baseController{
     
      public function thanks($param) {
        // dump($_SESSION);
+    if(isset($_SESSION['korpa']) && isset($_SESSION['order_information'])){
         if ($param == 1) {
+            
             unset($_SESSION['korpa']['ukupna_cena_korpe']);
             unset($_SESSION['korpa']['ukupno_proizvoda_u_korpi']);
 
@@ -236,7 +238,9 @@ class paymentModuleController extends baseController{
             foreach ($_SESSION['korpa'] as $product) {
                 $this->_ordersMdl->insertOrder($product, $last_transaction_id);
             }
-            echo "OK OK";
+            unset($_SESSION['korpa']);
+            unset($_SESSION['order_information']);
+            Loader::loadView("success", "payment");
         } else {
             unset($_SESSION['korpa']['ukupna_cena_korpe']);
             unset($_SESSION['korpa']['ukupno_proizvoda_u_korpi']);
@@ -246,11 +250,14 @@ class paymentModuleController extends baseController{
             foreach ($_SESSION['korpa'] as $product) {
                 $this->_ordersMdl->insertOrder($product, $last_transaction_id);
             }
-            echo "Failed";
+            unset($_SESSION['korpa']);
+            unset($_SESSION['order_information']);
+           Loader::loadView("failed", "payment");
         }
-        unset($_SESSION['korpa']);
-        unset($_SESSION['order_information']);
-        //dump($_SESSION);
+    }else{
+        $this->page404();  
     }
+     
+  }
 
 }
