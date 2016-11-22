@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2016 at 12:30 PM
+-- Generation Time: Nov 22, 2016 at 09:34 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -117,6 +117,23 @@ CREATE TABLE `orders` (
   `product_unit_price` decimal(20,2) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`ID`, `transaction_id`, `product_id`, `product_quantity`, `product_unit_price`) VALUES
+(1, 1, 3, 1, '10.55'),
+(2, 2, 1, 1, '120.00'),
+(3, 3, 3, 1, '10.55'),
+(4, 4, 1, 1, '120.00'),
+(5, 5, 7, 1, '15.90'),
+(6, 6, 3, 1, '10.55'),
+(7, 7, 1, 1, '120.00'),
+(8, 8, 2, 1, '12.50'),
+(9, 9, 7, 1, '15.90'),
+(10, 10, 7, 1, '15.90'),
+(11, 11, 7, 1, '15.90');
+
 -- --------------------------------------------------------
 
 --
@@ -162,7 +179,8 @@ CREATE TABLE `products` (
 INSERT INTO `products` (`ID`, `product_name`, `product_description`, `product_price`, `product_quantity`, `product_category`, `product_subcategory`, `product_sub_subcategory`, `product_status`) VALUES
 (1, '3M - Car Wash Soap', '<p>3M - Car Wash Soap</p>', '12.92', 10, 1, 2, 0, 1),
 (2, 'Auto Finesse - Avalanche', '<h1 class="fn product-title">Auto Finesse - Avalanche</h1>', '20.00', 10, 1, 2, 0, 1),
-(3, 'proba123', '<p>proba</p>', '100.00', 10, 1, 2, 0, 1);
+(3, 'proba123', '<p>proba</p>', '100.00', 10, 1, 2, 0, 1),
+(7, 'proba12377777', '<p>proba</p>', '100.00', 10, 1, 2, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -203,6 +221,23 @@ CREATE TABLE `transactions` (
   `status` varchar(1) NOT NULL COMMENT '0 - failed 1 - ok ok'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `transactions`
+--
+
+INSERT INTO `transactions` (`ID`, `transaction_id`, `user_id`, `shipping_method_id`, `payment_method_id`, `total_price`, `transaction_date`, `status`) VALUES
+(1, 'Order - 5831a242b82dc', 18, 1, 1, '12.66', '2016-11-20 14:17:10', '1'),
+(2, 'Order - 5831a32ff190e', 18, 1, 1, '144.00', '2016-11-20 14:21:05', '1'),
+(3, 'Order - 5831a3a804a33', 18, 1, 1, '12.66', '2016-11-20 14:23:12', '1'),
+(4, 'Order - 5831a43a8fc81', 18, 1, 1, '144.00', '2016-11-20 14:25:30', '1'),
+(5, 'Order - 5831a468d75f3', 18, 1, 1, '19.08', '2016-11-20 14:26:19', '1'),
+(6, 'Order - 5831a6b1f2bc1', 18, 1, 1, '12.66', '2016-11-20 14:36:04', '1'),
+(7, 'Order - 5831a927520e3', 18, 2, 1, '144.00', '2016-11-20 14:46:33', '1'),
+(8, 'Order - 5831b960b6ac8', 18, 1, 1, '15.00', '2016-11-20 15:55:46', '1'),
+(9, 'Order - 5831bfb113262', 11, 1, 1, '19.08', '2016-11-20 16:24:06', '1'),
+(10, 'Order - 58321e6956954', 18, 1, 1, '19.08', '2016-11-20 23:07:44', '1'),
+(11, 'Order - 583315e37d0a7', 18, 1, 1, '19.08', '2016-11-21 16:42:33', '0');
+
 -- --------------------------------------------------------
 
 --
@@ -227,9 +262,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`ID`, `first_name`, `last_name`, `email`, `password`, `company`, `salt`, `active`, `last_login`, `status`) VALUES
-(11, '', '', 'savicdragan15@facebook.com', '$2y$12$gAFPfixVUWKUSlUIYXAleOlwIE6JNNy7TyLsy0jlK3XdovseZWDzS', '', '4rmCugjw3oEDTlw8SPGd5N65f129db2558e4312021dfa4c19c4186', 1, '0000-00-00 00:00:00', 2),
-(13, '', '', 'savicdragan2707@gmail.com', '$2y$12$NldVbmRDZGRYNlRyUmZSceraucNc4pGYgBPZG1s260WpFJleRrexi', '', 'aCpMLzu41S2ymSHxyDupRL27bdc63b4bb93bf490a8172ae35bbf60', 1, '2016-11-19 23:50:12', 2),
-(14, '', '', 'dragan@mediaworks.io', '$2y$12$NnlCQWRvMUlaVzdNb3FCd.1zcM5EqFMaH6JSwTCD7DqQyREClx3Tm', '', 'TIlqD9L13kOM4AL09Jxrcacfdbb05da5a51648b0fe8d22b9c464b8', 1, '2016-11-04 18:32:00', 1);
+(11, 'Goran', 'Mladenovic', 'savicdragan15@facebook.com', '$2y$12$gAFPfixVUWKUSlUIYXAleOlwIE6JNNy7TyLsy0jlK3XdovseZWDzS', '', '4rmCugjw3oEDTlw8SPGd5N65f129db2558e4312021dfa4c19c4186', 1, '0000-00-00 00:00:00', 2),
+(18, 'Dragan', 'Savic', 'savicdragan2707@gmail.com', '$2y$12$NldVbmRDZGRYNlRyUmZSceraucNc4pGYgBPZG1s260WpFJleRrexi', '', 'aCpMLzu41S2ymSHxyDupRL27bdc63b4bb93bf490a8172ae35bbf60', 1, '2016-11-20 13:00:59', 2),
+(14, '', '', 'dragan@mediaworks.io', '$2y$12$NnlCQWRvMUlaVzdNb3FCd.1zcM5EqFMaH6JSwTCD7DqQyREClx3Tm', '', 'TIlqD9L13kOM4AL09Jxrcacfdbb05da5a51648b0fe8d22b9c464b8', 1, '2016-11-22 19:22:24', 1);
 
 --
 -- Indexes for dumped tables
@@ -301,7 +336,7 @@ ALTER TABLE `navigation`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `payment_methods`
 --
@@ -311,7 +346,7 @@ ALTER TABLE `payment_methods`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `shipping_methods`
 --
@@ -321,12 +356,12 @@ ALTER TABLE `shipping_methods`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
