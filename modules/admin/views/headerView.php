@@ -89,7 +89,9 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="<?=_WEB_PATH?>login
                      <li>
                         <a  href="<?=_WEB_PATH?>admin/productsAdministration"><i class="fa fa-pencil fa-2x"></i>Administracija proizvoda</a>
                     </li>
-                     
+                     <li>
+                        <a  href="<?=_WEB_PATH?>admin/transactions"><i class="fa fa-credit-card fa-2x" aria-hidden="true"></i> Transakcije</a>
+                    </li>
                                        
                 </ul>
                

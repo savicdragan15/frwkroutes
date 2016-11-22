@@ -227,7 +227,7 @@ class paymentModuleController extends baseController{
     
      public function thanks($param) {
        // dump($_SESSION);
-    if(isset($_SESSION['korpa']) && isset($_SESSION['order_information'])){
+    if(isset($_SESSION['korpa'])){
         if ($param == 1) {
             
             unset($_SESSION['korpa']['ukupna_cena_korpe']);

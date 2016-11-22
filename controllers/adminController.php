@@ -77,4 +77,12 @@ class adminController extends baseController{
      public function updateCategory(){
         $this->_adminMod->updateCategory();
     }
+    
+     public function transactions(){
+        $this->_adminMod->transactions();
+    }
+    
+     public function getTransactions($page){
+        $this->_adminMod->getTransactions($page);
+    }
 }

@@ -97,7 +97,7 @@
 
                             <div class="span5">
                                 <div class="logo">
-                                    <a href="<?=_WEB_PATH?>"><img style="width: 100px; height: 70px;" src="<?=_WEB_PATH?>/views/images/1_o.jpg" alt=""></a>
+                                    <a href="<?=_WEB_PATH?>"><img style="width: 128px; height: 68px;" src="<?=_WEB_PATH?>/views/images/1_o.png" alt=""></a>
                                     <h1><a href="<?=_WEB_PATH?>">Ultra Customizable<span> All shine out </span>Theme</a></h1>
                                 </div>
                             </div>

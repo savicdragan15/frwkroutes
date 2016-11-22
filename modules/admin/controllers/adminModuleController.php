@@ -16,6 +16,7 @@ class adminModuleController extends baseController{
           $this->_callMdl("products", "products");
           $this->_callMdl("navigation");
           $this->_callMdl("images", "admin");
+          $this->_callMdl('transactions', "payment");
           Loader::loadClass("SimpleImage");
       }
       
@@ -439,6 +440,39 @@ class adminModuleController extends baseController{
         }
         
         
+    }
+    
+    public function transactions(){
+        $this->_isAdminLogin();
+        Loader::loadView('transactions', 'admin', true);
+    }
+    
+    public function getTransactions($page){
+        
+        $nubmerOfRecords = $this->_transactionsMdl->getNumberTransactions();
+        
+        $pagination = new Pagination($nubmerOfRecords, $page, 5 ,2);
+        $offset = $pagination->offset();
+        $limit = $pagination->limit();
+        $transactions = $this->_transactionsMdl->getTransactions($limit,$offset);
+        $pages = $pagination->build(); // Contains associative array with a numbers of a pages
+        
+        $error = true;
+        $message = "Došlo je do greške!";
+        
+        if(!empty($transactions)){
+            $error = false;
+            $message = "Success";  
+        }
+        
+        $data = array(
+          'error' => $error,
+          'message' => $message,
+          'transactions' => $transactions,
+          'pagination' => $pages
+        );
+        
+       $this->response($data);
     }
   
 }
