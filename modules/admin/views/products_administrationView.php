@@ -10,7 +10,7 @@
                 <!-- Table -->
             <div class="row">
                 <div class="col-md-12">
-                    <button onclick="getProducts($('.pagination > li.active').find('a').attr('data-page'));" title="Osvezi tabelu" class="btn btn-default"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+                    <button data-tooltip="tooltip"  onclick="getProducts($('.pagination > li.active').find('a').attr('data-page'));" title="Osvezi tabelu" class="btn btn-default"><i class="fa fa-refresh" aria-hidden="true"></i></button>
                     <p></p>
                   <!--   Kitchen Sink -->
                     <div class="panel panel-default">
@@ -174,6 +174,7 @@
     //When documetn ready
     $('body').ready(function(){
        getProducts();
+       $('[data-tooltip="tooltip"]').tooltip();
     });
     
     //When click on pagination page
@@ -193,7 +194,7 @@
             if(response.error == false){
                
                 $.each(response.products, function(index, value){
-                     var status = value.product_status == 1 ? '<i class="fa fa-eye" aria-hidden="true"></i>' : '<i class="fa fa-eye-slash" aria-hidden="true"></i>';
+                     var status = value.product_status == 1 ? '<i data-tooltip="tooltip" title="Proizvod vidljiv" class="fa fa-eye" aria-hidden="true"></i>' : '<i data-tooltip="tooltip" title="Na čekanju" class="fa fa-eye-slash" aria-hidden="true"></i>';
                    content +='';
                    content += '<tr>';
                    content +=    '<td>'+value.ID+'</td>';
@@ -202,19 +203,22 @@
                    content +=    '<td>'+value.product_quantity+'</td>';
                    content +=    '<td class="center">'+status+'</td>';
                    content +=    '<td>';
-                   content +=       '<button id="editImageProduct" data-product-id='+value.ID+' title="Izmeni sliku" type="button" class="btn btn-primary " data-toggle="modal" data-target="#editImage"><i class="fa fa-picture-o actions" aria-hidden="true"></i></button> &nbsp;';
-                   content +=       '<button id="editProductBtn" data-product-id='+value.ID+' title="Izmena porizvoda" type="button" class="btn btn-success " data-toggle="modal" data-target="#editProduct"><i class="fa fa-pencil actions" aria-hidden="true"></i></button>  &nbsp;';
-                   content +=       '<button title="Obirsi proizvod" type="button" class="btn btn-danger " data-toggle="modal" data-target="#123"><i class="fa fa-trash-o  actions actions-basket" aria-hidden="true"></i></button>';
+                   content +=       '<button data-tooltip="tooltip" id="editImageProduct" data-product-id='+value.ID+' title="Izmeni sliku" type="button" class="btn btn-primary " data-toggle="modal" data-target="#editImage"><i class="fa fa-picture-o actions" aria-hidden="true"></i></button> &nbsp;';
+                   content +=       '<button data-tooltip="tooltip" id="editProductBtn" data-product-id='+value.ID+' title="Izmena porizvoda" type="button" class="btn btn-success " data-toggle="modal" data-target="#editProduct"><i class="fa fa-pencil actions" aria-hidden="true"></i></button>  &nbsp;';
                    content +=    '</td>'
                    content += '</tr>';
                 });
                 
                 var pagination = '';
                 $.each(response.pagination, function(index, value){
-                        if(value == 'current'){
+                         if(value == 'current'){
                            pagination += '<li class="active"><a class="pager" data-page='+index+' href="<?=_WEB_PATH?>admin/getProducts">'+index+'</a></li>'; 
                         }else if(value == 'less' || value == 'more'){
                              pagination += '<li><a class="pager" data-page='+index+' href="<?=_WEB_PATH?>admin/getProducts">...</a></li>';
+                        }else if(value == 'last'){
+                             pagination += '<li><a title="last" class="pager" data-page='+index+' href="<?=_WEB_PATH?>admin/getProducts"> >></a></li>';
+                        }else if(value == 'first'){
+                             pagination += '<li><a title="first" class="pager" data-page='+index+' href="<?=_WEB_PATH?>admin/getProducts"><< </a></li>';
                         }else{
                             pagination += '<li><a class="pager" data-page='+index+' href="<?=_WEB_PATH?>admin/getProducts">'+index+'</a></li>';
                         }
@@ -225,6 +229,7 @@
                 $('.table-responsive').find('tbody').html(content).hide();
                 $('.table-responsive').find('tbody').html(content).show("slow");
             }
+            $('[data-tooltip="tooltip"]').tooltip();
         }, "POST"); 
       }
       

@@ -362,9 +362,20 @@ line-height: 1.428571429;
 }
 .fa-times {
     color: #c90000;
+    cursor: pointer;
 }
 .fa-check {
     color: green;
+    cursor: pointer;
+}
+.fa-spinner {
+    cursor: pointer;
+}
+.fa-eye {
+    cursor: pointer;
+}
+.fa-eye-slash {
+    cursor: pointer;
 }
 /*==============================================
     MEDIA QUERIES     

@@ -331,7 +331,7 @@ class adminModuleController extends baseController{
         //var_dump($page); die;
         $nubmerOfRecords = $this->_productsMdl->getNumberProducts();
         
-        $pagination = new Pagination($nubmerOfRecords, $page, 5 ,2);
+        $pagination = new Pagination($nubmerOfRecords, $page, 10 ,3);
         $offset = $pagination->offset();
         $limit = $pagination->limit();
         $products = $this->_productsMdl->getProducts($limit,$offset);
@@ -451,7 +451,7 @@ class adminModuleController extends baseController{
         
         $nubmerOfRecords = $this->_transactionsMdl->getNumberTransactions();
         
-        $pagination = new Pagination($nubmerOfRecords, $page, 5 ,2);
+        $pagination = new Pagination($nubmerOfRecords, $page, 10 ,3);
         $offset = $pagination->offset();
         $limit = $pagination->limit();
         $transactions = $this->_transactionsMdl->getTransactions($limit,$offset);

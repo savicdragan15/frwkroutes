@@ -10,7 +10,7 @@
                 <!-- Table -->
             <div class="row">
                 <div class="col-md-12">
-                    <button onclick="getProducts($('.pagination > li.active').find('a').attr('data-page'));" title="Osvezi tabelu" class="btn btn-default"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+                    <button data-tooltip="tooltip" onclick="getTransactions($('.pagination > li.active').find('a').attr('data-page'));" title="Osvezi tabelu" class="btn btn-default"><i class="fa fa-refresh" aria-hidden="true"></i></button>
                     <p></p>
                   <!--   Kitchen Sink -->
                     <div class="panel panel-default">
@@ -50,7 +50,26 @@
                 <!--End Advanced Tables -->
                 </div>
             </div>
-               
+            <!-- Modal view transaction -->
+                <div class="modal fade" id="viewTRansaction" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Pregled transakcije</h4>
+                            </div>
+                            <div class="modal-body">
+                                
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Zatvori <i class="fa fa-times" aria-hidden="true"></i></button>                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of view transaction modal -->   
                 
             </div>
         </div>
@@ -65,17 +84,17 @@
     
     //When documetn ready
     $('body').ready(function(){
-       getProducts();
+       getTransactions();
     });
     
     //When click on pagination page
     $('body').on('click','.pager', function(e){
          e.preventDefault();
-         getProducts($(this).attr('data-page'));
+         getTransactions($(this).attr('data-page'));
     });
     
     //Funcion for get products
-    function getProducts(page){
+    function getTransactions(page){
         data = {}
         page = typeof page !== 'undefined' ? page : 1 ;
         $('.span-loader-edit-image').show();
@@ -86,7 +105,10 @@
             if(response.error == false){
                
                 $.each(response.transactions, function(index, value){
-                     var status = value.status == 1 ? '<i class="fa fa-check" aria-hidden="true"></i>' : '<i class="fa fa-times" aria-hidden="true"></i>';
+                    var status;
+                    if(value.status == 1) status = '<i data-tooltip="tooltip" title="Uspešna transakcija" class="fa fa-check" aria-hidden="true"></i>';
+                    if(value.status == 0) status = '<i data-tooltip="tooltip" title="Neuspela transakcija" class="fa fa-times" aria-hidden="true"></i>';
+                    if(value.status == 2) status = '<i data-tooltip="tooltip" title="Započeta transakcija" class="fa fa-spinner" aria-hidden="true"></i>';
                    content +='';
                    content += '<tr>';
                     content +=    '<td>'+value.ID+'</td>';
@@ -98,8 +120,7 @@
                    content +=    '<td class="center">'+value.total_price+' €</td>';
                    content +=    '<td class="center">'+status+'</td>';
                    content +=    '<td>';
-                   content +=       '<button id="editProductBtn" data-product-id='+value.ID+' title="Izmena porizvoda" type="button" class="btn btn-success " data-toggle="modal" data-target="#editProduct"><i class="fa fa-pencil actions" aria-hidden="true"></i></button>  &nbsp;';
-                   content +=       '<button title="Obirsi proizvod" type="button" class="btn btn-danger " data-toggle="modal" data-target="#123"><i class="fa fa-trash-o  actions actions-basket" aria-hidden="true"></i></button>';
+                   content +=       '<button data-tooltip="tooltip" id="editProductBtn" data-product-id='+value.ID+' title="Vidi" type="button" class="btn btn-success " data-toggle="modal" data-target="#viewTRansaction"><i class="fa fa-search" aria-hidden="true"></i></button>  &nbsp;';
                    content +=    '</td>'
                    content += '</tr>';
                 });
@@ -110,6 +131,10 @@
                            pagination += '<li class="active"><a class="pager" data-page='+index+' href="<?=_WEB_PATH?>admin/getProducts">'+index+'</a></li>'; 
                         }else if(value == 'less' || value == 'more'){
                              pagination += '<li><a class="pager" data-page='+index+' href="<?=_WEB_PATH?>admin/getProducts">...</a></li>';
+                        }else if(value == 'last'){
+                             pagination += '<li><a title="last" class="pager" data-page='+index+' href="<?=_WEB_PATH?>admin/getProducts"> >></a></li>';
+                        }else if(value == 'first'){
+                             pagination += '<li><a title="first" class="pager" data-page='+index+' href="<?=_WEB_PATH?>admin/getProducts"><< </a></li>';
                         }else{
                             pagination += '<li><a class="pager" data-page='+index+' href="<?=_WEB_PATH?>admin/getProducts">'+index+'</a></li>';
                         }
@@ -120,6 +145,7 @@
                 $('.table-responsive').find('tbody').html(content).hide();
                 $('.table-responsive').find('tbody').html(content).show("slow");
             }
+            $('[data-tooltip="tooltip"]').tooltip(); 
         }, "POST"); 
       }
       
