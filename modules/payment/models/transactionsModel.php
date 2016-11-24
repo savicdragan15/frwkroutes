@@ -43,4 +43,18 @@ class transactionsModel extends baseModel{
        $transactions = $this->getAll("count(ID) as 'all'");
        return $transactions[0]->all;
    }
+   
+   public function getLastTransaction($user_id){
+       $this->where = "transactions.user_id = '$user_id'";
+       $this->orderBy = "transactions.ID DESC";
+       $this->limit = 1;
+       if(!empty($this->getAll('transactions.ID')))
+           return $this->getAll('transactions.ID')[0];
+   }
+   
+   public function updateTrasactionStatus($transaction_id, $status){
+       $this->ID = (int)$transaction_id;
+       $this->status = $status;
+       $this->update();
+   }
 }

@@ -159,16 +159,19 @@ class paymentModuleController extends baseController{
         unset($_SESSION['korpa']['ukupna_cena_korpe']);
         unset($_SESSION['korpa']['ukupno_proizvoda_u_korpi']);
         
-        foreach ($_SESSION['korpa'] as $key => $value) {
+        //transaction in payment process
+        $last_transaction_id = $this->_transactionsMdl->insertTransaction(2);
+
+        foreach ($_SESSION['korpa'] as $key => $product) {
             
             $article = new eps_bank_transfer\WebshopArticle(  // = epsp:WebshopArticle
-                  $value['proizvod_naziv'],  // Article name
-                  $value['proizvod_kolicina'], // Quantity
-                  (int)($value['proizvod_cena'] * 100)    // Price in EUR cents
+                  $product['proizvod_naziv'],  // Article name
+                  $product['proizvod_kolicina'], // Quantity
+                  (int)($product['proizvod_cena'] * 100)    // Price in EUR cents
             );
 
             $transferInitiatorDetails->WebshopArticles[] = $article;
-          
+            $this->_ordersMdl->insertOrder($product, $last_transaction_id);
         }
         $_SESSION['korpa']['ukupna_cena_korpe'] = $ukupna_cena_korpe;
         $_SESSION['korpa']['ukupno_proizvoda_u_korpi'] = $ukupno_proizvoda_u_korpi;
@@ -226,37 +229,20 @@ class paymentModuleController extends baseController{
     }
     
      public function thanks($param) {
-       // dump($_SESSION);
-    if(isset($_SESSION['korpa'])){
+        //if transaction success
         if ($param == 1) {
-            
-            unset($_SESSION['korpa']['ukupna_cena_korpe']);
-            unset($_SESSION['korpa']['ukupno_proizvoda_u_korpi']);
-
-            $last_transaction_id = $this->_transactionsMdl->insertTransaction(1);
-
-            foreach ($_SESSION['korpa'] as $product) {
-                $this->_ordersMdl->insertOrder($product, $last_transaction_id);
-            }
+            $last_transaction_id = $this->_transactionsMdl->getLastTransaction($_SESSION['user']['user_id']);
+            $this->_transactionsMdl->updateTrasactionStatus($last_transaction_id->ID, 1);
             unset($_SESSION['korpa']);
             unset($_SESSION['order_information']);
             Loader::loadView("success", "payment");
         } else {
-            unset($_SESSION['korpa']['ukupna_cena_korpe']);
-            unset($_SESSION['korpa']['ukupno_proizvoda_u_korpi']);
-
-            $last_transaction_id = $this->_transactionsMdl->insertTransaction(0);
-
-            foreach ($_SESSION['korpa'] as $product) {
-                $this->_ordersMdl->insertOrder($product, $last_transaction_id);
-            }
+            $last_transaction_id = $this->_transactionsMdl->getLastTransaction($_SESSION['user']['user_id']);
+            $this->_transactionsMdl->updateTrasactionStatus($last_transaction_id->ID, 0);
             unset($_SESSION['korpa']);
             unset($_SESSION['order_information']);
            Loader::loadView("failed", "payment");
         }
-    }else{
-        $this->page404();  
-    }
      
   }
 
