@@ -8,6 +8,10 @@ use Kilte\Pagination\Pagination;
  * @property string $_imagesMdl Images model 
  * @property object $_navigationMdl Navigation model
  * @property object $_productsMdl Products model
+ * @property object $_transactionsMdl Transactions model
+ * @property object $_ordersMdl Orders model
+ * @property object $_usersMdl Users model
+ * @property object $_shippingmethodsMdl Users model
  */
 
 class adminModuleController extends baseController{
@@ -17,6 +21,9 @@ class adminModuleController extends baseController{
           $this->_callMdl("navigation");
           $this->_callMdl("images", "admin");
           $this->_callMdl('transactions', "payment");
+          $this->_callMdl('orders', 'payment');
+          $this->_callMdl('users', 'register');
+          $this->_callMdl('shippingmethods', 'payment');
           Loader::loadClass("SimpleImage");
       }
       
@@ -490,5 +497,21 @@ class adminModuleController extends baseController{
         
        $this->response($data);
     }
-  
+    
+   public function getTransactionDetails($transaction_id){
+       
+      $products = array(); 
+      $transaction_id = $this->filter_input($transaction_id);
+      
+      //transaction
+      $this->template['transaction'] = $this->_transactionsMdl->getTransaction($transaction_id);
+      $this->template['shipping_method'] = $this->_shippingmethodsMdl->getShippingMethod($this->template['transaction']->shipping_method_id);
+      //user
+      $this->template['user'] = $this->_usersMdl->get($this->template['transaction']->user_id);
+      
+      //transaction detail
+      $this->template['transaction_detail'] = $this->_ordersMdl->getOrderByTransactionId($transaction_id);
+      
+      Loader::loadPartialView("_transaction_details", "admin", false, $this->template);
+   }
 }

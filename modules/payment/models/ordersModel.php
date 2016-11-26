@@ -19,4 +19,14 @@ class ordersModel extends baseModel{
        return $this->insert();
     }
     
+    public function getOrderByTransactionId($transaction_id){
+         $this->select = "orders.ID as orderProductId, orders.transaction_id , orders.product_id as orderProductID, orders.product_quantity as orderProductQuantity,
+             orders.product_unit_price, products.ID, products.product_name ";
+         $this->join = array( 
+            array("table"=>"products","relation"=>"orders.product_id = products.ID")
+        );
+        $this->where = "transaction_id = '$transaction_id'";
+        return $this->join();
+    }
+    
 }

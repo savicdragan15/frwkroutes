@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.6.1/css/themes/bootstrap.min.css"/>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
     <link rel="stylesheet" href="<?=_WEB_PATH?>modules/admin/views/assets/js/dataTables/dataTables.bootstrap.css" />
+     <link rel="stylesheet" href="<?=_WEB_PATH?>modules/admin/views/assets/css/pgwmodal.css" />
     <!-- End CSS ALERTIFY -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
    <script src="<?=_WEB_PATH?>modules/admin/views/assets/js/notify.js"></script>
@@ -38,7 +39,7 @@
    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
    <!-- form validate -->
     <script src="<?=_WEB_PATH?>modules/admin/views/assets/js/formValidate.js"></script>
-   
+    <script src="<?=_WEB_PATH?>modules/admin/views/assets/js/pgwmodal.min.js"></script>
  <script>
     tinymce.init({ 
       selector:'textarea', 

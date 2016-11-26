@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2016 at 09:34 PM
+-- Generation Time: Nov 26, 2016 at 09:09 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -40,8 +40,8 @@ INSERT INTO `images` (`ID`, `product_id`, `image_name`) VALUES
 (1, 1, '580b8c34c37532016-10-22.jpg'),
 (3, 2, '580b8daca974f2016-10-22.jpg'),
 (4, NULL, '581cd45f05dc02016-11-04.jpg'),
-(5, NULL, '581cd46f000002016-11-04.jpg'),
-(6, 3, '581cd4c030d402016-11-04.jpg');
+(5, 7, '583752b3181f02016-11-24.jpg'),
+(6, 3, '58375277356b02016-11-24.jpg');
 
 -- --------------------------------------------------------
 
@@ -132,7 +132,8 @@ INSERT INTO `orders` (`ID`, `transaction_id`, `product_id`, `product_quantity`, 
 (8, 8, 2, 1, '12.50'),
 (9, 9, 7, 1, '15.90'),
 (10, 10, 7, 1, '15.90'),
-(11, 11, 7, 1, '15.90');
+(11, 11, 7, 1, '15.90'),
+(12, 1, 2, 1, '10.55');
 
 -- --------------------------------------------------------
 
@@ -180,7 +181,7 @@ INSERT INTO `products` (`ID`, `product_name`, `product_description`, `product_pr
 (1, '3M - Car Wash Soap', '<p>3M - Car Wash Soap</p>', '12.92', 10, 1, 2, 0, 1),
 (2, 'Auto Finesse - Avalanche', '<h1 class="fn product-title">Auto Finesse - Avalanche</h1>', '20.00', 10, 1, 2, 0, 1),
 (3, 'proba123', '<p>proba</p>', '100.00', 10, 1, 2, 0, 1),
-(7, 'proba12377777', '<p>proba</p>', '100.00', 10, 1, 2, 0, 1);
+(7, 'proba12377777', '&#60;p&#62;proba&#60;/p&#62;', '100.00', 10, 1, 2, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -226,7 +227,7 @@ CREATE TABLE `transactions` (
 --
 
 INSERT INTO `transactions` (`ID`, `transaction_id`, `user_id`, `shipping_method_id`, `payment_method_id`, `total_price`, `transaction_date`, `status`) VALUES
-(1, 'Order - 5831a242b82dc', 18, 1, 1, '12.66', '2016-11-20 14:17:10', '1'),
+(1, 'Order - 5831a242b82dc', 18, 1, 1, '12.66', '2016-11-20 14:17:10', '2'),
 (2, 'Order - 5831a32ff190e', 18, 1, 1, '144.00', '2016-11-20 14:21:05', '1'),
 (3, 'Order - 5831a3a804a33', 18, 1, 1, '12.66', '2016-11-20 14:23:12', '1'),
 (4, 'Order - 5831a43a8fc81', 18, 1, 1, '144.00', '2016-11-20 14:25:30', '1'),
@@ -263,8 +264,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`ID`, `first_name`, `last_name`, `email`, `password`, `company`, `salt`, `active`, `last_login`, `status`) VALUES
 (11, 'Goran', 'Mladenovic', 'savicdragan15@facebook.com', '$2y$12$gAFPfixVUWKUSlUIYXAleOlwIE6JNNy7TyLsy0jlK3XdovseZWDzS', '', '4rmCugjw3oEDTlw8SPGd5N65f129db2558e4312021dfa4c19c4186', 1, '0000-00-00 00:00:00', 2),
-(18, 'Dragan', 'Savic', 'savicdragan2707@gmail.com', '$2y$12$NldVbmRDZGRYNlRyUmZSceraucNc4pGYgBPZG1s260WpFJleRrexi', '', 'aCpMLzu41S2ymSHxyDupRL27bdc63b4bb93bf490a8172ae35bbf60', 1, '2016-11-20 13:00:59', 2),
-(14, '', '', 'dragan@mediaworks.io', '$2y$12$NnlCQWRvMUlaVzdNb3FCd.1zcM5EqFMaH6JSwTCD7DqQyREClx3Tm', '', 'TIlqD9L13kOM4AL09Jxrcacfdbb05da5a51648b0fe8d22b9c464b8', 1, '2016-11-22 19:22:24', 1);
+(18, 'Dragan', 'Savic', 'savicdragan2707@gmail.com', '$2y$12$NldVbmRDZGRYNlRyUmZSceraucNc4pGYgBPZG1s260WpFJleRrexi', '', 'aCpMLzu41S2ymSHxyDupRL27bdc63b4bb93bf490a8172ae35bbf60', 1, '2016-11-24 19:33:59', 2),
+(14, '', '', 'dragan@mediaworks.io', '$2y$12$NnlCQWRvMUlaVzdNb3FCd.1zcM5EqFMaH6JSwTCD7DqQyREClx3Tm', '', 'TIlqD9L13kOM4AL09Jxrcacfdbb05da5a51648b0fe8d22b9c464b8', 1, '2016-11-26 09:37:02', 1);
 
 --
 -- Indexes for dumped tables
@@ -336,7 +337,7 @@ ALTER TABLE `navigation`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `payment_methods`
 --

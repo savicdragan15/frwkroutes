@@ -16,4 +16,8 @@ class shippingmethodsModel extends baseModel{
         return $this->getAll();
     }
     
+   public function getShippingMethod($id){
+      $this->where = "ID = '$id' and status = '1'";
+      return $this->getAll()[0];
+   }
 }

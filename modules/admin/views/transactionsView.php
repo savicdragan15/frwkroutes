@@ -53,10 +53,10 @@
                 </div>
             </div>
             <!-- Modal view transaction -->
-                <div class="modal fade" id="viewTRansaction" role="dialog">
+<!--                <div class="modal fade" id="viewTRansaction" role="dialog">
                     <div class="modal-dialog">
 
-                        <!-- Modal content-->
+                         Modal content
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -70,7 +70,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
                 <!-- End of view transaction modal -->   
                 
             </div>
@@ -122,7 +122,7 @@
                    content +=    '<td class="center">'+value.total_price+' €</td>';
                    content +=    '<td class="center">'+status+'</td>';
                    content +=    '<td>';
-                   content +=       '<button data-tooltip="tooltip" id="editProductBtn" data-product-id='+value.ID+' title="Vidi" type="button" class="btn btn-success " data-toggle="modal" data-target="#viewTRansaction"><i class="fa fa-search" aria-hidden="true"></i></button>  &nbsp;';
+                   content +=       '<button data-tooltip="tooltip" id="viewTransaction" data-product-id='+value.ID+' title="Vidi" type="button" class="btn btn-success " data-toggle="modal" data-target="#viewTRansaction"><i class="fa fa-search" aria-hidden="true"></i></button>  &nbsp;';
                    content +=    '</td>'
                    content += '</tr>';
                 });
@@ -242,85 +242,24 @@
       /**
       * When click on edit product
        */
-      $('body').on('click', '#editProductBtn', function(){
-        //console.log($(this).attr('data-product-id'));
-           var product_id  = $(this).attr('data-product-id');
-           data = {
-               'product_status' : 5
-           }
-           ajaxCall(data, "<?=_WEB_PATH?>admin/getProduct/"+product_id+"", function(data){
-               data = JSON.parse(data);
-               //console.log(data);
-            if(data.error == false){
-                $('#btn_update').attr('data-product-id', data.product.product_id);
-                $('#proizvod_naziv').val(data.product.product_name);
-                tinyMCE.activeEditor.setContent(data.product.product_description);
-                $('#proizvod_kolicina').val(data.product.product_quantity);
-                $('#proizvod_cena').val(data.product.product_price);
-                $('#product_status option').prop("value ="+data.product.product_status);
-
-                $('#category option').each(function(){
-                    if(data.product.product_category == $(this).val())
-                      $(this).attr("selected","selected");   
-                });
-                
-                var categoryID = {
-                    'category_id' : data.product.product_category,
-                    'subcategory_id' : data.product.product_subcategory
-                };
-                 $('#subcategory').empty();
-                //get subcategories
-                ajaxCall(categoryID, "<?=_WEB_PATH?>admin/getSubcategories/", function(data){
-                        data = JSON.parse(data);
-                        if(data.error == false){
-                            
-                          $.each(data.data, function(index, value){
-                            //console.log(value);
-                            var content = "<option value="+value.ID+">"+value.name+"</option>";
-                            $('#subcategory').append(content);
-                            $('#subcategory option').each(function(){
-                                //console.log(value);
-                               if(data.subcategory_id == value.ID){
-                                    $(this).attr("selected","selected");
-                               }
-                           });
-                      });
-                  }else{
-                      $('#subcategory').append("<option value='0'>"+data.message+"</option>"); 
-                  }
-                });
-                
-                var subcategory_id = {
-                    'subcategory_id' : data.product.product_subcategory,
-                    'sub_subcategory_id' : data.product.product_sub_subcategory
-                };
-                
-                //get sub subcategories
-                ajaxCall(subcategory_id, "<?=_WEB_PATH?>admin/getSubSubCategories/", function(data){
-                        data = JSON.parse(data);
-                        $('#sub_subcategory').empty();
-                        
-                        if(data.error == false){
-                            
-                          $.each(data.data, function(index, value){
-                            //console.log(value);
-                            var content = "<option value="+value.ID+">"+value.name+"</option>";
-                            $('#sub_subcategory').append(content);
-                            $('#sub_subcategory option').each(function(){
-                                if(value.ID == data.sub_subcategory_id)
-                                  $(this).attr("selected","selected");   
-                          });
-                      });
-                  }else{
-                      $('#sub_subcategory').append("<option value='0'>"+data.message+"</option>");
-                  }
-                });
-                
-               $("#product_status").val(data.product.product_status).change();
-               
-            }
-           });
+      $('body').on('click', '#viewTransaction', function(){
+          
+           var transaction_id  = $(this).attr('data-product-id');
+           $.pgwModal({
+                url: '<?=_WEB_PATH?>/admin/getTransactionDetails/'+transaction_id, // Returns the object "{status: 200, response: '<div class="user">John Doe</div>'}"
+                maxWidth : 1200,
+                ajaxOptions : {
+                    success : function(data) {
+                        if (data) {
+                            $.pgwModal({ pushContent: data });
+                        } else {
+                            $.pgwModal({ pushContent: 'An error has occured' });
+                        }
+                    }
+                }
+            });
       });
+      
     $(document).ready(function(){
     
        $('body').on('click', '#btn_update', function(e){
