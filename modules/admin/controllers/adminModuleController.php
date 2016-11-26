@@ -338,19 +338,27 @@ class adminModuleController extends baseController{
         $pages = $pagination->build(); // Contains associative array with a numbers of a pages
         
         $error = true;
-        $message = "Došlo je do greške!";
+        $message = "Nema podataka!";
         
         if(!empty($products)){
          $error = false;
          $message = "Success";  
-        }
-        
-        $data = array(
+         
+         $data = array(
           'error' => $error,
           'message' => $message,
           'products' => $products,
-          'pagination' => $pages
+          'pagination' => $pages,
+          'total_pages' => $pagination->totalPages(),
+          'current_page' => $pagination->currentPage()
         );
+         
+        }else{
+            $data = array(
+              'error' => $error,
+              'message' => $message
+            );
+        }
         
        $this->response($data);
     }
@@ -458,19 +466,27 @@ class adminModuleController extends baseController{
         $pages = $pagination->build(); // Contains associative array with a numbers of a pages
         
         $error = true;
-        $message = "Došlo je do greške!";
+        $message = "Nema podataka";
         
         if(!empty($transactions)){
             $error = false;
-            $message = "Success";  
+            $message = "Success";
+            
+            $data = array(
+              'error' => $error,
+              'message' => $message,
+              'transactions' => $transactions,
+              'pagination' => $pages,
+              'total_pages' => $pagination->totalPages(),
+              'current_page' => $pagination->currentPage()
+            );
+            
+        }else{
+           $data = array(
+              'error' => $error,
+              'message' => $message
+            ); 
         }
-        
-        $data = array(
-          'error' => $error,
-          'message' => $message,
-          'transactions' => $transactions,
-          'pagination' => $pages
-        );
         
        $this->response($data);
     }
