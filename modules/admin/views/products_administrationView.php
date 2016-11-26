@@ -223,10 +223,6 @@
                            pagination += '<li class="active"><a class="pager" data-page='+index+' href="<?=_WEB_PATH?>admin/getProducts">'+index+'</a></li>'; 
                         }else if(value == 'less' || value == 'more'){
                              pagination += '<li><a class="pager" data-page='+index+' href="<?=_WEB_PATH?>admin/getProducts">...</a></li>';
-                        }else if(value == 'last'){
-                             pagination += '<li><a title="last" class="pager" data-page='+index+' href="<?=_WEB_PATH?>admin/getProducts"> >></a></li>';
-                        }else if(value == 'first'){
-                             pagination += '<li><a title="first" class="pager" data-page='+index+' href="<?=_WEB_PATH?>admin/getProducts"><< </a></li>';
                         }else{
                             pagination += '<li><a class="pager" data-page='+index+' href="<?=_WEB_PATH?>admin/getProducts">'+index+'</a></li>';
                         }
