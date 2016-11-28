@@ -9,7 +9,7 @@ define("_DEFAULT_CONTROLLER", "home");
 
 define('_WEB_PATH',"http://".$_SERVER['HTTP_HOST'].str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']));
 
-define("_NEW_PRODUCT_HOME_PAGE",4);
+define("_NEW_PRODUCT_HOME_PAGE",6);
 
 define("_VIEWS_FOLDER", "views");
 define("_FOLDER_CLASSES", "classes");

@@ -18,6 +18,8 @@
         "symfony/var-dumper": "^3.1",
         "duncan3dc/blade" : "2.2.1",
         "hakito/php-stuzza-eps-banktransfer": "^1.2",
-        "phelium/mysql-backup": "dev-master"
+        "phelium/mysql-backup": "dev-master",
+        "blueimp/jquery-file-upload": "^9.14",
+        "datatables/datatables": "^1.10"
     }
 }

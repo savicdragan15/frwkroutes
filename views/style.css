@@ -192,17 +192,27 @@ header nav > ul > li ul li a{display: block;}
 .heading h2 { border-bottom:1px solid #e9e9e9; background: #474747; position: relative; padding: 10px 20px; color: #ffffff; display: inline-block;  }
 .heading h2 span { width: 23px;height: 48.4px; display: block;position: absolute; right: -23px; top: -1px; background: url("images/heading-errow.png") no-repeat;}
 
-.product { margin-bottom: 30px;-webkit-transition:  0.5s; -moz-transition:  0.5s; -o-transition: 0.5s; -ms-transition: 0.5s;}
+.product { border: 1px solid #dfdfdf; margin-bottom: 30px;-webkit-transition:  0.5s; -moz-transition:  0.5s; -o-transition: 0.5s; -ms-transition: 0.5s;}
 .product figure { position: relative;width: 270px; height: 250px !important;}
 .product figure > a { width: 270px; height: 250px; }
-.product figure > a > img { width: 100%; height: 100%; }
+.product figure > a > img { width: 99%; height: 100%; }
 
 .product figure .overlay { display: none; padding: 20px 0px; margin-left: -64px; margin-top: -42px;  width: 128px; text-align: center; position: absolute; top: 50%; left: 50%;  background: rgba(237,60,60,0.7); }
 .product figure .overlay a { width: 41px; height: 41px;  display: inline-block; background-position: 0px 0px; }
 .product figure .overlay a.zoom { background: url("images/zoom.png") no-repeat; }
 .product figure .overlay a.link { background: url("images/link.png") no-repeat; }
 
-.detail { background: #f9f9f9;text-align: center; border: 1px solid #dfdfdf; border-top: 0px; padding: 10px 0px;;-webkit-transition: background-color 0.5s; -moz-transition: background-color 0.5s; -o-transition: background-color 0.5s; -ms-transition: background-color 0.5s; }
+.detail { 
+/*        background: #f9f9f9;*/
+         text-align: center;
+         border: 1px solid #dfdfdf;
+         border-top: 0px; 
+         padding: 10px 0px;;
+         -webkit-transition: background-color 0.5s; 
+         -moz-transition: background-color 0.5s; 
+         -o-transition: background-color 0.5s;
+         -ms-transition: background-color 0.5s; 
+}
 .detail span {font:700 16px 'Arial' sans-serif; color: #f71919; margin-bottom: 5px;}
 .detail h4 { margin-bottom: 5px;}
 

@@ -27,7 +27,8 @@
                 <link rel="stylesheet" href="<?=_WEB_PATH?>/views/css/pgwmodal.css">
                 <link rel="stylesheet" href="<?=_WEB_PATH?>/views/css/alertify/alertify.core.css">
                 <link rel="stylesheet" href="<?=_WEB_PATH?>/views/css/alertify/alertify.default.css">
-                
+                <link rel="stylesheet" type="text/css" href="<?=_WEB_PATH?>views/js/slick-1.6.0/slick/slick.css"/>
+                <link rel="stylesheet" type="text/css" href="<?=_WEB_PATH?>views/js/slick-1.6.0/slick/slick-theme.css"/>
 				
                 <!-- favicon -->
                 <link rel="shortcut icon" href="<?=_WEB_PATH?>/views/images/favicon.jpg">
