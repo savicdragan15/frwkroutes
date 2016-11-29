@@ -11,7 +11,7 @@
                 <meta name="viewport" content="width=device-width" />
 
                 <!-- Title -->
-                <title>All shine out</title>
+                <title>All out shine</title>
 
                 <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,700,600,800' rel='stylesheet' type='text/css'>
                 <link href='http://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
@@ -99,7 +99,7 @@
                             <div class="span5">
                                 <div class="logo">
                                     <a href="<?=_WEB_PATH?>"><img style="width: 128px; height: 68px;" src="<?=_WEB_PATH?>/views/images/1_o.png" alt=""></a>
-                                    <h1><a href="<?=_WEB_PATH?>">Ultra Customizable<span> All shine out </span>Theme</a></h1>
+                                    <h1><a href="<?=_WEB_PATH?>"><span> All out shine </span></a></h1>
                                 </div>
                             </div>
 
