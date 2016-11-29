@@ -53,7 +53,14 @@ class adminModuleController extends baseController{
         
         if(isset($_POST['image_id'])){
             
+            $_POST['product_description'] =  strip_tags($_POST['product_description'],'<code><p>');
+            $_POST['product_description'] = str_replace("'", '"', $_POST['product_description']);
+            $description = $_POST['product_description'];
+            unset($_POST['product_description']);
             $data = $this->validate($_POST);
+            
+            $data['product_description'] = $description;
+            
             $product_id = $this->_productsMdl->insertProduct($data);
             
             $error = true;
@@ -372,8 +379,15 @@ class adminModuleController extends baseController{
     
     public function updateProduct(){
         
+        $_POST['product_description'] =  strip_tags($_POST['product_description'],'<code><p><span><strong><i><u><em>');
+        $_POST['product_description'] = str_replace("'", '"', $_POST['product_description']);
+        $description = $_POST['product_description'];
+        unset($_POST['product_description']);
+            
         $data = $this->validate($_POST);
         
+        $data['product_description'] = $description;
+        //var_dump($data); die;
         $update = $this->_productsMdl->updateProduct($data);
         
         $error = true;

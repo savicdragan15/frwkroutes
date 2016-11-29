@@ -419,7 +419,7 @@
                  });
                 
             $('.product-slick').slick({
-                dots: false,
+                dots: true,
                 infinite: true,
                 speed: 300,
                 slidesToShow: 4,
@@ -428,22 +428,7 @@
                 slidesToScroll: 1
             });
             
-            
-            $('.slider-slick').slick({
-              dots: true,
-              infinite: true,
-              speed: 500,
-              fade: true,
-              slidesToShow: 1,
-               slidesToScroll: 1,
-//              cssEase: 'linear',
-//              centerMode: true,
-              focusOnSelect: true,
-              variableWidth: true,
-              centerPadding: '60px',
-            });
-            
-            <!-- Initialize Swiper -->
+        <!-- Initialize Swiper -->
    
     var swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
