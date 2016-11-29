@@ -428,6 +428,13 @@
                 slidesToScroll: 1
             });
             
+           $(".regular").slick({
+                dots: true,
+                infinite: true,
+                slidesToShow: 3,
+                slidesToScroll: 3
+          });
+            
         <!-- Initialize Swiper -->
    
     var swiper = new Swiper('.swiper-container', {
@@ -435,7 +442,9 @@
         paginationClickable: true,
         nextButton: '.swiper-button-next',
         prevButton: '.swiper-button-prev',
-        spaceBetween: 30
+        spaceBetween: 30,
+        autoplay: 8000,
+        effect: 'fade'
     });
     </script>
           
