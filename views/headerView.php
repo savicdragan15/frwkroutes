@@ -29,13 +29,13 @@
                 <link rel="stylesheet" href="<?=_WEB_PATH?>/views/css/alertify/alertify.default.css">
                 <link rel="stylesheet" type="text/css" href="<?=_WEB_PATH?>views/js/slick-1.6.0/slick/slick.css"/>
                 <link rel="stylesheet" type="text/css" href="<?=_WEB_PATH?>views/js/slick-1.6.0/slick/slick-theme.css"/>
-				
+                <link rel="stylesheet" type="text/css" href="<?=_WEB_PATH?>views/js/swiper/css/swiper.min.css" />
                 <!-- favicon -->
                 <link rel="shortcut icon" href="<?=_WEB_PATH?>/views/images/favicon.jpg">
-
+                
             <!-- Include the HTML5 shiv print polyfill for Internet Explorer browsers 8 and below -->
             <!--[if lt IE 10]><script src="js/html5shiv-printshiv.js" media="all"></script><![endif]-->
-            
+    
 		</head>
 		<body>				
                     <!-- HEADER -->

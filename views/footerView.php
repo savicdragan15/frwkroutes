@@ -106,9 +106,8 @@
                 <script src="<?=_WEB_PATH?>/views/js/pgwmodal.min.js"></script>
                 <script src="<?=_WEB_PATH?>/views/js/alertify.min.js"></script>
                 <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
-                <script type="text/javascript" src="<?=_WEB_PATH?>/views/js/jssor.slider-21.1.5.mini.js"></script>
-                <script src="<?=_WEB_PATH?>/views/js/custom.js"></script>
-                
+                <script type="text/javascript" src="<?=_WEB_PATH?>/views/js/custom.js"></script>
+                <script type="text/javascript" src="<?=_WEB_PATH?>views/js/swiper/js/swiper.js"></script>
                 <?php 
                      
                  if(isset($params['controllerMethod'])){
@@ -420,7 +419,7 @@
                  });
                 
             $('.product-slick').slick({
-                dots: true,
+                dots: false,
                 infinite: true,
                 speed: 300,
                 slidesToShow: 4,
@@ -428,8 +427,33 @@
                 variableWidth: true,
                 slidesToScroll: 1
             });
-
-            </script>
+            
+            
+            $('.slider-slick').slick({
+              dots: true,
+              infinite: true,
+              speed: 500,
+              fade: true,
+              slidesToShow: 1,
+               slidesToScroll: 1,
+//              cssEase: 'linear',
+//              centerMode: true,
+              focusOnSelect: true,
+              variableWidth: true,
+              centerPadding: '60px',
+            });
+            
+            <!-- Initialize Swiper -->
+   
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        spaceBetween: 30
+    });
+    </script>
+          
             
         </body>
 </html>
