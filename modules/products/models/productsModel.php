@@ -130,6 +130,7 @@ class productsModel extends baseModel{
    public function getProducts($limit,$offset){
        $this->limit = $limit;
        $this->offset = $offset;
+       $this->orderBy = "products.ID DESC";
        return $this->getAll();
    }
    
