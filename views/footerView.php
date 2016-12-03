@@ -425,15 +425,15 @@
                 slidesToShow: 4,
                 centerMode: false,
                 variableWidth: true,
-                slidesToScroll: 1
+                slidesToScroll: 4
             });
             
-           $(".regular").slick({
-                dots: true,
-                infinite: true,
-                slidesToShow: 3,
-                slidesToScroll: 3
-          });
+//           $(".regular").slick({
+//                dots: true,
+//                infinite: true,
+//                slidesToShow: 3,
+//                slidesToScroll: 3
+//          });
             
         <!-- Initialize Swiper -->
    
@@ -444,7 +444,8 @@
         prevButton: '.swiper-button-prev',
         spaceBetween: 30,
         autoplay: 8000,
-        effect: 'fade'
+        effect: 'fade',
+        loop: true
     });
     </script>
           
