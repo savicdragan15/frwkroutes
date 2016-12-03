@@ -513,7 +513,8 @@ class adminModuleController extends baseController{
     }
     
    public function getTransactionDetails($transaction_id){
-       
+      $this->_isAdminLogin();
+      
       $products = array(); 
       $transaction_id = $this->filter_input($transaction_id);
       
