@@ -529,4 +529,58 @@ class adminModuleController extends baseController{
       
       Loader::loadPartialView("_transaction_details", "admin", false, $this->template);
    }
+   
+   public function users(){
+       Loader::loadView('users', 'admin', true);
+   }
+   
+   public function getUsers($page){
+        $page = $this->filter_input($page);
+        $nubmerOfRecords = $this->_usersMdl->getNumberUsers();
+        $pagination = new Pagination($nubmerOfRecords, $page, 10 ,3);
+        $offset = $pagination->offset();
+        $limit = $pagination->limit();
+        $users = $this->_usersMdl->getUsers($limit,$offset);
+        $pages = $pagination->build(); // Contains associative array with a numbers of a pages
+        
+        $error = true;
+        $message = "Nema podataka";
+        
+        if(!empty($users)){
+            $error = false;
+            $message = "Success";
+            
+            $data = array(
+              'error' => $error,
+              'message' => $message,
+              'users' => $users,
+              'pagination' => $pages,
+              'total_pages' => $pagination->totalPages(),
+              'current_page' => $pagination->currentPage()
+            );
+            
+        }else{
+           $data = array(
+              'error' => $error,
+              'message' => $message
+            ); 
+        }
+        
+       $this->response($data);
+    }
+    
+    public function switchStatus(){
+        if(isset($_POST['active'])){
+            $active = $this->filter_input($_POST['active']);
+            $user_id = (int)$_POST['user_id'];
+            $this->_usersMdl->ID = $user_id;
+            $this->_usersMdl->active = $active;
+            $error = true;
+            if($this->_usersMdl->update()){
+                $error = false;
+            }
+            $data = array('error' => $error);
+            $this->response($data);
+        }
+    }
 }

@@ -89,4 +89,17 @@ class adminController extends baseController{
     public function getTransactionDetails($transaction_id){
         $this->_adminMod->getTransactionDetails($transaction_id);
    }
+   
+   public function users(){
+        $this->_adminMod->users();
+   }
+   
+    public function getUsers($page){
+        $this->_adminMod->getUsers($page);
+    }
+    
+    public function switchStatus(){
+        $this->_adminMod->switchStatus();
+    }
+    
 }

@@ -36,4 +36,17 @@ class usersModel extends baseModel{
     public function getUserByEmail($email){
        return $this->getAll('email', "WHERE email='{$email}'");
     }
+    public function getNumberUsers(){
+       $transactions = $this->getAll("count(ID) as 'all'");
+       return $transactions[0]->all;
+   }
+   
+    public function getUsers($limit,$offset){
+       $this->limit = $limit;
+       $this->offset = $offset;
+       $this->orderBy = 'users.ID DESC';
+       $this->where = "users.status = '2' OR users.status = '0' OR users.active = '1' OR users.active = '0' ";
+       
+       return $this->getAll();
+   }
 }
