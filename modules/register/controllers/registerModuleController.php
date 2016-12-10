@@ -65,16 +65,19 @@ class registerModuleController extends baseController{
         $mail = new PHPMailer;
         //$mail->SMTPDebug = 3;
         $mail->isSMTP();                                      // Set mailer to use SMTP
-        $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
-        $mail->SMTPAuth = true;                               // Enable SMTP authentication
-        $mail->Username = 'savicdragan2707@gmail.com';                 // SMTP username
-        $mail->Password = 'spodoba1222';                           // SMTP password
-        $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-        $mail->Port = 587;                                    // TCP port to connect to
-
+        
+        if(_ENVIROMENT == 'DEVELOPMENT'){
+            $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+            $mail->SMTPAuth = true;                               // Enable SMTP authentication
+            $mail->Username = 'savicdragan2707@gmail.com';                 // SMTP username
+            $mail->Password = 'spodoba1222';                           // SMTP password
+            $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+            $mail->Port = 587;                                    // TCP port to connect to
+        }
+        
         $mail->setFrom('savicdragan2707@gmail.com', 'All out shine');
         $mail->addAddress($data['email'], $data['first_name']." ".$data['last_name']);     // Add a recipient
-        $mail->addReplyTo('info@example.com', 'Information');
+        $mail->addReplyTo('savicdragan2707@gmail.com', 'Information');
         //$mail->addCC('cc@example.com');
         //$mail->addBCC('bcc@example.com');
 
