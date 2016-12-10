@@ -231,8 +231,13 @@ class paymentModuleController extends baseController{
      public function thanks($param) {
         //if transaction success
         if ($param == 1) {
+           
             $last_transaction_id = $this->_transactionsMdl->getLastTransaction($_SESSION['user']['user_id']);
-            $this->_transactionsMdl->updateTrasactionStatus($last_transaction_id->ID, 1);
+            if(!$this->_transactionsMdl->updateTrasactionStatus($last_transaction_id->ID, 1)){
+               error_log("Nisam uspeo da promenim status transakcije", 1, "savicdragan2707@gmail.com");
+            }else{
+               error_log("Uspeo sam.", 1, "savicdragan2707@gmail.com"); 
+            }
             unset($_SESSION['korpa']);
             unset($_SESSION['order_information']);
             Loader::loadView("success", "payment");

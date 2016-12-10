@@ -55,7 +55,7 @@ class transactionsModel extends baseModel{
    public function updateTrasactionStatus($transaction_id, $status){
        $this->ID = (int)$transaction_id;
        $this->status = $status;
-       $this->update();
+       return $this->update();
    }
    
    public function getTransaction($transaciton_id){
