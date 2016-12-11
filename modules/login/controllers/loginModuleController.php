@@ -22,14 +22,14 @@ class loginModuleController extends baseController
      */
     public function index(){
         $this->isUserLogin();
-        
+        $message = "";
         if(isset($_POST['login'])){
             $email = $this->filter_input($_POST['email']);
             $password = $_POST['password'];
             $this->_loginMdl->email = $email;
             $user = $this->_loginMdl->getUserforLogin();
             
-            if($user && $user[0]->status == self::$userStatus){
+            if(!empty($user) && $user[0]->status == self::$userStatus){
                if(PasswordHash::verify($password, $user[0]->password)){
                    $_SESSION['user']['user_id'] = $user[0]->ID;
                    $_SESSION['user']['first_name'] = $user[0]->first_name;
@@ -46,15 +46,16 @@ class loginModuleController extends baseController
                    
                    $this->redirect(_WEB_PATH);
                }else{
-                   echo "Neispravni podaci";
+                   $message = "Neispravni podaci";
                } 
             }  else {
-                echo "Nepostojeci korisnik";
+                   $message = "Nepostojeci korisnik";
             }
               
         }
-         
-        Loader::loadView("login", "login");
+        
+        $this->template['message'] = $message;
+        Loader::loadView("login", "login", false, $this->template);
     }
     
     /**

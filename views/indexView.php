@@ -111,8 +111,8 @@
                                                 <a href="<?=_WEB_PATH?>products/singleProduct/<?=$product->product_id?>/<?=$product->product_name_url?>"><h4><?=$product->product_name?></h4></a>
                                                 <div class="icon">
                                                     <a href="#" class="add-to-cart one tooltip" data-id="<?=$product->product_id?>" data-price="<?=$product->product_price?>" data-name="<?=$product->product_name?>" data-img="<?=$product->image_name?>" data-quantity="1" title="Add to wish list"></a>
-                                                    <a href="#" class="two tooltip " title="Add to cart"></a>
-                                                    <a href="#" class="three tooltip" title="Add to compare"></a>
+<!--                                                    <a href="#" class="two tooltip " title="Add to cart"></a>
+                                                    <a href="#" class="three tooltip" title="Add to compare"></a>-->
                                                 </div>
                                             </div>
                                         </div>
@@ -141,8 +141,8 @@
                                                 <a href="<?=_WEB_PATH?>products/singleProduct/<?=$product->product_id?>/<?=$product->product_name_url?>"><h4><?=$product->product_name?></h4></a>
                                                 <div class="icon">
                                                     <a href="#" class="add-to-cart one tooltip" data-id="<?=$product->product_id?>" data-price="<?=$product->product_price?>" data-name="<?=$product->product_name?>" data-img="<?=$product->image_name?>" data-quantity="1" title="Add to wish list"></a>
-                                                    <a href="#" class="two tooltip " title="Add to cart"></a>
-                                                    <a href="#" class="three tooltip" title="Add to compare"></a>
+<!--                                                    <a href="#" class="two tooltip " title="Add to cart"></a>
+                                                    <a href="#" class="three tooltip" title="Add to compare"></a>-->
                                                 </div>
                                             </div>
                                         </div>

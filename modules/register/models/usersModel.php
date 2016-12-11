@@ -19,6 +19,7 @@ class usersModel extends baseModel{
         $this->email = $data['email'];
         $this->company = $data['company'];
         $this->salt = $data['salt'];
+        $this->last_login = date("Y-m-d H:i:s",time());
         $this->status = 2;
         
         return $this->insert();

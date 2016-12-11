@@ -108,6 +108,9 @@
                 <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
                 <script type="text/javascript" src="<?=_WEB_PATH?>/views/js/custom.js"></script>
                 <script type="text/javascript" src="<?=_WEB_PATH?>views/js/swiper/js/swiper.js"></script>
+                <script type="text/javascript" src="<?=_WEB_PATH?>views/js/notify.js"></script>
+                <script type="text/javascript" src="<?=_WEB_PATH?>views/js/jquery.validate.js"></script>
+                <script type="text/javascript" src="<?=_WEB_PATH?>views/js/messages_de.js"></script>
                 <?php 
                      
                  if(isset($params['controllerMethod'])){
