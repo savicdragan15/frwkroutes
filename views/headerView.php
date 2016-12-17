@@ -53,7 +53,7 @@
                                     <ul>
                                         <li>
                                             <?php  if(User::isLogin()){ ?>
-                                                <a href="<?=_WEB_PATH?>login" class="account"><?=$_SESSION['user']['email']?></a>
+                                                <a href="<?=_WEB_PATH?>profile/edit/information" class="account"><?=$_SESSION['user']['email']?></a>
                                             <?php  } ?>  
                                         </li>
                                         

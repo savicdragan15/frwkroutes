@@ -19,6 +19,11 @@ class usersModel extends baseModel{
         $this->email = $data['email'];
         $this->company = $data['company'];
         $this->salt = $data['salt'];
+        $this->city = $data['city'];
+        $this->country = $data['country'];
+        $this->address = $data['address'];
+        $this->telephone = $data['telephone'];
+        $this->zip = $data['zip'];
         $this->last_login = date("Y-m-d H:i:s",time());
         $this->status = 2;
         

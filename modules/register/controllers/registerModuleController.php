@@ -20,28 +20,35 @@ class registerModuleController extends baseController{
     }
 
         public function index() {
-        
+            
+        $this->template = array();
         if(isset($_POST['register'])){
+            
             $password = $_POST['password'];
-            $re_password = $_POST['re-password'];
+            $re_password = $_POST['re_password'];
             $salt = $this->generateSalt(22);
             $password_hash = PasswordHash::hash($password, PASSWORD_BCRYPT, 12, $salt);
-            
+           
             $data = $this->validate($_POST);
+            
             $data['salt'] = $this->generateSalt(22, true).md5(uniqid(rand(), true));
             $usr_mod=$this->usersModel->getUserByEmail($data['email']);
             if(empty($usr_mod)){
                 if(!$this->usersModel->insertUser($data,$password_hash)){
-                    echo "Nije uspelo";
+                   $this->template['message'] = "Doslo je do greske prilikom registracije!";
+                   $this->template['class'] = "alert alert-danger";
                 }else{
-                    echo "Uspelo";
+                    $this->template['message'] = "Uspesno ste se registrovali. Proverite vasu e-postu. {$data['email']}";
+                    $this->template['class'] = "alert alert-success";
                     $this->sendConfirmationMail($data);
                 }
           }else{
-              echo "Email address is already in use.";
+              $this->template['message'] = "Email address is already in use.";
+              $this->template['class'] = "alert alert-danger";
           }
         }
-        Loader::loadView("register", "register");
+        
+        Loader::loadView("register", "register", false, $this->template);
     }
     
     public function confirm($salt){
@@ -70,7 +77,7 @@ class registerModuleController extends baseController{
             $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
             $mail->SMTPAuth = true;                               // Enable SMTP authentication
             $mail->Username = 'savicdragan2707@gmail.com';                 // SMTP username
-            $mail->Password = 'secret';                           // SMTP password
+            $mail->Password = 'spodoba1222';                           // SMTP password
             $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
             $mail->Port = 587;                                    // TCP port to connect to
         }
@@ -90,10 +97,10 @@ class registerModuleController extends baseController{
         //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
         if(!$mail->send()) {
-            echo 'Message could not be sent.';
-            echo 'Mailer Error: ' . $mail->ErrorInfo;
+            //echo 'Message could not be sent.';
+            //echo 'Mailer Error: ' . $mail->ErrorInfo;
         } else {
-            echo 'Message has been sent';
+           // echo 'Message has been sent';
         }
     }
     

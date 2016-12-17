@@ -36,7 +36,7 @@
                                   }else{ ?>
                     <div> <p>Vasa korpa je prazna.</p> </div>
                                 <?php  }?>
-                                    <a href="#" class="red-button">Continue Shopping</a>
+                                    <a href="javascript:void(0)" class="red-button" onclick="$.pgwModal('close');">Continue Shopping</a>
                                    <!-- <a href="#" class="red-button black">Update Shopping Cart</a> -->
 
                                 </div>

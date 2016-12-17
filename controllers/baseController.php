@@ -149,6 +149,18 @@ abstract class baseController implements base
         return $this->$module = $this->modules[$module_name."Module"];
     }
     
+    
+    /**
+      * This method detected is user log in
+      * if not login will be redirect to login page
+      */
+     protected function _isUserLogin(){
+          if(!User::isLogin()){
+              $this->redirect(_WEB_PATH."login");
+              die;
+          }
+     }
+     
     public function page404(){
         $this->redirect(_WEB_PATH."home/page404");
     }

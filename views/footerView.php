@@ -428,7 +428,7 @@
                 slidesToShow: 4,
                 centerMode: false,
                 variableWidth: true,
-                slidesToScroll: 4
+                slidesToScroll: 1
             });
             
 //           $(".regular").slick({
