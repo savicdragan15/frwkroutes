@@ -27,5 +27,9 @@ class profileController extends frontendController{
        $this->_profileMod->edit($scenario);
     }
     
+     public function getTransactionsByUser($page) {
+       $this->_profileMod->getTransactionsByUser($page);
+    }
+    
     
 }

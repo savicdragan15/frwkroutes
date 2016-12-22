@@ -42,7 +42,7 @@
                Loader::loadPartialView("_change_password", "profile",false, array('user' => $user));
            break;
            case 'orders':
-               Loader::loadPartialView("_orders", "profile",false, array('user' => $user));
+               Loader::loadPartialView("_orders", "profile",false, array('user' => $user , 'transactions' => $transactions));
            break;
            default :
                

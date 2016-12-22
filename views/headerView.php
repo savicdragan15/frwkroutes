@@ -16,7 +16,7 @@
                 <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,700,600,800' rel='stylesheet' type='text/css'>
                 <link href='http://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
                 <link href='http://fonts.googleapis.com/css?family=Quattrocento:400,700' rel='stylesheet' type='text/css'>
-
+                <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
                 <!-- Style Sheet-->
                 <link rel="stylesheet" href="<?=_WEB_PATH?>/views/css/tooltipster.css">
                 <link href="<?=_WEB_PATH?>/views/css/ie.css" rel="stylesheet" media="all">

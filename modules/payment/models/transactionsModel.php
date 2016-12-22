@@ -44,6 +44,13 @@ class transactionsModel extends baseModel{
        return $transactions[0]->all;
    }
    
+   public function getNumberTransactionsByUser($user_id){
+       $this->where = "user_id = '$user_id' and transactions.status = 1";
+       $transactions = $this->getAll("count(ID) as 'all'");
+       return $transactions[0]->all;
+   }
+  
+
    public function getLastTransaction($user_id){
        $this->where = "transactions.user_id = '$user_id'";
        $this->orderBy = "transactions.ID DESC";
@@ -60,5 +67,19 @@ class transactionsModel extends baseModel{
    
    public function getTransaction($transaciton_id){
      return $this->get($transaciton_id);
+   }
+   
+   public function getTransactionByUserId($user_id, $limit, $offset){
+       $this->where = "transactions.user_id = '$user_id' and transactions.status = 1";
+       $this->orderBy = "transactions.transaction_date DESC";
+       $this->limit = $limit;
+       $this->offset = $offset;
+       
+       $this->join = array( 
+            array("table"=>"payment_methods","relation"=>"transactions.payment_method_id = payment_methods.ID"),
+        );
+       
+       return $this->join();
+       //return $this->getAll();
    }
 }
