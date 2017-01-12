@@ -14,22 +14,5 @@ Loader::loadClass('Cookie');
 Loader::loadClass('User');
 Session::start();
 
+include_once  realpath("routes/dispatcher.php");
 
-
-//Loader::loadClass('Cookie');
-//Cookie::set('interval', "100", "1", "/", false, false);
-//Cookie::set('intervalDrugi', "100", "1", "/", false, false);
-//$cookie = Cookie::get("interval");
-//var_dump($cookie);
-//$del = Cookie::delete("intervalDrugi");
-//var_dump($del);
-/**
- * $_GET['rt'] automatski setova u .htaccess fajlu regularnim izrazom
- */
-
-$route = new Router($_GET['rt']);
-$controller=$route->getController();
-$method=$route->getMethod(); 
-$params = $route->getParams();
-
-Loader::loadController($controller,$method,$params);

@@ -20,6 +20,8 @@
         "hakito/php-stuzza-eps-banktransfer": "^1.2",
         "phelium/mysql-backup": "dev-master",
         "blueimp/jquery-file-upload": "^9.14",
-        "datatables/datatables": "^1.10"
+        "datatables/datatables": "^1.10",
+        "catfan/Medoo": "^1.1",
+        "phroute/phroute": "^2.1"
     }
 }
