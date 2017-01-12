@@ -18,7 +18,6 @@ $collector->get('404', function(){
     Loader::loadController('home','page404');
 });
 
-$collector->post('products', function(){
-    dump($_POST);
-    return 'Create Product';
+$collector->post('probica', function(){
+   Loader::loadController('test','test');
 });

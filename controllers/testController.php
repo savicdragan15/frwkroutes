@@ -163,18 +163,7 @@ class testController extends frontendController
     }
 
     public function test(){
-        $condition = array(
-          array("field" => "product_name", "condition" => "%12%")
-        );
-        
-        echo $this->view->render("test", array(
-            'name' => 'Dragan',
-            "data" =>  $this->_productsMdl->like("*",$condition)[0]
-        ));
-        
-      /*  $this->_callMdl("products", "products");
-        var_dump($this->_productsMdl);
-     */
+        dump($_POST);
     }
 }
 
