@@ -23,5 +23,12 @@
         "datatables/datatables": "^1.10",
         "catfan/Medoo": "^1.1",
         "phroute/phroute": "^2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Models\\":        "models/",
+            "Modules\\admin\\": "modules/admin/controllers",
+            "Modules\\cart\\":  "modules/cart/controllers"
+        }
     }
 }
