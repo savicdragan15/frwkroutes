@@ -9,7 +9,7 @@
  *
  */
 
-namespace Image;
+namespace Classes;
 use Exception;
 
 /**

@@ -1,4 +1,6 @@
 <?php
+namespace Modules\models\products;
+use Models;
 /**
  * @property int $ID primary key
  * @property string $product_name Name of product
@@ -10,7 +12,7 @@
  * @property int $product_sub_subcategory Sub sub category
  * @property int $product_status Product status
  */
-class productsModel extends baseModel{
+class Products extends Models\baseModel{
     public static $key = "ID";
     public static $table = "products";
     

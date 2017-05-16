@@ -1,5 +1,5 @@
 <?php
-
+namespace Classes;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,10 +11,8 @@
  *
  * @author Draga Savic <savicdragan2707@gmail.com>
  */
-Loader::loadClass("SimpleImage");
-use Image\SimpleImage as SimpleImageClass;
 
-class Uploader extends SimpleImageClass{
+class Uploader extends SimpleImage{
 
     /**
      *

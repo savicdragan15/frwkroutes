@@ -1,4 +1,6 @@
 <?php
+namespace Modules\models\login;
+use Models\baseModel;
 /**
  * @property int $ID Primary key
  * @property int $first_name 

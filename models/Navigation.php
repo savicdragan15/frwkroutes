@@ -1,4 +1,5 @@
 <?php
+namespace Models;
 /**
  * @property int $ID Primary key
  * @property string $name 
@@ -9,7 +10,7 @@
  * @property string $id_parent   
  * @property string $id_subparent 
  */
-class navigationModel extends baseModel{
+class Navigation extends baseModel{
     public static $key = "ID";
     public static $table = "navigation";
     

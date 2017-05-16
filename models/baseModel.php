@@ -126,12 +126,12 @@ abstract class baseModel
         
         try {
             $res = $this->db->query($query);
-            $data =  $res->fetchAll(PDO::FETCH_CLASS, get_called_class());
+            $data =  $res->fetchAll(\PDO::FETCH_CLASS, get_called_class());
             foreach($data as $record){
                 unset($record->db);
             }
             return $data;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             echo $e->getMessage();
             return false;
         }
@@ -148,7 +148,7 @@ abstract class baseModel
             
             $rez = $this->db->query($sql);
             return $row = $rez->fetchObject(get_called_class());
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             echo $e->getMessage();
             return false;
         }
@@ -225,7 +225,7 @@ abstract class baseModel
                 return $this->db->lastInsertId();
             }else
                 return false;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             echo $e->getMessage();
             return false;
         }
@@ -259,7 +259,7 @@ abstract class baseModel
                return true;   
              }
             return false;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             echo $e->getMessage();
             return false;
         }
@@ -274,7 +274,7 @@ abstract class baseModel
         try {
             $query = "DELETE from " . static::$table . " WHERE " . static::$key . "='{$id}'";
             return $this->db->exec($query);
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             echo $e->getMessage();
             return false;
         }
@@ -315,12 +315,12 @@ abstract class baseModel
         
          try {
             $res = $this->db->query($query);
-            $data = $res->fetchAll(PDO::FETCH_CLASS, "stdClass");
+            $data = $res->fetchAll(\PDO::FETCH_CLASS, "stdClass");
             foreach ($data as $record) {
                 unset($record->db);
         }
             return $data;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             echo $e->getMessage();
             return false;
         }

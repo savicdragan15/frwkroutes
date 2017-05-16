@@ -1,11 +1,12 @@
 <?php
 use Models\ProbaBre as ProbaMdl;
-use Modules\cart as CartModul;
+use Modules\cart\CartProba as CartModul;
+use Modules\login\LoginProba as login;
 class regController extends frontendController{
 
     public function __construct() {
        parent::__construct();
-        $this->mod=new CartModul\CartProba();
+        $this->mod=new login();
      
     }
     public function index()

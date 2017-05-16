@@ -1,9 +1,9 @@
 <?php
-
+namespace Controllers;
 class frontendController extends baseController{
     
     public function __construct() {
-          Loader::loadClass("Navigation");
+          \Loader::loadClass("Navigation");
     }
     public function index() {}
 }

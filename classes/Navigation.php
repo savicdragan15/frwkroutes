@@ -1,11 +1,14 @@
 <?php
+namespace Classes;
+use Controllers;
 
-class Navigation extends baseController{
+class Navigation extends Controllers\baseController{
     
     public function __construct() {
-        Loader::loadModel($this, 'navigation');
-        Loader::loadModel($this, 'products','products');
+        \Loader::loadModel($this, 'navigation');
+        \Loader::loadModel($this, 'products','products');
     }
+    
     public function index() {}
     
     public function renderNav() {

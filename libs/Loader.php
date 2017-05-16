@@ -11,12 +11,12 @@ class Loader
     public static function loadController($controller,$method,$params=array())
     {
         global $config;
-        $path_to_controller = realpath("controllers/" . strtolower($controller) . "Controller.php");
+        $path_to_controller = realpath("controllers/" . ucfirst($controller) . ".php");
         if (file_exists($path_to_controller)) {
-            include_once $path_to_controller;
-            $controller=strtolower($controller)."Controller";
-            $controller_instance = new $controller();
-            if (!is_subclass_of($controller_instance, 'baseController')) {
+            
+            $controller = 'Controllers\\' . ucfirst($controller);
+            $controller_instance = new  $controller();
+            if (!is_subclass_of($controller_instance, 'Controllers\baseController')) {
                 echo $config['Poruke']['noBaseCont'];
                 die;
             }
@@ -44,14 +44,24 @@ class Loader
     public static function loadModel($object,$model,$module="")
     {
         global $config;
+        
         $module_folder = ($module != '')?'modules/'.$module."/":'';
-        $path_to_model=realpath($module_folder."models/".strtolower($model)."Model.php");
+        $path_to_model=realpath($module_folder."models/" . ucfirst($model) . ".php");
+        
+        if($module == '')
+        {
+            $namespace = "Models\\";
+        }
+        else
+        {
+            $namespace = "Modules\\models\\" . $module . "\\";
+        }
+        
         if (file_exists($path_to_model))
         {
-            include_once  $path_to_model;
-            $model_full_mame=strtolower($model)."Model";
-            $model_instance=new $model_full_mame();
-            if (!is_subclass_of($model_instance, 'baseModel'))
+            $model_full_mame = $namespace . ucfirst($model);
+            $model_instance = new $model_full_mame();
+            if (!is_subclass_of($model_instance, 'Models\baseModel'))
             {
             echo $config['Poruke']['noBaseMod'];
             die;

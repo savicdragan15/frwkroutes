@@ -20,6 +20,12 @@ $collector->get('404', function(){
     Loader::loadController('home','page404');
 });
 
+$collector->get('regProba', function(){
+    Loader::loadController('Regproba','index', array());
+});
+
 $collector->post('probica', function(){
    Loader::loadController('test','test');
-});
+})
+
+;

@@ -4,9 +4,10 @@
  * @author Jovan
  * @author Dragan
  */
-
+namespace Controllers;
 use interfaces\base as base;
 use duncan3dc\Laravel\BladeInstance;
+use Classes\UrlHelper;
 
 abstract class baseController implements base
 {
@@ -116,7 +117,7 @@ abstract class baseController implements base
      */
     public function url_friendly($string)
     {
-     Loader::loadClass('UrlHelper');
+     \Loader::loadClass('UrlHelper');
      $urlHelper = new UrlHelper();
      return str_replace(" ","_",$urlHelper->remove_accents($string));
     }
@@ -132,7 +133,7 @@ abstract class baseController implements base
      */
     public function _callMdl($model, $module="")
     {
-        Loader::LoadModel($this,$model, $module);
+        \Loader::LoadModel($this,$model, $module);
         $mdl="_".$model."Mdl";
         return $this->$mdl=$this->models[$model];
     }
@@ -144,7 +145,7 @@ abstract class baseController implements base
      */
     public function _callMod($module_name)
     {
-        Loader::loadModule($this, $module_name."Module");
+        \Loader::loadModule($this, $module_name."Module");
         $module ="_".$module_name."Mod";
         return $this->$module = $this->modules[$module_name."Module"];
     }
@@ -155,7 +156,7 @@ abstract class baseController implements base
       * if not login will be redirect to login page
       */
      protected function _isUserLogin(){
-          if(!User::isLogin()){
+          if(!\User::isLogin()){
               $this->redirect(_WEB_PATH."login");
               die;
           }

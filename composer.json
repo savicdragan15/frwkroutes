@@ -26,9 +26,17 @@
     },
     "autoload": {
         "psr-4": {
-            "Models\\":        "models/",
+            "Controllers\\" : "controllers/",
+            "Models\\" : "models/",
+            "Classes\\" : "classes/",
+            
             "Modules\\admin\\": "modules/admin/controllers",
-            "Modules\\cart\\":  "modules/cart/controllers"
+            
+            "Modules\\cart\\":  "modules/cart/controllers",
+            "Modules\\login\\":  "modules/login/controllers",
+            
+            "Modules\\models\\login\\": "modules/login/models",
+            "Modules\\models\\products\\": "modules/products/models"
         }
     }
 }

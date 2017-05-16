@@ -1,4 +1,5 @@
 <?php
+namespace Classes;
 /**
  * @author Dragan Savic <savicdragan2707@gmail.com>
  */
