@@ -4,7 +4,7 @@ class ProbaBre extends baseModel{
     
     public function index()
     {
-        return "234rrr";
+        return "djansr";
     }
 }
 

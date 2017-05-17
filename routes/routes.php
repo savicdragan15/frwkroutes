@@ -23,7 +23,9 @@ $collector->get('404', function(){
 $collector->get('regProba', function(){
     Loader::loadController('Regproba','index', array());
 });
-
+$collector->get('seksoman', function(){
+    Loader::loadController('seksoman','index', array());
+});
 $collector->post('probica', function(){
    Loader::loadController('test','test');
 })
