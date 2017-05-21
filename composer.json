@@ -29,6 +29,7 @@
             "Controllers\\" : "controllers/",
             "Models\\" : "models/",
             "Classes\\" : "classes/",
+            "Views\\" : "views/",
             
             "Modules\\admin\\": "modules/admin/controllers",
             

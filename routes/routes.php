@@ -10,8 +10,9 @@ $collector->get('/loginpage', function(){
    Loader::loadController('login','index', array());
 });
 $collector->get('/reg', function(){
-   Loader::loadController('reg','index', array());
+   Loader::loadController('regController','index', array());
 });
+
 $collector->get('products/{id}/{page}/{name}', function($id, $page, $name){
     Loader::loadController('products','allProductsByCategory', array($id, $page));
 });
