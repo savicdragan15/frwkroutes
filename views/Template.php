@@ -35,13 +35,4 @@ class Template extends View implements iView{
         
     }
     
-    public function getHeaderPath()
-    {
-        return realpath('views/'.$this->theme_name.'/header.php');
-    }
-    
-    public function getFooterPath()
-    {
-        return realpath('views/'.$this->theme_name.'/footer.php');
-    }
 }

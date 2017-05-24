@@ -29,6 +29,12 @@ $collector->get('seksoman', function(){
 });
 $collector->post('probica', function(){
    Loader::loadController('test','test');
-})
+});
 
-;
+$collector->get('theme', function(){
+   Loader::loadController('ProbaView', 'index');
+});
+
+$collector->get('testic', function(){
+   Loader::loadController('ProbaView', 'theme');
+});

@@ -14,6 +14,7 @@ namespace Views;
 abstract class View {
     
     protected $data = array();
+    protected $module_name = '';
     
     public function setData($key, $value)
     {
@@ -25,6 +26,39 @@ abstract class View {
         return $this->data;
     }
     
+    public function getHeaderPath()
+    {
+        $header_path = realpath('views/'.$this->theme_name.'/header.php');
+        
+        if($this->module_name == '')
+            return $header_path;
+        else
+        {
+           $header_path_module = realpath('modules/'. $this->module_name .'/views/'.$this->theme_name.'/header.php'); 
+           if(file_exists($header_path_module))
+               return $header_path_module;
+           
+           return $header_path;
+        }
+            
+    }
+    
+    public function getFooterPath()
+    {
+        $footer_path = realpath('views/'.$this->theme_name.'/footer.php');
+        
+        if($this->module_name == '')
+            return $footer_path;
+        else
+        {
+           $footer_path_module = realpath('modules/'. $this->module_name .'/views/'.$this->theme_name.'/footer.php'); 
+           
+           if(file_exists($footer_path_module))
+               return $footer_path_module;
+           
+           return $footer_path;
+        }
+    }
     
     
     

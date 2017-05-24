@@ -35,6 +35,7 @@
             
             "Modules\\cart\\":  "modules/cart/controllers",
             "Modules\\login\\":  "modules/login/controllers",
+            "Modules\\products\\":  "modules/products/controllers",
             
             "Modules\\models\\login\\": "modules/login/models",
             "Modules\\models\\products\\": "modules/products/models"

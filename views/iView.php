@@ -17,8 +17,4 @@ interface iView {
     
     public function render($view_name);
     
-    public function getHeaderPath();
-    
-    public function getFooterPath();
-    
 }
