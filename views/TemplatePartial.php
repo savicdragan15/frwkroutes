@@ -13,10 +13,9 @@ namespace Views;
  *
  * @author WIN 7 PRO
  */
-class Template extends View implements iView{
+class TemplatePartial extends View implements iView{
     
     public function __construct($theme_name) {
-        $this->partial=new TemplatePartial($theme_name);
         $this->theme_name = $theme_name;
     }
     
@@ -24,13 +23,10 @@ class Template extends View implements iView{
        $path_to_view = "views/" . $this->theme_name . '/' . $view_name . '.php';
        if (file_exists($path_to_view))
         {
-          //  $partial_params = $this->data;
-            
+            //$partial_params = $this->data;
             extract($this->data);
-            
-            include_once  $this->getHeaderPath();
+   
             include_once  $path_to_view;
-            include_once  $this->getFooterPath();
            
         }
         
