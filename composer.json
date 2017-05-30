@@ -16,7 +16,8 @@
         "ircmaxell/password-compat": "^1.0",
         "phpmailer/phpmailer": "^5.2",
         "symfony/var-dumper": "^3.1",
-        "phroute/phroute": "^2.1"
+        "phroute/phroute": "^2.1",
+        "doctrine/orm": "*"
     },
     "autoload": {
         "psr-4": {
@@ -33,6 +34,9 @@
             
             "Modules\\models\\login\\": "modules/login/models",
             "Modules\\models\\products\\": "modules/products/models"
+        },
+        "psr-0": {
+            "": "models/"
         }
     }
 }
