@@ -6,7 +6,6 @@
  */
 namespace Controllers;
 use interfaces\base as base;
-use duncan3dc\Laravel\BladeInstance;
 use Classes\UrlHelper;
 
 abstract class baseController implements base
@@ -15,8 +14,6 @@ abstract class baseController implements base
     protected $modules = array();
     
     public function __construct() {
-        
-       $this->view = new BladeInstance(_VIEWS_PATH, _CACHE_FOLDER);
        
     }
     

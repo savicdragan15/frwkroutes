@@ -1,112 +1,106 @@
-<!doctype html>
-<!--[if IE 7]>    <html class="ie7" > <![endif]-->
-<!--[if IE 8]>    <html class="ie8" > <![endif]-->
-<!--[if IE 9]>    <html class="ie9" > <![endif]-->
-<!--[if IE 10]>    <html class="ie10" > <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> 
-  <html lang="en-US"> <!--<![endif]-->
-		<head>
-                <!-- META TAGS -->
-                <meta charset="UTF-8" />
-                <meta name="viewport" content="width=device-width" />
+<!DOCTYPE html>
+<html lang="en">
 
-                <!-- Title -->
-                <title>All out shine</title>
+<head>
 
-                <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,700,600,800' rel='stylesheet' type='text/css'>
-                <link href='http://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
-                <link href='http://fonts.googleapis.com/css?family=Quattrocento:400,700' rel='stylesheet' type='text/css'>
-                <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
-                <!-- Style Sheet-->
-                <link rel="stylesheet" href="<?=_WEB_PATH?>/views/css/tooltipster.css">
-                <link href="<?=_WEB_PATH?>/views/css/ie.css" rel="stylesheet" media="all">
-                <link rel="stylesheet" href="<?=_WEB_PATH?>/views/test_theme/css/bootstrap.css">
-                <link rel="stylesheet" href="<?=_WEB_PATH?>/views/test_theme/css/style.css">
-                <link rel="stylesheet" href="<?=_WEB_PATH?>/views/test_theme/css/responsive.css">
-                <link rel="stylesheet" href="<?=_WEB_PATH?>/views/test_theme/css/prettyPhoto.css">
-                <link rel="stylesheet" href="<?=_WEB_PATH?>/views/test_theme/css/pgwmodal.css">
-                <link rel="stylesheet" href="<?=_WEB_PATH?>/views/test_theme/css/alertify/alertify.core.css">
-                <link rel="stylesheet" href="<?=_WEB_PATH?>/views/test_theme/css/alertify/alertify.default.css">
-                <link rel="stylesheet" type="text/css" href="<?=_WEB_PATH?>views/test_theme/js/slick-1.6.0/slick/slick.css"/>
-                <link rel="stylesheet" type="text/css" href="<?=_WEB_PATH?>views/test_theme/js/slick-1.6.0/slick/slick-theme.css"/>
-                <link rel="stylesheet" type="text/css" href="<?=_WEB_PATH?>views/test_theme/js/swiper/css/swiper.min.css" />
-                <!-- favicon -->
-                <link rel="shortcut icon" href="<?=_WEB_PATH?>/views/images/favicon.jpg">
-                
-            <!-- Include the HTML5 shiv print polyfill for Internet Explorer browsers 8 and below -->
-            <!--[if lt IE 10]><script src="js/html5shiv-printshiv.js" media="all"></script><![endif]-->
-    
-		</head>
-		<body>				
-                    <!-- HEADER -->
-                <div class="header-bar">
-                    <div class="container">
-                        <div class="row">
-                            <div class="pric-icon span2">
-                               <!-- <a href="#" class="active">&#x20ac;</a>
-                                <a href="#">&#xa3;</a>
-                                <a href="#">&#36;</a>-->
-                            </div> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-                            <div class="span10 right">
-                           
+    <title>PHP Paspartu</title>
 
-                               <!-- <div class="languages">
-                                    <a href="#" class="english active"><img src="<?=_WEB_PATH?>/views/images/english.png" alt=""></a>
-                                    <a href="#" class="german"><img src="<?=_WEB_PATH?>/views/images/german.png" alt=""></a>
-                                    <a href="#" class="japan"><img src="<?=_WEB_PATH?>/views/images/japan.png" alt=""></a>
-                                    <a href="#" class="turkish"><img src="<?=_WEB_PATH?>/views/images/turkish.png" alt=""></a>
-                                </div> -->
-                            </div>
+    <!-- Bootstrap core CSS -->
+    <link href="<?=_WEB_PATH?>views/test_theme/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="<?=_WEB_PATH?>views/test_theme/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="<?=_WEB_PATH?>views/test_theme/css/modern-business.css" rel="stylesheet">
+
+    <!-- Temporary navbar container fix -->
+    <style>
+        .navbar-toggler {
+            z-index: 1;
+        }
+
+        @media (max-width: 576px) {
+            nav > .container {
+                width: 100%;
+            }
+        }
+        /* Temporary fix for img-fluid sizing within the carousel */
+
+        .carousel-item.active,
+        .carousel-item-next,
+        .carousel-item-prev {
+            display: block;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar fixed-top navbar-toggleable-md navbar-inverse bg-inverse">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarExample" aria-controls="navbarExample" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+            <div class="collapse navbar-collapse" id="navbarExample">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="services.html">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Portfolio
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+                            <a class="dropdown-item" href="portfolio-1-col.html">1 Column Portfolio</a>
+                            <a class="dropdown-item" href="portfolio-2-col.html">2 Column Portfolio</a>
+                            <a class="dropdown-item" href="portfolio-3-col.html">3 Column Portfolio</a>
+                            <a class="dropdown-item" href="portfolio-4-col.html">4 Column Portfolio</a>
+                            <a class="dropdown-item" href="portfolio-item.html">Single Portfolio Item</a>
                         </div>
-                    </div>
-				</div>
-
-                <div class="header-top">
-                    <div class="container">
-                        <div class="row">
-
-                            <div class="span5">
-                                <div class="logo">
-                                    <a href="<?=_WEB_PATH?>"><img style="width: 128px; height: 68px;" src="<?=_WEB_PATH?>/views/images/1_o.png" alt=""></a>
-                                    <h1><a href="<?=_WEB_PATH?>"><span> All out shine </span></a></h1>
-                                </div>
-                            </div>
-
-                            <div class="span5">
-                                <form>
-                                    <input type="text" placeholder="Type and hit enter">
-                                    <input type="submit" value="">
-                                </form>
-                            </div>
-
-                            <div class="span2">
-                                <div class="cart">
-                                    <ul>
-                                        <li class="first" id="view_cart"><a href="#"></a><span></span></li>
-                                        <li id="cart-info"><?=isset($_SESSION['korpa'])?$_SESSION['korpa']['ukupno_proizvoda_u_korpi'].' items':'0 items'?></li>
-                                    </ul>
-                                </div>
-                            </div>
-
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Blog
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+                            <a class="dropdown-item" href="blog-home-1.html">Blog Home 1</a>
+                            <a class="dropdown-item" href="blog-home-2.html">Blog Home 2</a>
+                            <a class="dropdown-item" href="blog-post.html">Blog Post</a>
                         </div>
-                    </div>
-                </div>
-
-                <header>
-                    <div class="container">
-                        <div class="row">
-                            <div class="span12">
-                            <nav class="desktop-nav">
-                                <ul class="clearfix">
-                                    <?php// $navigation = new Navigation(); echo $navigation->renderNav();?>
-                                </ul>
-                            </nav>
-                                <select>
-                                    <?php //echo $navigation->renderCategory()?>
-                                </select>
-                            </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Other Pages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+                            <a class="dropdown-item" href="full-width.html">Full Width Page</a>
+                            <a class="dropdown-item" href="sidebar.html">Sidebar Page</a>
+                            <a class="dropdown-item" href="faq.html">FAQ</a>
+                            <a class="dropdown-item" href="404.html">404</a>
+                            <a class="dropdown-item" href="pricing.html">Pricing Table</a>
                         </div>
-                    </div>
-                </header>
-<!-- HEADER -->
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header>
+        
+    </header>
+   

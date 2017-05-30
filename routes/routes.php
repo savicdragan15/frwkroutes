@@ -3,6 +3,6 @@
  * Define your routes
  */
 $collector->get('/', function(){
-   Loader::loadController('home','index', array());
+   Loader::loadController('TestController','index', array());
 });
 
