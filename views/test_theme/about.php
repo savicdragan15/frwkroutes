@@ -7,7 +7,7 @@
 
 <!-- Page Content -->
     <div class="container">
-        <?php  dump($name);?>
+        
         <!-- Page Heading/Breadcrumbs -->
         <h1 class="mt-4 mb-3">About <small>Subheading</small></h1>
 
