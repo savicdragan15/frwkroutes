@@ -1,5 +1,5 @@
 {
-    "name": "vendor/all-shine-out",
+    "name": "vendor/php-paspartu",
     "description": "Description of project all_shine_out.",
     "authors": [
         {
@@ -17,7 +17,10 @@
         "phpmailer/phpmailer": "^5.2",
         "symfony/var-dumper": "^3.1",
         "phroute/phroute": "^2.1",
-        "doctrine/orm": "*"
+        "doctrine/orm": "*",
+        "illuminate/database": "^5.4",
+        "illuminate/events": "^5.4",
+        "illuminate/pagination": "^5.4"
     },
     "autoload": {
         "psr-4": {

@@ -8,6 +8,7 @@
 
 
 namespace Models;
+use Illuminate\Database\Eloquent\Model;
 /**
  * Description of Product
  *
@@ -17,20 +18,12 @@ namespace Models;
 /**
  * @Entity @Table(name="products")
  */
-class Product {
-    //put your code here
-    
-    public function __construct() {
-        global $entityManager;
-        $this->entityManager = $entityManager;
-    }
-    
-    public function find(){
-        return $this->entityManager->find(static::class, 1);
-    }
-    /** @Id @Column(type="integer") @GeneratedValue **/
-    protected $id;
-    
-    /** @Column(type="string") **/
-    protected $product_name;
+class Product extends Model{
+   
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['product_name'];
 }

@@ -22,16 +22,8 @@ class TestController extends baseController{
     }
     
     public function index() {
-        global $entityManager;
-        echo "123";
-        //dump($entityManager);
-        //$product = $entityManager->find('Models\Product', 1);
-        $product = new Product();
-        dump($product->find());
-        die;
-        dump($product); die;
-        $this->template->setData('name', 'Dragan');
-        $this->template->render('about');
+       $product = Product::create(['product_name' => 'orm test1234']);
+       dump($product);
     }
     
 }
