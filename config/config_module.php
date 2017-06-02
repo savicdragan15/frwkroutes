@@ -1,5 +1,5 @@
 <?php 
-define("_MODULE_MODE_", true);
+define("_MODULE_MODE_", false);
 $modules = ['products','register','login','users','admin','cart', 'payment', 'profile'];
 if(_MODULE_MODE_){
     function autoload_module($className) {

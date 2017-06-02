@@ -36,3 +36,14 @@ $entityManager = EntityManager::create($conn, $config);
     'charset' => 'utf8'
 ]);*/
 
+$configEloquentORM = [
+            'driver'    => 'mysql',
+            'host'      => 'localhost',
+            'database'  => 'all_shine_out',
+            'username'  => 'root',
+            'password'  => '',
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+];
+
