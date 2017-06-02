@@ -5,10 +5,9 @@
  * @author Dragan
  */
 namespace Controllers;
-use interfaces\base as base;
 use Classes\UrlHelper;
 
-abstract class baseController implements base
+abstract class baseController
 {
     protected $models  = array();
     protected $modules = array();
