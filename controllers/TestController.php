@@ -22,13 +22,12 @@ class TestController extends baseController{
     }
     
     public function index() {
-        global $entityManager;
-        
+        //global $entityManager;
         //dump($entityManager);
         //$product = $entityManager->find('Models\Product', 1);
-        $product = new Product();
-        dump($product->find());
-        die;
+        //$product = new Product();
+        //dump($product->find());
+        //die;
         $this->template->setData('name', 'Dragan');
         $this->template->render('about');
     }

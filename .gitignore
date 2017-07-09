@@ -4,3 +4,5 @@
 /views/cache/
 /php.ini
 /nbproject/private/
+/node_modules
+.idea

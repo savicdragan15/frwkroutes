@@ -19,6 +19,8 @@
     <!-- Custom styles for this template -->
     <link href="<?=_WEB_PATH?>views/test_theme/css/modern-business.css" rel="stylesheet">
 
+    <link href="<?=_WEB_PATH?>views/test_theme/css/styles.css" rel="stylesheet">
+
     <!-- Temporary navbar container fix -->
     <style>
         .navbar-toggler {
