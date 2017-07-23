@@ -9,6 +9,7 @@
 namespace Controllers;
 use Views\Template;
 use Models\Product;
+use Models\Image;
 
 /**
  * Description of TestController
@@ -22,6 +23,27 @@ class TestController extends baseController{
     }
     
     public function index() {
+
+//        $img = Image::create(array('product_id' => 1, 'image_name' => 'create.jpg'));
+//        dd($img);
+//        $img->fill(['product_id' => 1, 'image_name' => 'create.jpg']);
+//        dd($img);
+//        $img->save();
+
+//        $image = new Image();
+//        $image->product_id = 1;
+//        $image->image_name = 'test.jpg';
+//        dd($image->save());
+
+//        $product = Product::find(1);
+//        $product->product_name = 'New name';
+//        dd($product->save());
+
+//        $products = Product::find(1);
+//        dd($products->images);
+
+//        $products = Product::Active('1')->Price()->get();
+//        dd($products);
         //global $entityManager;
         //dump($entityManager);
         //$product = $entityManager->find('Models\Product', 1);

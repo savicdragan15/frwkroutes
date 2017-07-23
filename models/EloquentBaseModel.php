@@ -21,13 +21,15 @@ abstract class EloquentBaseModel extends Model{
     
     private $capsule;
     
-    public function __construct() 
+    public function __construct()
     {
+        parent::__construct();
+
         $this->capsule = new Capsule();
         $this->connect();
-       
+
     }
-    
+
     private function connect()
     {
         global $configEloquentORM;
@@ -35,5 +37,17 @@ abstract class EloquentBaseModel extends Model{
         $this->capsule->setEventDispatcher(new Dispatcher(new Container));
         $this->capsule->setAsGlobal();
         $this->capsule->bootEloquent();
+    }
+
+    public static function create($attributes = [])
+    {
+        $class = static::class;
+        $model = new $class();
+
+        foreach ($attributes as $key => $attribute){
+            $model->$key = $attribute;
+        }
+
+        return $model->save();
     }
 }

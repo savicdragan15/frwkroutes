@@ -8,29 +8,26 @@
 
 
 namespace Models;
-/**
- * Description of Product
- *
- * @author WIN 7 PRO
- */
 
-/**
- * @Entity @Table(name="products")
- */
-class Product {
-    //put your code here
-    
-    public function __construct() {
-        global $entityManager;
-        $this->entityManager = $entityManager;
+
+class Product extends EloquentBaseModel{
+
+    public $primaryKey = 'ID';
+
+    public function images()
+    {
+        return $this->hasMany('Models\Image', 'product_id', 'ID');
     }
-    
-    public function find(){
-        return $this->entityManager->find(static::class, 1);
+
+    public function scopeActive($query, $param)
+    {
+        return $query->where('product_status', $param);
     }
-    /** @Id @Column(type="integer") @GeneratedValue **/
-    protected $id;
-    
-    /** @Column(type="string") **/
-    protected $product_name;
+
+    public function scopePrice($query)
+    {
+        return $query->where('product_price', '>=', 20.00);
+    }
+
+
 }
