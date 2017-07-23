@@ -24,8 +24,8 @@ class TestController extends baseController{
     
     public function index() {
 
-//        $img = Image::create(array('product_id' => 1, 'image_name' => 'create.jpg'));
-//        dd($img);
+        $img = Image::create(array('test' => 21, 'product_id' => 1, 'image_name' => '123.jpg'));
+        dd($img);
 //        $img->fill(['product_id' => 1, 'image_name' => 'create.jpg']);
 //        dd($img);
 //        $img->save();
