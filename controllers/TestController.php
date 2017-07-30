@@ -23,9 +23,11 @@ class TestController extends baseController{
     }
     
     public function index() {
-
-        $img = Image::create(array('test' => 21, 'product_id' => 1, 'image_name' => '123.jpg'));
-        dd($img);
+        $image = Image::find(1);
+        $image->update(array('image_name' => 'new.jpg'));
+        dd($image);
+//        $img = Image::create(array('test' => 21, 'product_id' => 1, 'image_name' => 'test123.jpg'));
+//        dd($img);
 //        $img->fill(['product_id' => 1, 'image_name' => 'create.jpg']);
 //        dd($img);
 //        $img->save();
@@ -53,5 +55,5 @@ class TestController extends baseController{
         $this->template->setData('name', 'Dragan');
         $this->template->render('about');
     }
-    
+
 }
