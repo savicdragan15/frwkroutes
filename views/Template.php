@@ -20,17 +20,26 @@ class Template extends View implements iView{
         $this->theme_name = $theme_name;
     }
     
-    public function render($view_name) {
+    public function render($view_name,$return=false) {
        $path_to_view = "views/" . $this->theme_name . '/' . $view_name . '.php';
        if (file_exists($path_to_view))
         {
-          //  $partial_params = $this->data;
+            $this->partial->data = $this->data;
             
             extract($this->data);
             
+            if($return)
+            {
+              ob_start();
+            }
             include_once  $this->getHeaderPath();
             include_once  $path_to_view;
             include_once  $this->getFooterPath();
+            if($return)
+            {
+              $string = ob_get_clean();
+              return $string;
+            }
            
         }
         

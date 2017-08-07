@@ -41,18 +41,15 @@ abstract class EloquentBaseModel extends Model{
 
     /**
      * @param array $attributes
+     * @param array $options
      * @return mixed
      */
-    public static function create($attributes = [])
+    public static function create(array $attributes = [], array $options = [])
     {
         $class = static::class;
         $model = new $class();
 
-        foreach ($attributes as $key => $attribute){
-           if(in_array($key, $model->fillable))
-                $model->$key = $attribute;
-        }
-
-        return $model->save();
+        return $model->fill($attributes)->save($options);
     }
+
 }

@@ -115,7 +115,7 @@ abstract class baseController
     {
      \Loader::loadClass('UrlHelper');
      $urlHelper = new UrlHelper();
-     return str_replace(" ","_",$urlHelper->remove_accents($string));
+     return str_replace(array(" ","."),array("_",""),$urlHelper->remove_accents($string));
     }
 
     /**
@@ -161,5 +161,19 @@ abstract class baseController
     public function page404(){
         $this->redirect(_WEB_PATH."home/page404");
     }
+    
+    public function generateSalt($max = 15, $confirm = false) {
+        if(!$confirm)
+           $characterList = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*?";
+        else
+             $characterList = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        $i = 0;
+        $salt = "";
+        while ($i < $max) {
+            $salt .= $characterList{mt_rand(0, (strlen($characterList) - 1))};
+            $i++;
+        }
+        return $salt;
+  }
 }
 

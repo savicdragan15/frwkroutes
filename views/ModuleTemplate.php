@@ -17,6 +17,7 @@ class ModuleTemplate extends View implements iView{
     
     public function __construct($theme_name, $module_name) 
     {
+        $this->partial=new TemplatePartial($theme_name);
         $this->theme_name = $theme_name;
         $this->module_name = $module_name;
     }
@@ -31,7 +32,7 @@ class ModuleTemplate extends View implements iView{
        
        if (file_exists($path_to_view))
         {
-            $partial_params = $this->data;
+            $this->partial->data = $this->data;
             
             extract($this->data);
             

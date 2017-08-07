@@ -10,10 +10,14 @@
     "require": {
         "symfony/var-dumper": "^3.1",
         "phroute/phroute": "^2.1",
+        "triadev/password-hashing": "^1.0",
+        "ircmaxell/password-compat": "^1.0",
         "doctrine/orm": "*",
         "illuminate/database": "^5.4",
         "illuminate/events": "^5.4",
-        "illuminate/pagination": "^5.4"
+        "illuminate/pagination": "^5.4",
+        "azi/envalid": "^1.0",
+        "phpmailer/phpmailer": "^5.2"
     },
     "autoload": {
         "psr-4": {
@@ -26,7 +30,7 @@
             
             "Modules\\cart\\":  "modules/cart/controllers",
             "Modules\\login\\":  "modules/login/controllers",
-            "Modules\\products\\":  "modules/products/controllers",
+            "Modules\\register\\":  "modules/register/controllers",
             
             "Modules\\models\\login\\": "modules/login/models",
             "Modules\\models\\products\\": "modules/products/models"
